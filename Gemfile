@@ -48,9 +48,10 @@ gem 'public_activity'
 gem 'country_select'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'draper', '~> 1.3'
-gem 'annotate', '>=2.6.0'
+
 
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'
+  gem 'annotate', '>=2.6.0'
 end
