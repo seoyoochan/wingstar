@@ -5,85 +5,102 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Wingstar API</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js"></script>
-    <script type="text/javascript">
-      WebFont.load({
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/application.js"></script>
 
-        // For google fonts
-        google: {
-          families: ['Droid Sans', 'Droid Serif']
-        }
-        // For early access or custom font
-        custom: {
-            families: ['NanumGothic'],
-            urls: ['http://fonts.googleapis.com/earlyaccess/nanumgothic.css']
-        }
-
-      });
-    </script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="assets/js/respond.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
-      <header id="header">
-        <h1>Wingstar API</h1>
-      </header>
 
-      <div id="banner">
-        <span id="logo">Wingstar</span>
+    <a href="#body" class="sr-only">Go to Contents</a>
 
-        <a href="https://github.com/bitsnut/wingstar" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/bitsnut/wingstar/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/bitsnut/wingstar/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- #banner -->
+    <header id="header">
+      <div class="masthead">
+        <h3 class="main-logo text-muted">WINGSTAR</h3>
+        <ul id="main-nav" class="nav nav-justified">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="https://github.com/bitsnut/wingstar/tree/master" target="_blank">Github</a></li>
+          <li><a href="#gems">Gems</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </header><!-- #header -->
+
+    <a href="#" class="scrollToTop">Scroll to Top</a>
 
     <div id="body">
-      <section class="gem">
-        <h3>Gem List</h3>
-          <ul class="gem_list">
-            <li>Devise: a flexible authentication solution for Rails based on Warde</li>
-            <li>Gritter: easily add Growl-like notifications to your application using a jQuery plugin called 'gritter'</li>
-            <li>FriendlyID: slugging and permalink plugins for Active Record. It lets you create pretty URLs and work with human-friendly strings as if they were numeric ids.</li>
-            <li>Kaminari: a Scope &amp; Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 3+</li>
-            <li>Dragonfly: on-the-fly processing - suitable for image uploading in Rails, Sinatra and much more</li>
-            <li>Pundit: object oriented authorization for Rails applications</li>
-            <li>Active Admin: the administration framework </li>
-            <li>Ancestry: organise ActiveRecord model into a tree structure</li>
-            <li>OmniAuth: a flexible authentication system utilizing Rack middleware</li>
-            <li>Breakman: an open source vulnerability scanner specifically designed for Ruby on Rails applications. It statically analyzes Rails application code to find security issues at any stage of development</li>
-            <li>Prawn: fast, Nimble PDF Writer for Ruby</li>
-            <li>MailBoxer: a private message system </li>
-            <li>Better Errors: Better error page for Rack apps</li>
-            <li>Guard: a command line tool to easily handle events on file system modifications</li>
-            <li>Annotate: Add a comment summarizing the current schema to the top of each ActiveRecord model source file</li>
-            <li>Flay: analyzes code for structural similarities. Differences in literal values, variable, class, method names, whitespace, programming style, braces vs do/end, etc are all ignored</li>
-            <li>Table Print: It shows objects in nicely formatted columns for easy reading. It even lets you nest other tables of related objects, contextualizing data across tables.</li>
-            <li>Local Tunnel: Expose your local web server to the Internet.</li>
-            <li>Quiet Assets: Turn off rails assets log.</li>
-            <li>Rack Mini Profiler: Profiling toolkit for Rack applications with Rails integration. Client Side profiling, DB profiling and Server profiling.</li>
-            <li>Public Activity: Easy activity tracking for your ActiveRecord models. Provides Activity model with details about actions performed by your users, like adding comments, responding etc.</li>
-            <li>Jammit: an industrial strength asset packaging library for Rails, providing both the CSS and JavaScript concatenation and compression that you'd expect, as well as YUI Compressor and Closure Compiler compatibility, ahead-of-time gzipping, built-in JavaScript template support, and optional Data-URI / MHTML image embedding.</li>
-          </ul>
+      <!-- Jumbotron -->
+      <div class="jumbotron">
+        <h1>윙스타 API 페이지</h1>
+        <p class="lead">윙스타에서 사용하는 젬들을 소개합니다.</p>
+        <p><a class="btn btn-lg btn-success" href="#">윙스타 시작하기</a></p>
+      </div>
 
-          <ul class="gem_list">
-            <li>Forem: the best Rails 3 and Rails 4 forum engine. Ever.</li>
-            <li>Flutie: a starting point for personal discovery</li>
-          </ul>
-      </section>
-      <footer id="footer">
-        <p>Wingstar made by <a href="https://github.com/bitsnut">bitsnut</a></p>
-      </footer>
-    </div>
+      <section id="gems" class="row">
+        <div class="col-md-6">
+          <h2>Gems</h2>
+            <h4>Currently used</h4>
+            <ul class="gem_list">
+              <li><strong>Devise</strong>: a flexible authentication solution for Rails based on Warde</li>
+              <li><strong>Gritter</strong>: easily add Growl-like notifications to your application using a jQuery plugin called 'gritter'</li>
+              <li><strong>FriendlyID</strong>: slugging and permalink plugins for Active Record. It lets you create pretty URLs and work with human-friendly strings as if they were numeric ids.</li>
+              <li><strong>Kaminari</strong>: a Scope &amp; Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 3+</li>
+              <li><strong>Dragonfly</strong>: on-the-fly processing - suitable for image uploading in Rails, Sinatra and much more</li>
+              <li><strong>Pundit</strong>: object oriented authorization for Rails applications</li>
+              <li><strong>Active Admin</strong>: the administration framework </li>
+              <li><strong>Ancestry</strong>: organise ActiveRecord model into a tree structure</li>
+              <li><strong>OmniAuth</strong>: a flexible authentication system utilizing Rack middleware</li>
+              <li><strong>Breakman</strong>: an open source vulnerability scanner specifically designed for Ruby on Rails applications. It statically analyzes Rails application code to find security issues at any stage of development</li>
+              <li><strong>Prawn</strong>: fast, Nimble PDF Writer for Ruby</li>
+              <li><strong>MailBoxer</strong>: a private message system </li>
+              <li><strong>Better Errors</strong>: Better error page for Rack apps</li>
+              <li><strong>Guard</strong>: a command line tool to easily handle events on file system modifications</li>
+              <li><strong>Annotate</strong>: Add a comment summarizing the current schema to the top of each ActiveRecord model source file</li>
+              <li><strong>Flay</strong>: analyzes code for structural similarities. Differences in literal values, variable, class, method names, whitespace, programming style, braces vs do/end, etc are all ignored</li>
+              <li><strong>Table Print</strong>: It shows objects in nicely formatted columns for easy reading. It even lets you nest other tables of related objects, contextualizing data across tables.</li>
+              <li><strong>Local Tunnel</strong>: Expose your local web server to the Internet.</li>
+              <li><strong>Quiet Assets</strong>: Turn off rails assets log.</li>
+              <li><strong>Rack Mini Profiler</strong>: Profiling toolkit for Rack applications with Rails integration. Client Side profiling, DB profiling and Server profiling.</li>
+              <li><strong>Public Activity</strong>: Easy activity tracking for your ActiveRecord models. Provides Activity model with details about actions performed by your users, like adding comments, responding etc.</li>
+              <li><strong>Jammit</strong>: an industrial strength asset packaging library for Rails, providing both the CSS and JavaScript concatenation and compression that you'd expect, as well as YUI Compressor and Closure Compiler compatibility, ahead-of-time gzipping, built-in JavaScript template support, and optional Data-URI / MHTML image embedding.</li>
+            </ul>
+            
+            <br/>
+            <h4>Suggestive Gems</h4>
+            <ul class="gem_list">
+              <li><strong>Forem</strong>: the best Rails 3 and Rails 4 forum engine. Ever.</li>
+              <li><strong>Flutie</strong>: a starting point for personal discovery</li>
+              <li><strong>Capybara</strong>: an integration testing tool for rack based web applications. It simulates how a user would interact with a website</li>
+              <li><strong>Active Merchant</strong>: a simple payment abstraction library used in and sponsored by Shopify.</li>
+              <li><strong>Discourse</strong>: a platform for community discussion. </li>
+              <li><strong>Koala</strong>: a lightweight, flexible library for Facebook with support for OAuth authentication, the Graph and REST APIs, realtime updates, and test users.</li>
+              <li><strong>Instagram Ruby Gem</strong>: The official gem for the Instagram API</li>
+              <li><strong>Octokit</strong>: Ruby toolkit for the GitHub API</li>
+              <li><strong>AWS SDK for Ruby</strong>: The official AWS SDK for Ruby.</li>
+              <li><strong>Youtube it</strong>: An object-oriented Ruby wrapper for the YouTube GData API</li>
+
+
+            </ul>
+          </div>
+      </section><!-- .gem -->
+    </div><!-- #body -->
+    
+    <footer id="footer">
+
+      <p>Wingstar made by <a href="https://github.com/bitsnut">bitsnut</a></p>
+    </footer><!-- #footer -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
   </body>
 </html>
