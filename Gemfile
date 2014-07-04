@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '4.1.1', github: 'rails/rails'
+gem 'rails', '4.1.1'
 gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -20,7 +20,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+# gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -34,3 +34,23 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'devise'
+gem 'friendly_id', '~> 5.0.0'
+gem 'kaminari'
+gem 'dragonfly', '~> 1.0.5'
+gem 'pundit'
+gem 'ancestry'
+gem 'prawn'
+gem 'mailboxer'
+gem 'annotate', '>=2.6.0'
+gem 'table_print'
+gem 'public_activity'
+gem 'country_select'
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'draper', '~> 1.3'
+gem 'annotate', '>=2.6.0'
+
+group :development do
+  gem 'better_errors'
+  gem 'quiet_assets'
+end
