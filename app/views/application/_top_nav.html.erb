@@ -1,0 +1,39 @@
+<!-- Static navbar -->
+<div class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<%= root_path %>">윙스타</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="<%= root_path %>">Home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <% if current_user %>
+                <li><%= link_to "Logout", destroy_user_session_path, "data-method" => :delete %></li>
+            <% else %>
+                <li><%= link_to "Login", new_user_session_path %></li>
+                <li><%= link_to "Registration", new_user_registration_path %></li>
+            <% end %>
+
+            <li class="divider"></li>
+            <li class="dropdown-header">외부링크</li>
+            <li><a href="#google">Google</a></li>
+            <li><a href="#">Naver</a></li>
+
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="<%= root_path %>">Root</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container-fluid -->
+</div>

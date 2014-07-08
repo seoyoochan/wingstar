@@ -1,0 +1,25 @@
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), format: :json, remote: true ) do |f| %>
+
+    <% if resource.errors.any? %>
+        <div class="alert alert-danger">
+          <h4><%= pluralize(resource.errors.count, "error") %></h4>
+          <ul>
+            <% resource.errors.full_messages.each do |msg| %> <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <%= f.input :first_name, placeholder: t("placeholder.registration.first_name"),required: true, autofocus: true %>
+    <%= f.input :last_name, placeholder: t("placeholder.registration.last_name"), required: true %>
+    <%= f.input :email, placeholder: t("placeholder.registration.email"), required: true %>
+    <%= f.input :password, placeholder: t("placeholder.registration.password"), required: true, autocomplete: false %>
+    <%= f.input :date_of_birth, as: :date, order: [:year, :month, :day], prompt: {year: t('date.year'), month: t('date.month.name'), day: t('date.day')}, start_year: Date.current.year, end_year: 1920, use_month_names: [t("date.month.jan"), t("date.month.feb"), t("date.month.mar"), t("date.month.apr"), t("date.month.may"), t("date.month.jun"), t("date.month.jul"), t("date.month.aug"), t("date.month.sep"), t("date.month.oct"), t("date.month.nov"), t("date.month.dec")], required: true  %>
+    <%= f.collection_radio_buttons :gender, [["F", "female"], ["M", "male"]], :first, :last %>
+    <%= f.input :locale, collection: @locales.map { |k,v| [v,k] }, selected: @locales[:en] %>
+    <%= f.input :agreement, as: :boolean, required: false, input_html: { checked: true  } %>
+
+    <%= f.button :submit, "Sign up", class: "btn btn-success btn-medium" %>
+<% end %>
+
+<%= render "devise/shared/links" %>

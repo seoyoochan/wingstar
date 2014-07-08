@@ -1,0 +1,17 @@
+<h2>Sign in</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+  <%= f.input :email, autofocus: true %>
+
+  <%= f.input :password, autocomplete: false %>
+
+  <%= f.input :remember_me, as: :boolean, input_html: { checked: "checked" } if devise_mapping.rememberable? %>
+
+
+  <br/>
+
+  <%= f.button :submit, "Login" %>
+<% end %>
+
+<%= render "devise/shared/links" %>

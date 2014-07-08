@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wingstar</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta property="og:title" content="Wingstar is something"/>
+  <meta property="og:type" content="company"/>
+  <meta property="og:site_name" content="wingstar.net"/>
+  <meta property="og:image" content="http://cdn1.editmysite.com/images/theme_contest/screenshots.gif"/>
+  <title><%= yield(:title) %></title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<%= render 'flashes' %>
 <%= yield %>
 
 </body>

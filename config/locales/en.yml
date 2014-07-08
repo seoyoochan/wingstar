@@ -20,4 +20,78 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  placeholder:
+    registration:
+      first_name: "First name"
+      last_name: "Last name"
+      email: "Email address"
+      password: "Password"
+    settings:
+      first_name: "First name"
+      last_name: "Last name"
+      email: "Email address"
+      password: "Leave blank if you don't want to change it"
+      password_confirmation: "Enter your new password to confirm"
+      current_password: "To save these settings, please enter your currnet password"
+      unconfirmed_email: "Currently waiting confirmation for this email: "
+  date:
+    year: "Year"
+    month:
+      name: "Month"
+      jan: "Jan"
+      feb: "Feb"
+      mar: "Mar"
+      apr: "Apr"
+      may: "May"
+      jun: "Jun"
+      jul: "Jul"
+      aug: "Aug"
+      sep: "Sep"
+      oct: "Oct"
+      nov: "Nov"
+      dec: "Dec"
+    day: "Day"
+  language:
+    en: "English"
+    ko: "Korean"
+  validates:
+    presence:
+      agreement: "To continue, you must check the box acknowledging you have read and agree to the Terms of Use and Privacy Policy"
+  activerecord:
+    attributes:
+      user:
+        first_name: "Fisrt name"
+        last_name: "Last name"
+        email: "Email address"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        date_of_birth: "Date of birth"
+        remember_me: "Keep me logged in"
+        agreement: "Agreement"
+        locale: "Language"
+        current_password: "Current Password"
+    errors:
+      template:
+        header:
+          one: "1 error prohibited this %{model} from being saved"
+          other: "%{count} errors prohibited this %{model} from being saved"
+        body: "There were problems with the following fields: "
+      models:
+        user:
+          attributes:
+            first_name:
+              blank: "is required"
+            last_name:
+              blank: "is required"
+            email:
+              blank: "is required"
+              taken: "already exists"
+              format: "is not a valid format of email address"
+            password:
+              blank: "is required"
+              too_short: "must be at least 6 letters"
+              too_long: "must be within 20 letters"
+            date_of_birth:
+              blank: "is required"
+            agreement:
+              blank: "is required"

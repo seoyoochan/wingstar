@@ -1,0 +1,80 @@
+ko:
+  placeholder:
+    registration:
+      first_name: "이름"
+      last_name: "성"
+      email: "이메일"
+      password: "비밀번호"
+    settings:
+      first_name: "이름"
+      last_name: "성"
+      email: "이메일"
+      password: "비밀번호 변경을 원치 않는다면 빈칸으로 내버려두세요"
+      password_confirmation: "새비밀번호가 일치하는지 재확인해주세요"
+      current_password: "환경설정을 하려면 현재 비밀번호를 입력해주세요"
+      unconfirmed_email: "현재 확인을 기다리는 승인대기중인 이메일: "
+  date:
+    year: "년"
+    month:
+      name: "월"
+      jan: "1"
+      feb: "2"
+      mar: "3"
+      apr: "4"
+      may: "5"
+      jun: "6"
+      jul: "7"
+      aug: "8"
+      sep: "9"
+      oct: "10"
+      nov: "11"
+      dec: "12"
+    day: "일"
+  language:
+    en: "영어"
+    ko: "한국어"
+  validates:
+    presence:
+      agreement: "가입하시려면 개인정보정책과 이용규약을 읽고 동의하셔야 합니다"
+  activerecord:
+    attributes:
+      user:
+        first_name: "이름"
+        last_name: "성"
+        email: "이메일주소"
+        password: "비밀번호"
+        password_confirmation: "비밀번호 재확인"
+        date_of_birth: "생년월일"
+        remember_me: "로그인유지"
+        agreement: "약관동의"
+        locale: "언어"
+        current_password: "현재 비밀번호"
+    errors:
+      full_messages:
+        format: "%{attribute} %{message}"
+      messages: &errors_messages
+        blank: "블랭크가 나타난다"
+      template:
+        header:
+          one: "%{model}에서 1개의 에러가 발생했습니다"
+          other: "%{model}에서 %{count}개의 에러가 발생했습니다."
+        body: "문제가 나타난 필드: "
+      models:
+        user:
+          attributes:
+            first_name:
+              blank: "을 입력해주세요"
+            last_name:
+              blank: "을 입력해주세요"
+            email:
+              blank: "를 입력해주세요"
+              taken: "가 이미 존재합니다"
+              format: "올바른 형식이 아닙니다"
+            password:
+              blank: "를 입력해주세요"
+              too_short: "는 최소 6자 입니다"
+              too_long: "는 최대 20자 입니다"
+            date_of_birth:
+              blank: "을 선택해주세요"
+            agreement:
+              blank: "을 동의해주세요"

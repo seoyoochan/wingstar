@@ -1,0 +1,60 @@
+/****************
+*  Reset & Base
+*****************/
+body {
+  font-size: 12px;
+}
+div, #header, #body, #footer {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  float: none;
+  clear: both;
+}
+
+/****************
+*  Style
+*****************/
+#header {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  height: 50px;
+
+  .branding {
+    width: 60%;
+    float: left;
+
+    .logo {
+      margin-right: 10px;
+      float: left;
+    }
+
+    .slogan {
+      float: left;
+
+    }
+  }
+
+  .member-nav {
+    float: right;
+    ul {
+      float: left;
+
+      li {
+        margin-right: 20px;
+        display: inline;
+      }
+    }
+  }
+
+
+}
+
+#body {
+  float: none;
+}
+
+/****************
+*  Components
+*****************/
+

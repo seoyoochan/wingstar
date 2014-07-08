@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'high_voltage/pages#show', id: 'home'
+
+  devise_scope :user do
+    get "settings" => "users/registrations#edit", as: :settings
+   # get "login" => "devise/sessions#new"
+  end
+
+  devise_for :user, path: "", path_names: { sign_in: "login", sign_out: "logout", sign_up: "registration" }, controllers: { registrations: "users/registrations" }
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
