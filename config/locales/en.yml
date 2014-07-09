@@ -20,7 +20,29 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  wingstar: "wingstar"
+  footer:
+    bottom_menu:
+      blog: "Blog"
+      terms_conditions: "Terms & Conditions"
+      privacy: "Privacy"
+  instruction:
+    registration_notice_html: 'By clicking the button below, you agree to our <a href="terms">Terms</a> and that you have read our <a href="privacy">Data Use Policy</a>, including our <a href="cookies">Cookie Use.'
+  title:
+    registration: "Sign Up"
+    login: "Login"
+  button_link:
+    settings_html: <i class='fa fa-cog'></i>Settings
+    logout_html: <i class='fa fa-power-off'></i>Logout
+    registration_sign_up: "Let's Go!"
+  collection:
+    gender:
+      female_html: <i class="fa fa-female"></i>Female
+      male_html: <i class="fa fa-male"></i>Male
   placeholder:
+    login:
+      email: "Email address"
+      password: "Password"
     registration:
       first_name: "First name"
       last_name: "Last name"
@@ -54,9 +76,6 @@ en:
   language:
     en: "English"
     ko: "Korean"
-  validates:
-    presence:
-      agreement: "To continue, you must check the box acknowledging you have read and agree to the Terms of Use and Privacy Policy"
   activerecord:
     attributes:
       user:

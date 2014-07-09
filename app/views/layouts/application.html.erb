@@ -8,15 +8,64 @@
   <meta property="og:type" content="company"/>
   <meta property="og:site_name" content="wingstar.net"/>
   <meta property="og:image" content="http://cdn1.editmysite.com/images/theme_contest/screenshots.gif"/>
+  <%= csrf_meta_tags %>
   <title><%= yield(:title) %></title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
 </head>
 <body>
 
 <%= render 'flashes' %>
-<%= yield %>
+
+<% content_for(:title, 'Wingstar') %>
+
+
+<header id="header">
+  <div class="branding">
+    <div class="logo">
+      wingstar
+    </div>
+    <p class="slogan animate-plus" data-animations="tada" data-animation-when-visible="true" data-animation-reset-offscreen="true">Wing your dream,You are star.</p>
+  </div>
+  <nav class="member-nav">
+    <ul>
+      <% unless signed_in? %>
+      <li class="login"><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
+      <%= login_modal %>
+      <li class="registrationModal"><a href="#" data-toggle="modal" data-target="#registrationModal">Register</a></li>
+      <%= registration_modal %>
+      <% else %>
+      <li class="dropdown settings">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %><span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><%= link_to t("button_link.settings_html"), settings_path %></li>
+          <li class="logout"><%= link_to t("button_link.logout_html"), destroy_user_session_path, :method => :delete  %></li>
+          <div class="divider"></div>
+          <li class="dropdown-header">You need help?</li>
+        </ul>
+      </li>
+      <% end %>
+    </ul>
+  </nav>
+</header>
+<div id="body">
+  <%= yield %>
+</div>
+
+<footer id="footer">
+    <h3 class="logo"><%= link_to t("wingstar"), root_path %></h3>
+    <nav class="bottom_nav">
+      <ul>
+        <li><%= link_to t("footer.bottom_menu.blog"), root_path %></li>
+        <li><%= link_to t("footer.bottom_menu.terms_conditions"), root_path %></li>
+        <li><%= link_to t("footer.bottom_menu.privacy"), root_path %></li>
+      </ul>
+    </nav>
+</footer>
 
 </body>
 </html>

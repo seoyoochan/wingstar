@@ -50,16 +50,15 @@ gem 'draper', '~> 1.3'
 gem 'dynamic_form'
 gem 'mysql2'
 
-# Modelserialization
 gem 'active_model_serializers'
-
-# FontAwesomeicons
-gem 'font-awesome-rails'
+gem 'font-awesome-sass'
 gem 'high_voltage', github: 'thoughtbot/high_voltage'
-gem 'bootstrap3-rails'
+gem 'rolify'
+gem 'authority'
 
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'
   gem 'annotate', '>=2.6.0'
+  gem 'letter_opener'
 end

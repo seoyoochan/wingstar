@@ -11,7 +11,5 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: { :case_sensitive => false, :allow_blank => false }, format: { :with => Devise.email_regexp }, :if => :email_changed?
   validates :password, presence: { length: { within: Devise.password_length } }, :on => :create
   validates :password, presence: true, :on => :update, :unless => lambda { |user| user.password.blank? }
-  validates :agreement, presence: { message: I18n.t('validates.presence.agreement') }
-
 
 end

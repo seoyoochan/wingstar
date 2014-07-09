@@ -12,5 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
 //= require_tree .
+//
+
+$(document).ready(function(){
+    $(".animBox-right").mouseenter(function(){
+        $(this).animate({ left: 50 }, "fast" );
+    });
+    $(".animBox-right").mouseleave(function(){
+        $(this).animate({ left: 0 }, "fast" );
+    });
+
+});
+

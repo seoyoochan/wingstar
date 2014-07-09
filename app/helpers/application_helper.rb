@@ -1,13 +1,13 @@
 module ApplicationHelper
 
   def support_locales
-    @locales = {"en" => "English", "ko" => "한국어"}
+    @locales = {"en" => "English" , "ko" => "한국어"}
   end
 
   def default_locale
 
     if signed_in?
-      # logger.debug "* User Preference Language: #{current_user.locale}."
+      logger.debug "* User Preference Language: #{current_user.locale}."
       I18n.locale = current_user.locale.to_sym
     end
 
@@ -15,10 +15,10 @@ module ApplicationHelper
     unless signed_in?
       support_locales # Get @locales, the supported language set
       if @locales.include?(browser_locale.to_s)
-        # logger.debug "* User Browser Language: '#{browser_locale}' is supported, thus set."
+        logger.debug "* User Browser Language: '#{browser_locale}' is supported, thus set."
         I18n.locale = browser_locale
       else
-        # logger.debug "* User Browser Language: '#{browser_locale}' isn't supported, then set English as default."
+        logger.debug "* User Browser Language: '#{browser_locale}' isn't supported, then set English as default."
         I18n.locale = :en
       end
     end
@@ -31,6 +31,14 @@ module ApplicationHelper
 
   def flash_normal
     render "flashes"
+  end
+
+  def login_modal
+    render "login_modal"
+  end
+
+  def registration_modal
+    render "registration_modal"
   end
 
   def bootstrap_flash(type)

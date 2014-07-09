@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :default_locale
+  before_action :default_locale, :support_locales
   before_filter :configure_devise_params, if: :devise_controller?
 
   protected

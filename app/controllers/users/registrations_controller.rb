@@ -1,6 +1,9 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  include ApplicationHelper
-  
-  before_action :default_locale, :support_locales
+
+  private
+  # Overwriting the sign_out redirect path method
+  def after_sign_out_path_for(resource_or_scope)
+    root_path
+  end
 
 end

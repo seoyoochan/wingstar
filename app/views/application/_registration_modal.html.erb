@@ -1,0 +1,68 @@
+<div id="registrationModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel" aria-hidden="true">
+  <button type="button" class="close" data-dismiss="modal">
+    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+  </button>
+  <div class="container">
+    <div class="header">
+      <h1 class="title"><%= t("title.registration") %></h1>
+    </div>
+    <div class="body">
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name) ) do |f| %>
+
+          <% if resource.errors.any? %>
+              <div class="alert alert-danger">
+                <h4><%= pluralize(resource.errors.count, "error") %></h4>
+                <ul>
+                  <% resource.errors.full_messages.each do |msg| %> <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+          <div class="fisrt_name_container">
+            <i class="fa fa-child fa-fw first_name"></i>
+            <%= f.input :first_name, placeholder: t("placeholder.registration.first_name"),required: true, autofocus: true, label: false, wrapper: false, input_html: { class: "first_name" } %>
+          </div>
+
+          <div class="last_name_container">
+            <i class="fa fa-child fa-fw last_name"></i>
+            <%= f.input :last_name, placeholder: t("placeholder.registration.last_name"), required: true, label: false, wrapper: false, input_html: { class: "first_name" } %>
+          </div>
+
+          <div class="email_container">
+            <i class="fa fa-envelope-o fa-fw email"></i>
+            <%= f.input :email, placeholder: t("placeholder.registration.email"), required: true, label: false, wrapper: false, input_html: { class: "email" }  %>
+          </div>
+
+          <div class="password_container">
+            <i class="fa fa-key fa-fw password"></i>
+            <%= f.input :password, placeholder: t("placeholder.registration.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password" } %>
+          </div>
+
+          <div class="locale_container">
+            <%= f.input :locale, collection: @locales.map { |k,v| [v,k] }, selected: @locales[:en], label: false, wrapper: false, input_html: { class: "locale" }  %>
+          </div>
+
+          <div class="date_of_birth_container">
+            <%= f.input :date_of_birth, as: :date, wrapper: false, order: [:year, :month, :day], prompt: {year: t('date.year'), month: t('date.month.name'), day: t('date.day')},
+                        start_year: Date.current.year, end_year: 1920, use_month_names: [t("date.month.jan"), t("date.month.feb"), t("date.month.mar"), t("date.month.apr"), t("date.month.may"),
+                                                                                         t("date.month.jun"), t("date.month.jul"), t("date.month.aug"), t("date.month.sep"), t("date.month.oct"), t("date.month.nov"), t("date.month.dec")],
+                        required: true, label: false, input_html: { class: "date_of_birth" }  %>
+          </div>
+
+          <div class="gender_container">
+            <%= f.collection_radio_buttons :gender, [["F", t("collection.gender.female_html") ], ["M", t("collection.gender.male_html")]], :first, :last, label: false, wrapper: false %>
+          </div>
+
+          <div class="agreement_container">
+            <p class="notice"><%= t("instruction.registration_notice_html") %></a></p>
+          </div>
+
+          <div class="animBox-right">
+          <%= f.button :submit, t("button_link.registration_sign_up"), class: "btn btn-info btn-medium", wrapper: false %>
+          </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

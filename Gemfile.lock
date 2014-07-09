@@ -52,6 +52,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.6)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
     annotate (2.6.5)
@@ -60,12 +61,13 @@ GEM
     arbre (1.0.1)
       activesupport (>= 3.0.0)
     arel (5.0.1.20140414130214)
+    authority (3.0.0)
+      activesupport (>= 3.0.0)
+      rake (>= 0.8.7)
     bcrypt (3.1.7)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
-    bootstrap3-rails (3.1.1)
-      rails (>= 4.0.0)
     bourbon (3.2.3)
       sass (~> 3.2)
       thor
@@ -105,8 +107,8 @@ GEM
     dynamic_form (1.1.4)
     erubis (2.7.0)
     execjs (2.2.1)
-    font-awesome-rails (4.1.0.0)
-      railties (>= 3.2, < 5.0)
+    font-awesome-sass (4.1.0)
+      sass (~> 3.2)
     foreigner (1.6.1)
       activerecord (>= 3.0.0)
     formtastic (2.3.0.rc3)
@@ -133,6 +135,10 @@ GEM
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    launchy (2.4.2)
+      addressable (~> 2.3)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -191,6 +197,7 @@ GEM
     request_store (1.0.6)
     responders (1.0.0)
       railties (>= 3.2, < 5)
+    rolify (3.4.0)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -237,21 +244,22 @@ DEPENDENCIES
   activeadmin!
   ancestry
   annotate (>= 2.6.0)
+  authority
   better_errors
-  bootstrap3-rails
   coffee-rails (~> 4.0.0)
   country_select
   devise
   dragonfly (~> 1.0.5)
   draper (~> 1.3)
   dynamic_form
-  font-awesome-rails
+  font-awesome-sass
   friendly_id (~> 5.0.0)
   high_voltage!
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
   kaminari
+  letter_opener
   mailboxer
   mysql2
   prawn
@@ -259,6 +267,7 @@ DEPENDENCIES
   pundit
   quiet_assets
   rails (= 4.1.1)
+  rolify
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   simple_form

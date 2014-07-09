@@ -1,5 +1,27 @@
 ko:
+  wingstar: "윙스타"
+  footer:
+    bottom_menu:
+      blog: "블로그"
+      terms_conditions: "서비스 이용약관"
+      privacy: "개인정보 보호정책"
+  instruction:
+    registration_notice_html: '아래 버튼을 클릭시 귀하는 저희의 <a href="terms">약관</a>과 <a href="privacy">데이터이용정책</a>, 및 <a href="cookies">쿠키사용</a>에 대해 읽고 동의한것으로 간주합니다.'
+  title:
+    registration: "회원가입"
+    login: "로그인"
+  button_link:
+    settings_html: <i class='fa fa-cog'></i>환경설정
+    logout_html: <i class='fa fa-power-off'></i>로그아웃
+    registration_sign_up: "출발!"
+  collection:
+    gender:
+      female_html: <i class="fa fa-female"></i>여자
+      male_html: <i class="fa fa-male"></i>남자
   placeholder:
+    login:
+      email: "이메일"
+      password: "비밀번호"
     registration:
       first_name: "이름"
       last_name: "성"
@@ -33,9 +55,6 @@ ko:
   language:
     en: "영어"
     ko: "한국어"
-  validates:
-    presence:
-      agreement: "가입하시려면 개인정보정책과 이용규약을 읽고 동의하셔야 합니다"
   activerecord:
     attributes:
       user:

@@ -1,0 +1,43 @@
+<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <button type="button" class="close" data-dismiss="modal">
+    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+  </button>
+  <div class="container">
+    <div class="header">
+      <h1 class="title"><%= t("title.login") %></h1>
+    </div>
+    <div class="body">
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+      <% if resource.errors.any? %>
+          <div class="alert alert-danger">
+            <h4><%= pluralize(resource.errors.count, "error") %></h4>
+            <ul>
+              <% resource.errors.full_messages.each do |msg| %> <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div class="email_container">
+        <i class="fa fa-envelope-o fa-fw email"></i>
+        <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email" }  %>
+      </div>
+
+      <div class="password_container">
+        <i class="fa fa-key fa-fw password"></i>
+        <%= f.input :password, placeholder: t("placeholder.login.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password" } %>
+      </div>
+
+      <div class="remember_container">
+        <%= f.input :remember_me, as: :boolean, wrapper: false, input_html: { class: "remember_me", checked: "checked" } if devise_mapping.rememberable? %>
+      </div>
+
+      <div class="animBox-right">
+      <%= f.button :submit, t("button_link.registration_sign_up"), class: "btn btn-info btn-medium", wrapper: false %>
+      </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
