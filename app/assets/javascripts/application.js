@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require bootstrap.min
+//= require animate-plus.min
+//= require underscore-min
 //
 
 $(document).ready(function(){
