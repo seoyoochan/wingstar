@@ -11,9 +11,10 @@
  * file per style scope.
  *
  *= require font-awesome
- *= require bootstrap
- *= require animate
- *= require NanumBarunGothic
+ *= require lib/bootstrap
+ *= require lib/animate
+ *= require lib/fonts/NanumBarunGothic
+ *= require lib/bootstrapValidator
  *= require style
  *= require responsive-style
  *= require_tree ../

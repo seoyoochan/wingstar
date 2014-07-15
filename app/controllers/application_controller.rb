@@ -15,8 +15,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password) }
   end
 
-  # Redirection Purpose
-  # def after_sign_in_path_for(resource)
-  #   settings_path
-  # end
+
+
 end

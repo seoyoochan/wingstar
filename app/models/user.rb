@@ -12,4 +12,5 @@ class User < ActiveRecord::Base
   validates :password, presence: { length: { within: Devise.password_length } }, :on => :create
   validates :password, presence: true, :on => :update, :unless => lambda { |user| user.password.blank? }
 
+
 end

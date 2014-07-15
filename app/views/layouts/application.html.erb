@@ -8,11 +8,12 @@
   <meta property="og:type" content="company"/>
   <meta property="og:site_name" content="wingstar.net"/>
   <meta property="og:image" content="http://cdn1.editmysite.com/images/theme_contest/screenshots.gif"/>
-  <%= csrf_meta_tags %>
+  <title><%= content_for?(:title) ? yield(:title) : "Wingstar" %></title>
+
   <title><%= yield(:title) %></title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+  <%= csrf_meta_tags %>
   <!--[if lt IE 9]>
   <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -24,21 +25,22 @@
 
 <% content_for(:title, 'Wingstar') %>
 
+<% unless signed_in? %>
+    <%= registration_modal %>
+    <%= login_modal %>
+<% end %>
 
 <header id="header">
   <div class="branding">
     <div class="logo">
       wingstar
     </div>
-    <p class="slogan animate-plus" data-animations="tada" data-animation-when-visible="true" data-animation-reset-offscreen="true">Wing your dream,You are star.</p>
   </div>
   <nav class="member-nav">
     <ul>
       <% unless signed_in? %>
-      <li class="login"><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
-      <%= login_modal %>
-      <li class="registrationModal"><a href="#" data-toggle="modal" data-target="#registrationModal">Register</a></li>
-      <%= registration_modal %>
+      <li class="login"><a href="#" data-toggle="modal" data-target="#loginModal_container">Login</a></li>
+      <li class="registration"><a href="#" data-toggle="modal" data-target="#registrationModal_container">Register</a></li>
       <% else %>
       <li class="dropdown settings">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %><span class="caret"></span></a>
@@ -54,11 +56,12 @@
   </nav>
 </header>
 <div id="body">
+
   <%= yield %>
 </div>
 
 <footer id="footer">
-    <h3 class="logo"><%= link_to t("wingstar"), root_path %></h3>
+    <h3 class="logo animate-plus" data-animations="tada" data-animation-when-visible="true" data-animation-reset-offscreen="true"><%= link_to t("wingstar"), root_path %></h3>
     <nav class="bottom_nav">
       <ul>
         <li><%= link_to t("footer.bottom_menu.blog"), root_path %></li>

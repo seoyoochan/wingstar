@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap.min
-//= require animate-plus.min
-//= require underscore-min
-//
+//= require lib/bootstrap.min
+//= require lib/animate-plus.min
+//= require lib/bootstrapValidator
+//= require login
 
 $(document).ready(function(){
     $(".animBox-right").mouseenter(function(){
@@ -23,6 +23,26 @@ $(document).ready(function(){
     });
     $(".animBox-right").mouseleave(function(){
         $(this).animate({ left: 0 }, "fast" );
+    });
+
+
+    $("form#loginModal").bind("ajax:success", function(e, data, status, xhr) {
+        if (data.success)
+        {
+            $('#loginModal_container').modal('hide');
+            $('#loginModal_container .btn').hide();
+        }
+        else
+        {
+            alert('failure! from ajax:success');
+        }
+    });
+
+    $("form#loginModal").bind("ajax:failure", function(e, data, status, xhr){
+        if(data.errors)
+        {
+            alert('failure! from ajax:failure ');
+        }
     });
 
 });

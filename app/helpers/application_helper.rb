@@ -59,7 +59,7 @@ module ApplicationHelper
   #############################
   # Helper methods for Devise #
   #############################
-  # make the devise resource mapping availble and understandable in places other than the devise views.
+  # make the devise resource mapping available and understandable in places other than the devise views.
   def resource_name
     :user
   end

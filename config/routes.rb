@@ -7,7 +7,9 @@ Rails.application.routes.draw do
    # get "login" => "devise/sessions#new"
   end
 
-  devise_for :user, path: "", path_names: { sign_in: "login", sign_out: "logout", sign_up: "registration" }, controllers: { registrations: "users/registrations" }
+  devise_for :user, path: "", path_names: { sign_in: "login", sign_out: "logout", sign_up: "registration" }, controllers: { registrations: "users/registrations", sessions: "users/sessions" }
+
+
 
 
   # Example of regular route:

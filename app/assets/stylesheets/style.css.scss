@@ -21,7 +21,8 @@ input, textarea, select, button, a:hover, a:focus, a {
   font-family: 'barun';
 }
 
-#body { z-index: -1; }
+#header, #footer { z-index: 1; }
+#body { z-index: 0; }
 
 /****************
 *  Style
@@ -34,17 +35,15 @@ p a:hover { color: #2990ea; text-decoration: underline; }
 
 
 input, textarea {
-  -webkit-transition: all 0.30s ease-in-out;
-  -moz-transition: all 0.30s ease-in-out;
-  -ms-transition: all 0.30s ease-in-out;
-  -o-transition: all 0.30s ease-in-out;
+  -webkit-transition: all 0.30s ease-in-out !important;
+  -moz-transition: all 0.30s ease-in-out !important;
+  -ms-transition: all 0.30s ease-in-out !important;
+  -o-transition: all 0.30s ease-in-out !important;
 
 }
 
 input:focus, textarea:focus, select:focus {
-  box-shadow: 0px 0px 10px #64d3ff;
-  padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
+  box-shadow: 0px 0px 10px #64d3ff !important;
 }
 
 
@@ -144,7 +143,6 @@ input:focus, textarea:focus, select:focus {
   margin: 0;
   padding: 20px 100px;
   background: #eee;
-
 }
 
 
@@ -153,7 +151,7 @@ input:focus, textarea:focus, select:focus {
   margin: 0;
   padding: 15px 10px 0 10px;
   height: 50px;
-  background: #35373f;
+  background: #2990ea;
   overflow: hidden;
 
   .logo {
@@ -202,8 +200,8 @@ input:focus, textarea:focus, select:focus {
   border-radius: 10px;
 }
 
-#registrationModal,
-#loginModal {
+#registrationModal_container,
+#loginModal_container {
   margin: 0;
   padding: 0;
   text-align: center;
@@ -344,7 +342,7 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
-#loginModal {
+#loginModal_container {
 
   .remember_container {
     margin: 15px 0 15px 0;
