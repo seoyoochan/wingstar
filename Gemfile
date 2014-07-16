@@ -48,7 +48,6 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'draper', '~> 1.3'
 # Translations for the Active Record error_messages_for Helper
 gem 'dynamic_form'
-gem 'mysql2'
 
 gem 'active_model_serializers'
 gem 'font-awesome-sass'

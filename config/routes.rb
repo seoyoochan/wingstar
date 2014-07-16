@@ -3,11 +3,12 @@ Rails.application.routes.draw do
   root 'high_voltage/pages#show', id: 'home'
 
   devise_scope :user do
-    get "settings" => "users/registrations#edit", as: :settings
-   # get "login" => "devise/sessions#new"
+  get "settings" => "devise/registrations#edit", as: :settings
   end
 
-  devise_for :user, path: "", path_names: { sign_in: "login", sign_out: "logout", sign_up: "registration" }, controllers: { registrations: "users/registrations", sessions: "users/sessions" }
+  devise_for :user, path: "",
+             path_names: { sign_in: "login", sign_out: "logout", sign_up: "registration" }
+
 
 
 

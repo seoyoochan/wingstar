@@ -7,7 +7,7 @@
       <h1 class="title"><%= t("title.login") %></h1>
     </div>
     <div class="body">
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { name: "loginModal", id: "loginModal"}, remote: true) do |f| %>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
       <% if resource.errors.any? %>
           <div class="alert alert-danger">

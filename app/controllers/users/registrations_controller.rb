@@ -1,9 +1,12 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
-  private
-  # Overwriting the sign_out redirect path method
-  def after_sign_out_path_for(resource_or_scope)
-    root_path
-  end
+  # protected
+  # def after_sign_up_path_for(resource)
+  #   signed_in_root_path(resource)
+  # end
+  #
+  # def after_update_path_for(resource)
+  #   signed_in_root_path(resource)
+  # end
 
 end

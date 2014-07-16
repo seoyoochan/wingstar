@@ -9,11 +9,9 @@
   <meta property="og:site_name" content="wingstar.net"/>
   <meta property="og:image" content="http://cdn1.editmysite.com/images/theme_contest/screenshots.gif"/>
   <title><%= content_for?(:title) ? yield(:title) : "Wingstar" %></title>
-
-  <title><%= yield(:title) %></title>
+  <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
   <!--[if lt IE 9]>
   <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -21,9 +19,7 @@
 </head>
 <body>
 
-<%= render 'flashes' %>
 
-<% content_for(:title, 'Wingstar') %>
 
 <% unless signed_in? %>
     <%= registration_modal %>
@@ -56,7 +52,7 @@
   </nav>
 </header>
 <div id="body">
-
+  <%= render 'flashes' %>
   <%= yield %>
 </div>
 
