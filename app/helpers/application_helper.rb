@@ -29,15 +29,15 @@ module ApplicationHelper
     request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first.to_sym
   end
 
-  def flash_normal
+  def view_flash_normal
     render "flashes"
   end
 
-  def login_modal
+  def view_login_modal
     render "login_modal"
   end
 
-  def registration_modal
+  def view_registration_modal
     render "registration_modal"
   end
 

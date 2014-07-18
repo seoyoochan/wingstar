@@ -32,6 +32,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # gem 'debugger', group: [:development, :test]
 
 gem 'simple_form'
+gem 'attr_searchable'
 gem 'jquery-ui-rails'
 gem 'devise'
 gem 'friendly_id', '~> 5.0.0'

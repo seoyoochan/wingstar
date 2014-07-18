@@ -14,10 +14,8 @@
  *= require lib/bootstrap
  *= require lib/animate
  *= require lib/fonts/NanumBarunGothic
- *= require lib/bootstrapValidator
  *= require style
- *= require responsive-style
- *= require_tree ../
+ *= require responsive
  *= require_self
  */
 

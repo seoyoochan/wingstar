@@ -20,12 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  wingstar: "wingstar"
-  footer:
-    bottom_menu:
-      blog: "Blog"
-      terms_conditions: "Terms & Conditions"
-      privacy: "Privacy"
+  logo: "Wingstar"
+  top_nav:
+    login_html: <i class="fa fa-sign-in"></i>Login
+    registration_html: <i class="fa fa-user"></i>Register
+    settings_html: <i class='fa fa-cog'></i>Settings
+    logout_html: <i class='fa fa-power-off'></i>Logout
+    help_html: <i class='fa fa-question-circle'></i>Help
   instruction:
     registration_notice_html: 'By clicking the button below, you agree to our <a href="terms">Terms</a> and that you have read our <a href="privacy">Data Use Policy</a>, including our <a href="cookies">Cookie Use.'
   title:
@@ -40,6 +41,7 @@ en:
       female_html: <i class="fa fa-female"></i>Female
       male_html: <i class="fa fa-male"></i>Male
   placeholder:
+    search: "Search for talents you want"
     login:
       email: "Email address"
       password: "Password"

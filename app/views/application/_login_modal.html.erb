@@ -21,12 +21,12 @@
 
       <div class="email_container form-group">
         <i class="fa fa-envelope-o fa-fw email"></i>
-        <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { name: "email", class: "email form-control", "aria-required" => true }  %>
+        <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email form-control", "aria-required" => true }  %>
       </div>
 
       <div class="password_container form-group">
         <i class="fa fa-key fa-fw password"></i>
-        <%= f.input :password, placeholder: t("placeholder.login.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { name: "password", class: "password form-control", "aria-required" => true } %>
+        <%= f.input :password, placeholder: t("placeholder.login.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password form-control", "aria-required" => true } %>
       </div>
 
       <div class="remember_container">

@@ -61,6 +61,8 @@ GEM
     arbre (1.0.1)
       activesupport (>= 3.0.0)
     arel (5.0.1.20140414130214)
+    attr_searchable (0.0.4)
+      treetop
     authority (3.0.0)
       activesupport (>= 3.0.0)
       rake (>= 0.8.7)
@@ -243,6 +245,7 @@ DEPENDENCIES
   activeadmin!
   ancestry
   annotate (>= 2.6.0)
+  attr_searchable
   authority
   better_errors
   coffee-rails (~> 4.0.0)

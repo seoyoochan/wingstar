@@ -1,10 +1,11 @@
 ko:
-  wingstar: "윙스타"
-  footer:
-    bottom_menu:
-      blog: "블로그"
-      terms_conditions: "서비스 이용약관"
-      privacy: "개인정보 보호정책"
+  logo: "윙스타"
+  top_nav:
+    login_html: <i class="fa fa-sign-in"></i>로그인
+    registration_html: <i class="fa fa-user"></i>회원가입
+    settings_html: <i class='fa fa-cog'></i>환경설정
+    logout_html: <i class='fa fa-power-off'></i>로그아웃
+    help_html: <i class='fa fa-question-circle'></i>고객센터
   instruction:
     registration_notice_html: '아래 버튼을 클릭시 귀하는 저희의 <a href="terms">약관</a>과 <a href="privacy">데이터이용정책</a>, 및 <a href="cookies">쿠키사용</a>에 대해 읽고 동의한것으로 간주합니다.'
   title:
@@ -19,6 +20,7 @@ ko:
       female_html: <i class="fa fa-female"></i>여자
       male_html: <i class="fa fa-male"></i>남자
   placeholder:
+    search: "원하는 인재를 찾아보세요"
     login:
       email: "이메일"
       password: "비밀번호"

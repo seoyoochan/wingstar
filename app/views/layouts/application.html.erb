@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,32 +19,42 @@
 </head>
 <body>
 
-
-
 <% unless signed_in? %>
-    <%= registration_modal %>
-    <%= login_modal %>
+    <%= view_registration_modal %>
+    <%= view_login_modal %>
 <% end %>
 
 <header id="header">
-  <div class="branding">
-    <div class="logo">
-      wingstar
-    </div>
+  <div class="logo">
+    <%= link_to t("logo"), root_path %>
   </div>
-  <nav class="member-nav">
-    <ul>
+  <div id="search_container">
+    <%= form_tag root_path, method: :get, class: "search_form", role: "search" do %>
+        <div class="wrapper">
+            <%= text_field_tag :search, params[:search], placeholder: t("placeholder.search"), class: "rounded-5" %>
+            <%= button_tag icon('search', '') %>
+        </div>
+    <% end %>
+  </div>
+  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <nav id="top_nav" class="navbar-collapse collapse" role="navigation">
+    <ul class="navbar-nav nav">
       <% unless signed_in? %>
-      <li class="login"><a href="#" data-toggle="modal" data-target="#loginModal_container">Login</a></li>
-      <li class="registration"><a href="#" data-toggle="modal" data-target="#registrationModal_container">Register</a></li>
+      <li class="login"><%= link_to t("top_nav.login_html"), "#", data: { toggle: "modal", target: "#loginModal_container" } %></li>
+      <li class="registration"><%= link_to t("top_nav.registration_html"), "#", data: { toggle: "modal", target: "#registrationModal_container" } %></li>
       <% else %>
       <li class="dropdown settings">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %><span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-          <li><%= link_to t("button_link.settings_html"), settings_path %></li>
-          <li class="logout"><%= link_to t("button_link.logout_html"), destroy_user_session_path, :method => :delete  %></li>
+        <ul class="dropdown-menu rounded-5" role="menu">
+          <li class="settings"><%= link_to t("top_nav.settings_html"), settings_path %></li>
+          <li class="logout"><%= link_to t("top_nav.logout_html"), destroy_user_session_path, :method => :delete  %></li>
           <div class="divider"></div>
-          <li class="dropdown-header">You need help?</li>
+          <li class="dropdown-header"><%= link_to t("top_nav.help_html"), "#help" %></li>
         </ul>
       </li>
       <% end %>
@@ -52,20 +62,8 @@
   </nav>
 </header>
 <div id="body">
-  <%= render 'flashes' %>
+  <%= view_flash_normal %>
   <%= yield %>
 </div>
-
-<footer id="footer">
-    <h3 class="logo animate-plus" data-animations="tada" data-animation-when-visible="true" data-animation-reset-offscreen="true"><%= link_to t("wingstar"), root_path %></h3>
-    <nav class="bottom_nav">
-      <ul>
-        <li><%= link_to t("footer.bottom_menu.blog"), root_path %></li>
-        <li><%= link_to t("footer.bottom_menu.terms_conditions"), root_path %></li>
-        <li><%= link_to t("footer.bottom_menu.privacy"), root_path %></li>
-      </ul>
-    </nav>
-</footer>
-
 </body>
 </html>
