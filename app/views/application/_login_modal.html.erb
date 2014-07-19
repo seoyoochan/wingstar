@@ -1,10 +1,12 @@
-<div id="loginModal_container" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+<div id="loginModal_container" class="modal fade randbg" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
   <button type="button" class="close" data-dismiss="modal">
-    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+    <span aria-hidden="true" class="close-x">&times;</span><span class="sr-only">Close</span>
   </button>
   <div class="container">
     <div class="header">
-      <h1 class="title"><%= t("title.login") %></h1>
+      <div class="title">
+        <h2 class="logo"><%= t("title.login") %></h2>
+      </div>
     </div>
     <div class="body">
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -19,25 +21,49 @@
           </div>
       <% end %>
 
-      <div class="email_container form-group">
+      <div class="email_container">
         <i class="fa fa-envelope-o fa-fw email"></i>
-        <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email form-control", "aria-required" => true }  %>
+        <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email inner-shadow-focus rounded-3-top-left rounded-3-top-right", "aria-required" => true }  %>
       </div>
 
-      <div class="password_container form-group">
-        <i class="fa fa-key fa-fw password"></i>
-        <%= f.input :password, placeholder: t("placeholder.login.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password form-control", "aria-required" => true } %>
+      <div class="password_container">
+        <i class="fa fa-lock fa-fw password"></i>
+        <%= f.input :password, placeholder: t("placeholder.login.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password inner-shadow-focus rounded-3-bottom-left rounded-3-bottom-right", "aria-required" => true } %>
       </div>
 
-      <div class="remember_container">
-        <%= f.input :remember_me, as: :boolean, wrapper: false, input_html: { class: "remember_me", checked: "checked" } if devise_mapping.rememberable? %>
-      </div>
+      <div class="submit_wrapper">
+          <div class="remember_container">
+            <%= f.input :remember_me, as: :boolean, wrapper: false, input_html: { class: "remember_me checkbox", checked: "checked" } if devise_mapping.rememberable? %>
+          </div>
 
-      <div class="animBox-right">
-      <%= f.button :submit, t("button_link.registration_sign_up"), class: "btn btn-info btn-medium", wrapper: false %>
+          <div class="submit_container">
+          <%= f.button :submit, t("button_link.login"), class: "btn btn-info btn-medium submit rounded-3", wrapper: false %>
+          </div>
       </div>
 
       <% end %>
+
+      <div class="divider rounded-3"></div>
+
+      <div class="sns_connector">
+        <ul>
+          <div class="wrapper">
+          <li class="twitter"><%= link_to t("login_modal.sns_connector.twitter_html"), "#", class: "rounded-3" %></li>
+          <li class="facebook"><%= link_to t("login_modal.sns_connector.facebook_html"), "#", class: "rounded-3" %></li>
+          </div>
+          <div class="wrapper">
+          <li class="linkedin"><%= link_to t("login_modal.sns_connector.linkedin_html"), "#", class: "rounded-3" %></li>
+          <li class="google"><%= link_to t("login_modal.sns_connector.google_html"), "#", class: "rounded-3" %></li>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer rounded-3">
+        <ul>
+          <li><%= link_to t("login_modal.footer.fotgot_password_html"), new_user_password_path %></li>
+          <li><%= link_to t("login_modal.footer.signup_html"), new_user_registration_path %></li>
+        </ul>
     </div>
   </div>
 </div>

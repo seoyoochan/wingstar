@@ -15,7 +15,7 @@ module ApplicationHelper
     unless signed_in?
       support_locales # Get @locales, the supported language set
       if @locales.include?(browser_locale.to_s)
-        logger.debug "* User Browser Language: '#{browser_locale}' is supported, thus set."
+        logger.debug "* User Browser Language: '#{browser_locale}' was set."
         I18n.locale = browser_locale
       else
         logger.debug "* User Browser Language: '#{browser_locale}' isn't supported, then set English as default."
@@ -27,18 +27,6 @@ module ApplicationHelper
 
   def browser_locale
     request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first.to_sym
-  end
-
-  def view_flash_normal
-    render "flashes"
-  end
-
-  def view_login_modal
-    render "login_modal"
-  end
-
-  def view_registration_modal
-    render "registration_modal"
   end
 
   def bootstrap_flash(type)
@@ -72,4 +60,7 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def bg_mapper
+    " bg-retro" if ["/signup", "/login"].include? (request.fullpath)
+  end
 end

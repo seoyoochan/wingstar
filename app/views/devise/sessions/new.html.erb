@@ -1,17 +1,67 @@
-<h2>Sign in</h2>
+<div id="login_container">
+  <div class="container rounded-10">
+    <div class="header">
+      <div class="title">
+        <h2 class="logo"><%= t("title.login") %></h2>
+      </div>
+    </div>
+    <div class="body">
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <% if resource.errors.any? %>
+              <div class="alert alert-danger">
+                <h4><%= pluralize(resource.errors.count, "error") %></h4>
+                <ul>
+                  <% resource.errors.full_messages.each do |msg| %> <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
 
-  <%= f.input :email, autofocus: true %>
+          <div class="email_container">
+            <i class="fa fa-envelope-o fa-fw email"></i>
+            <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email rounded-3-top-left rounded-3-top-right", "aria-required" => true }  %>
+          </div>
 
-  <%= f.input :password, autocomplete: false %>
+          <div class="password_container">
+            <i class="fa fa-lock fa-fw password"></i>
+            <%= f.input :password, placeholder: t("placeholder.login.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password rounded-3-bottom-left rounded-3-bottom-right", "aria-required" => true } %>
+          </div>
 
-  <%= f.input :remember_me, as: :boolean, input_html: { checked: "checked" } if devise_mapping.rememberable? %>
+          <div class="submit_wrapper">
+            <div class="remember_container">
+              <%= f.input :remember_me, as: :boolean, wrapper: false, input_html: { class: "remember_me checkbox", checked: "checked" } if devise_mapping.rememberable? %>
+            </div>
 
+            <div class="submit_container">
+              <%= f.button :submit, t("button_link.login"), class: "btn btn-info btn-medium submit rounded-3", wrapper: false %>
+            </div>
+          </div>
 
-  <br/>
+      <% end %>
 
-  <%= f.button :submit, "Login" %>
-<% end %>
+      <div class="divider rounded-3"></div>
 
-<%= render "devise/shared/links" %>
+      <div class="sns_connector">
+        <h5 class="title"><%= t("login_page.sns_connector.title_html") %></h5>
+        <ul>
+          <div class="wrapper">
+            <li class="twitter"><%= link_to t("login_page.sns_connector.twitter_html"), "#", class: "rounded-3" %></li>
+            <li class="facebook"><%= link_to t("login_page.sns_connector.facebook_html"), "#", class: "rounded-3" %></li>
+          </div>
+          <div class="wrapper">
+            <li class="linkedin"><%= link_to t("login_page.sns_connector.linkedin_html"), "#", class: "rounded-3" %></li>
+            <li class="google"><%= link_to t("login_page.sns_connector.google_html"), "#", class: "rounded-3" %></li>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer rounded-3">
+      <ul>
+        <li><%= link_to t("login_page.footer.fotgot_password_html"), new_user_password_path %></li>
+        <li><%= link_to t("login_page.footer.signup_html"), new_user_registration_path %></li>
+      </ul>
+    </div>
+  </div>
+</div>

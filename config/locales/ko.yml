@@ -1,30 +1,47 @@
 ko:
+  login_page:
+    sns_connector:
+      title_html: <i class="fa fa-sun-o"></i>SNS 연동하기
+      twitter_html: <i class="fa fa-twitter"></i>Twitter
+      facebook_html: <i class="fa fa-facebook"></i>Facebook
+      github_html: <i class="fa fa-github-square"></i>Github
+      linkedin_html: <i class="fa fa-linkedin-square"></i>LinkedIn
+      google_html: <i class="fa fa-google-plus"></i>Google
+    footer:
+      fotgot_password_html: <i class="fa fa-key"></i>비밀번호 찾기
+      signup_html: <i class="fa fa-user"></i>계정이 없다면 <span>가입하기!</span>
+  signup_page:
+   label:
+     language_html: <i class='fa fa-language'></i><span>언어</span>
+     dob_html: <i class='fa fa-calendar'></i><span>생일</span>
+     gender_html: <i class='fa fa-user'></i><span>성별</span>
+   collection:
+     gender:
+       female_html: <i class="fa fa-female"></i><span>여자</span>
+       male_html: <i class="fa fa-male"></i><span>남자</span>
   logo: "윙스타"
   top_nav:
     login_html: <i class="fa fa-sign-in"></i>로그인
-    registration_html: <i class="fa fa-user"></i>회원가입
+    signup_html: <i class="fa fa-user"></i>회원가입
     settings_html: <i class='fa fa-cog'></i>환경설정
     logout_html: <i class='fa fa-power-off'></i>로그아웃
     help_html: <i class='fa fa-question-circle'></i>고객센터
   instruction:
-    registration_notice_html: '아래 버튼을 클릭시 귀하는 저희의 <a href="terms">약관</a>과 <a href="privacy">데이터이용정책</a>, 및 <a href="cookies">쿠키사용</a>에 대해 읽고 동의한것으로 간주합니다.'
+    signup_notice_html: '아래 버튼을 클릭시 귀하는 저희의 <a href="terms">약관</a>과 <a href="privacy">데이터이용정책</a>, 및 <a href="cookies">쿠키사용</a>에 대해 읽고 동의한것으로 간주합니다.'
   title:
-    registration: "회원가입"
+    signup: "회원가입"
     login: "로그인"
   button_link:
     settings_html: <i class='fa fa-cog'></i>환경설정
     logout_html: <i class='fa fa-power-off'></i>로그아웃
-    registration_sign_up: "출발!"
-  collection:
-    gender:
-      female_html: <i class="fa fa-female"></i>여자
-      male_html: <i class="fa fa-male"></i>남자
+    login: "로그인"
+    signup: "가입하기"
   placeholder:
-    search: "원하는 인재를 찾아보세요"
+    search: "원하는 재능을 찾아보세요"
     login:
       email: "이메일"
       password: "비밀번호"
-    registration:
+    signup:
       first_name: "이름"
       last_name: "성"
       email: "이메일"
@@ -65,10 +82,11 @@ ko:
         email: "이메일주소"
         password: "비밀번호"
         password_confirmation: "비밀번호 재확인"
-        date_of_birth: "생년월일"
+        date_of_birth: "생일"
         remember_me: "로그인유지"
         agreement: "약관동의"
         locale: "언어"
+        gender: "성별"
         current_password: "현재 비밀번호"
     errors:
       full_messages:

@@ -14,13 +14,22 @@
 //= require jquery_ujs
 //= require lib/bootstrap.min
 //= require lib/animate-plus.min
+//= require lib/icheck.min
 
 $(document).ready(function(){
-    $(".animBox-right").mouseenter(function(){
-        $(this).animate({ left: 50 }, "fast" );
-    });
-    $(".animBox-right").mouseleave(function(){
-        $(this).animate({ left: 0 }, "fast" );
-    });
-});
 
+
+//    $('input').iCheck({
+//        checkboxClass: 'icheckbox_flat-green',
+//        radioClass: 'iradio_flat-green'
+//    });
+
+
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_polaris',
+        radioClass: 'iradio_polaris',
+        increaseArea: '-10%' // optional
+    });
+
+
+});

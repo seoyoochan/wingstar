@@ -17,21 +17,15 @@
   <![endif]-->
 
 </head>
-<body>
-
-<% unless signed_in? %>
-    <%= view_registration_modal %>
-    <%= view_login_modal %>
-<% end %>
-
+<body class="default<%= bg_mapper %>">
 <header id="header">
-  <div class="logo">
+  <div class="logo animate-plus" data-animations="fadeIn" data-animation-when-visible="true" data-animation-reset-offscreen="true">
     <%= link_to t("logo"), root_path %>
   </div>
   <div id="search_container">
     <%= form_tag root_path, method: :get, class: "search_form", role: "search" do %>
         <div class="wrapper">
-            <%= text_field_tag :search, params[:search], placeholder: t("placeholder.search"), class: "rounded-5" %>
+            <%= text_field_tag :search, params[:search], placeholder: t("placeholder.search"), class: "inner-shadow-focus rounded-5" %>
             <%= button_tag icon('search', '') %>
         </div>
     <% end %>
@@ -45,12 +39,12 @@
   <nav id="top_nav" class="navbar-collapse collapse" role="navigation">
     <ul class="navbar-nav nav">
       <% unless signed_in? %>
-      <li class="login"><%= link_to t("top_nav.login_html"), "#", data: { toggle: "modal", target: "#loginModal_container" } %></li>
-      <li class="registration"><%= link_to t("top_nav.registration_html"), "#", data: { toggle: "modal", target: "#registrationModal_container" } %></li>
+      <li class="login"><%= link_to t("top_nav.login_html"), new_user_session_path(resource) %></li>
+      <li class="signup"><%= link_to t("top_nav.signup_html"), new_registration_path(resource_name)  %></li>
       <% else %>
       <li class="dropdown settings">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %><span class="caret"></span></a>
-        <ul class="dropdown-menu rounded-5" role="menu">
+        <ul class="dropdown-menu rounded-3" role="menu">
           <li class="settings"><%= link_to t("top_nav.settings_html"), settings_path %></li>
           <li class="logout"><%= link_to t("top_nav.logout_html"), destroy_user_session_path, :method => :delete  %></li>
           <div class="divider"></div>
@@ -62,7 +56,7 @@
   </nav>
 </header>
 <div id="body">
-  <%= view_flash_normal %>
+  <%= render "flashes" %>
   <%= yield %>
 </div>
 </body>

@@ -20,32 +20,49 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  login_page:
+    sns_connector:
+      title_html: <i class="fa fa-sun-o"></i>Connect with SNS
+      twitter_html: <i class="fa fa-twitter"></i>Twitter
+      facebook_html: <i class="fa fa-facebook"></i>Facebook
+      github_html: <i class="fa fa-github-square"></i>Github
+      linkedin_html: <i class="fa fa-linkedin-square"></i>LinkedIn
+      google_html: <i class="fa fa-google-plus"></i>Google
+    footer:
+      fotgot_password_html: <i class="fa fa-key"></i>Forgot password?
+      signup_html: <i class="fa fa-user"></i>No account? <span>Sign Up!</span>
+  signup_page:
+    label:
+      language_html: <i class='fa fa-language'></i><span>Language</span>
+      dob_html: <i class='fa fa-calendar'></i><span>Birthday</span>
+      gender_html: <i class='fa fa-user'></i><span>Gender</span>
+    collection:
+      gender:
+        female_html: <i class="fa fa-female"></i><span>Female</span>
+        male_html: <i class="fa fa-male"></i><span>Male</span>
   logo: "Wingstar"
   top_nav:
     login_html: <i class="fa fa-sign-in"></i>Login
-    registration_html: <i class="fa fa-user"></i>Register
+    signup_html: <i class="fa fa-user"></i>Register
     settings_html: <i class='fa fa-cog'></i>Settings
     logout_html: <i class='fa fa-power-off'></i>Logout
     help_html: <i class='fa fa-question-circle'></i>Help
   instruction:
-    registration_notice_html: 'By clicking the button below, you agree to our <a href="terms">Terms</a> and that you have read our <a href="privacy">Data Use Policy</a>, including our <a href="cookies">Cookie Use.'
+    signup_notice_html: 'By clicking the button below, you agree to our <a href="terms">Terms</a> and that you have read our <a href="privacy">Data Use Policy</a>, including our <a href="cookies">Cookie Use.'
   title:
-    registration: "Sign Up"
+    signup: "Sign Up"
     login: "Login"
   button_link:
     settings_html: <i class='fa fa-cog'></i>Settings
     logout_html: <i class='fa fa-power-off'></i>Logout
-    registration_sign_up: "Let's Go!"
-  collection:
-    gender:
-      female_html: <i class="fa fa-female"></i>Female
-      male_html: <i class="fa fa-male"></i>Male
+    login: "LOGIN"
+    signup: "Sign Up"
   placeholder:
     search: "Search for talents you want"
     login:
       email: "Email address"
       password: "Password"
-    registration:
+    signup:
       first_name: "First name"
       last_name: "Last name"
       email: "Email address"
@@ -86,10 +103,11 @@ en:
         email: "Email address"
         password: "Password"
         password_confirmation: "Password confirmation"
-        date_of_birth: "Date of birth"
+        date_of_birth: "Birthday"
         remember_me: "Keep me logged in"
         agreement: "Agreement"
         locale: "Language"
+        gender: "Gender"
         current_password: "Current Password"
     errors:
       template:

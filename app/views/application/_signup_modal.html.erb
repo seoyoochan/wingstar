@@ -1,10 +1,10 @@
-<div id="registrationModal_container" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel" aria-hidden="true">
+<div id="signupModal_container" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
   <button type="button" class="close" data-dismiss="modal">
     <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
   </button>
   <div class="container">
     <div class="header">
-      <h1 class="title"><%= t("title.registration") %></h1>
+      <h1 class="title"><%= t("title.signup") %></h1>
     </div>
     <div class="body">
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -22,22 +22,22 @@
 
           <div class="fisrt_name_container">
             <i class="fa fa-child fa-fw first_name"></i>
-            <%= f.input :first_name, placeholder: t("placeholder.registration.first_name"),required: true, autofocus: true, label: false, wrapper: false, input_html: { class: "first_name" } %>
+            <%= f.input :first_name, placeholder: t("placeholder.signup.first_name"),required: true, autofocus: true, label: false, wrapper: false, input_html: { class: "first_name" } %>
           </div>
 
           <div class="last_name_container">
             <i class="fa fa-child fa-fw last_name"></i>
-            <%= f.input :last_name, placeholder: t("placeholder.registration.last_name"), required: true, label: false, wrapper: false, input_html: { class: "first_name" } %>
+            <%= f.input :last_name, placeholder: t("placeholder.signup.last_name"), required: true, label: false, wrapper: false, input_html: { class: "first_name" } %>
           </div>
 
           <div class="email_container">
             <i class="fa fa-envelope-o fa-fw email"></i>
-            <%= f.input :email, placeholder: t("placeholder.registration.email"), required: true, label: false, wrapper: false, input_html: { class: "email" }  %>
+            <%= f.input :email, placeholder: t("placeholder.signup.email"), required: true, label: false, wrapper: false, input_html: { class: "email" }  %>
           </div>
 
           <div class="password_container">
             <i class="fa fa-key fa-fw password"></i>
-            <%= f.input :password, placeholder: t("placeholder.registration.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password" } %>
+            <%= f.input :password, placeholder: t("placeholder.signup.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password" } %>
           </div>
 
           <div class="locale_container">
@@ -56,11 +56,11 @@
           </div>
 
           <div class="agreement_container">
-            <p class="notice"><%= t("instruction.registration_notice_html") %></a></p>
+            <p class="notice"><%= t("instruction.signup_notice_html") %></a></p>
           </div>
 
           <div class="animBox-right">
-          <%= f.button :submit, t("button_link.registration_sign_up"), class: "btn btn-info btn-medium", wrapper: false, "ng-click" => "update(user)" %>
+          <%= f.button :submit, t("button_link.signup"), class: "btn btn-info btn-medium", wrapper: false %>
           </div>
 
       <% end %>

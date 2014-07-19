@@ -1,9 +1,1 @@
-<div id="flash">
-  <% flash.each do |type, message| %>
-      <div class="<%= bootstrap_flash(type) %> alert alert-dismissable"></div>
-      <button aria-hidden="true" class="close" data-dismiss="alert">×</button>
-      <p>
-        <%= message %>
-      </p>
-  <% end %>
-</div>
+<div id="flash"><% flash.each do |type, message| %><div class="<%= bootstrap_flash(type) %> alert alert-dismissable"><button aria-hidden="true" class="close" data-dismiss="alert">×</button><p><%= message %></p><% end %></div></div>

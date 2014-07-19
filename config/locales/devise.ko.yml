@@ -34,7 +34,7 @@ ko:
       send_paranoid_instructions: 'If your e-mail exists on our database, you will receive an email with instructions about how to confirm your account in a few minutes.'
       confirmed: '귀하의 계정확인 절차가 완료되었습니다. 현재 로그인 상태입니다.'
     registrations:
-      signed_up: '환영합니다! 귀하의 회원가입이 성공적으로 완료되었습니다.'
+      signed_up: '#{current_user.first_name}님, 환영합니다.'
       inactive_signed_up: '귀하는 회원가입이 되었지만 %{reason} 이유로 로그인할 수 없습니다.'
       updated: '귀하의 개인정보 변경이 완료되었습니다.'
       destroyed: '안녕히 가십시요! 귀하의 계정이 성공적으로 삭제되었습니다. 조만간 다시 뵙기를 바랍니다.'
