@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  unfound_locale: is unsupported or does not exist
   login_page:
     sns_connector:
       title_html: <i class="fa fa-sun-o"></i>Connect with SNS
@@ -75,23 +76,6 @@ en:
       password_confirmation: "Enter your new password to confirm"
       current_password: "To save these settings, please enter your currnet password"
       unconfirmed_email: "Currently waiting confirmation for this email: "
-  date:
-    year: "Year"
-    month:
-      name: "Month"
-      jan: "Jan"
-      feb: "Feb"
-      mar: "Mar"
-      apr: "Apr"
-      may: "May"
-      jun: "Jun"
-      jul: "Jul"
-      aug: "Aug"
-      sep: "Sep"
-      oct: "Oct"
-      nov: "Nov"
-      dec: "Dec"
-    day: "Day"
   language:
     en: "English"
     ko: "Korean"

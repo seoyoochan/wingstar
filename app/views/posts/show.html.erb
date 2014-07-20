@@ -1,0 +1,17 @@
+<div class='post'>
+  <div class="title">
+    <h3><%= @post.title %></h3>
+  </div>
+
+  <div class="content">
+    <%= simple_format(@post.content, {}, sanitize: true) %>
+  </div>
+
+  <div class="user">
+    <strong><%= @post.user.present? ? @post.user.email : "익명사용자" %></strong>,
+    <%= time_ago_in_words(@post.created_at.in_time_zone) %>
+  </div>
+</div>
+
+<%= link_to '편집', edit_post_path(@post), class: 'btn btn-default' %>
+<%= link_to '뒤로', posts_path, class: 'btn btn-default' %>

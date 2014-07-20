@@ -1,2 +1,6 @@
 <% content_for :title, "홈" %>
-내용
+메인페이지
+<%= current_user.locale if signed_in? %>
+
+<% @posts = Post.paginate(:page => params[:page], :per_page => 2).order('created_at desc') %>
+<%= render :file => "/posts/index" %>

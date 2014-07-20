@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def support_locales
+  def app_locale_set
     @locales = {"en" => "English" , "ko" => "한국어"}
   end
 
@@ -8,39 +8,42 @@ module ApplicationHelper
 
     if signed_in?
       logger.debug "* User Preference Language: #{current_user.locale}."
-      I18n.locale = current_user.locale.to_sym
+      I18n.locale = current_user.locale.to_sym # User locale is the highest priority
+    else
+      # Set locale by browser language
+      available_locale(browser_locale)
+      # Otherwise, set locale if locale passed from url
+      available_locale(params[:locale]) if params[:locale].present?
     end
-
-
-    unless signed_in?
-      support_locales # Get @locales, the supported language set
-      if @locales.include?(browser_locale.to_s)
-        logger.debug "* User Browser Language: '#{browser_locale}' was set."
-        I18n.locale = browser_locale
-      else
-        logger.debug "* User Browser Language: '#{browser_locale}' isn't supported, then set English as default."
-        I18n.locale = :en
-      end
-    end
-
   end
 
   def browser_locale
     request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first.to_sym
   end
 
+  def available_locale(source)
+    app_locale_set
+    if @locales.include?(source.to_s)
+      logger.debug "* Language: '#{source}' was set."
+      I18n.locale = source
+    else
+      logger.debug "* Language: '#{source}' isn't supported, then set English as default."
+      I18n.locale = :en
+
+      flash[:error] = "#{source.to_s} " + t("unfound_locale")
+
+      redirect_to root_path
+    end
+  end
+
   def bootstrap_flash(type)
     case type
-      when :errors
-        "alert-error"
-      when :alert
-        "alert-warning"
-      when :error
-        "alert-error"
-      when :notice
-        "alert-success"
-      else
-        "alert-info"
+      when "notice" then "alert-info"
+      when "info" then "alert-info"
+      when "success" then "alert-success"
+      when "error" then "alert-danger"
+      when "alert" then "alert-danger"
+      else type.to_s
     end
   end
 
@@ -58,9 +61,5 @@ module ApplicationHelper
 
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
-  end
-
-  def bg_mapper
-    " bg-retro" if ["/signup", "/login"].include? (request.fullpath)
   end
 end

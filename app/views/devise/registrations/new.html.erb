@@ -1,3 +1,6 @@
+<style type="text/css">
+    body { background: url('<%= asset_url("bg/dark/retro_01-opacity-70.png") %>') no-repeat left top !important; }
+</style>
 <div id="signup_container">
   <div class="container rounded-10">
     <div class="header">
@@ -42,14 +45,13 @@
 
           <div class="locale_container">
             <h5 class="title"><%= t("signup_page.label.language_html") %></h5>
-            <%= f.input :locale, collection: @locales.map { |k,v| [v,k] }, selected: @locales[:en], wrapper: false, input_html: { class: "locale" }, label: false  %>
+            <%= f.input :locale, collection: @locales.map { |k,v| [v,k] }, selected: I18n.locale, wrapper: false, input_html: { class: "locale" }, label: false  %>
           </div>
 
           <div class="date_of_birth_container">
             <h5 class="title"><%= t("signup_page.label.dob_html") %></h5>
-            <%= f.input :date_of_birth, as: :date, wrapper: false, order: [:year, :month, :day], prompt: {year: t('date.year'), month: t('date.month.name'), day: t('date.day')},
-                        start_year: Date.current.year, end_year: 1920, use_month_names: [t("date.month.jan"), t("date.month.feb"), t("date.month.mar"), t("date.month.apr"), t("date.month.may"),
-                                                                                         t("date.month.jun"), t("date.month.jul"), t("date.month.aug"), t("date.month.sep"), t("date.month.oct"), t("date.month.nov"), t("date.month.dec")],
+            <%= f.input :date_of_birth, as: :date, wrapper: false, order: [:year, :month, :day], prompt: {year: t('date.year'), month: t('date.month'), day: t('date.day')},
+                        start_year: Date.current.year, end_year: 1920, use_month_names: t(:month_names, scope: :date),
                         required: false, label: false, input_html: { class: "date_of_birth" }  %>
           </div>
 

@@ -4,20 +4,35 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <!-- Facebook properties -->
   <meta property="og:title" content="Wingstar is something"/>
   <meta property="og:type" content="company"/>
   <meta property="og:site_name" content="wingstar.net"/>
   <meta property="og:image" content="http://cdn1.editmysite.com/images/theme_contest/screenshots.gif"/>
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="<%= asset_url('apple-touch-icon-57x57.png') %>">
+  <link rel="apple-touch-icon" sizes="114x114" href="<%= asset_url('apple-touch-icon-114x114.png') %>">
+  <link rel="apple-touch-icon" sizes="72x72" href="<%= asset_url('apple-touch-icon-72x72.png') %>">
+  <link rel="apple-touch-icon" sizes="144x144" href="<%= asset_url('apple-touch-icon-144x144.png') %>">
+  <link rel="apple-touch-icon" sizes="60x60" href="<%= asset_url('apple-touch-icon-60x60.png') %>">
+  <link rel="apple-touch-icon" sizes="120x120" href="<%= asset_url('apple-touch-icon-120x120.png') %>">
+  <link rel="apple-touch-icon" sizes="76x76" href="<%= asset_url('apple-touch-icon-76x76.png') %>">
+  <link rel="apple-touch-icon" sizes="152x152" href="<%= asset_url('apple-touch-icon-152x152.png') %>">
+  <meta name="apple-mobile-web-app-title" content="Wingstar">
+  <link rel="icon" type="image/png" href="<%= asset_url('favicon-196x196.png') %>" sizes="196x196">
+  <link rel="icon" type="image/png" href="<%= asset_url('favicon-160x160.png') %>" sizes="160x160">
+  <link rel="icon" type="image/png" href="<%= asset_url('favicon-96x96.png') %>" sizes="96x96">
+  <link rel="icon" type="image/png" href="<%= asset_url('favicon-16x16.png') %>" sizes="16x16">
+  <link rel="icon" type="image/png" href="<%= asset_url('favicon-32x32.png') %>" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#24282f">
+  <meta name="msapplication-TileImage" content="<%= asset_url('mstile-144x144.png') %>">
+  <meta name="application-name" content="Wingstar">
   <title><%= content_for?(:title) ? yield(:title) : "Wingstar" %></title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
-  <!--[if lt IE 9]>
-  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-
 </head>
-<body class="default<%= bg_mapper %>">
+<body class="default">
 <header id="header">
   <div class="logo animate-plus" data-animations="fadeIn" data-animation-when-visible="true" data-animation-reset-offscreen="true">
     <%= link_to t("logo"), root_path %>

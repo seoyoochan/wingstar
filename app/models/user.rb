@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include ApplicationHelper
 
+  has_many :posts, dependent: :destroy
+
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable

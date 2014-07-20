@@ -15,6 +15,7 @@
 //= require lib/bootstrap.min
 //= require lib/animate-plus.min
 //= require lib/icheck.min
+//= require lib/modernizr.custom.min
 
 $(document).ready(function(){
 
@@ -33,3 +34,4 @@ $(document).ready(function(){
 
 
 });
+
