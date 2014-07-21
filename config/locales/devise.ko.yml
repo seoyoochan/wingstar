@@ -39,6 +39,9 @@ ko:
       updated: '개인정보 변경이 완료되었습니다.'
       destroyed: '회원님의 계정이 성공적으로 삭제되었습니다. 조만간 다시 뵙기를 바랍니다.'
       roles: "권한설정"
+      user:
+        update_needs_confirmation: "이메일주소 변경이 신청되었습니다. 이메일 본인소유 확인을 위해, 새로운 이메일주소로 보내드린 링크를 클릭하여 확인해주세요."
+        signed_up_but_unconfirmed: "회원가입이 완료되었습니다. 이메일 본인소유 확인을 위해, 입력하신 이메일주소 '%{email}'에 보내드린 링크를 클릭하여 확인해주세요."
     unlocks:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'

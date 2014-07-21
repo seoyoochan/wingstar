@@ -8,3 +8,17 @@
       </div>
 </div>
 <% end %>
+
+<% if resource.errors.any? %>
+<div id="flash">
+  <div class="alert alert-dismissable alert-danger fade in">
+    <button aria-hidden="true" class="close" data-dismiss="alert">×</button>
+    <ul>
+      <% resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<% end %>
