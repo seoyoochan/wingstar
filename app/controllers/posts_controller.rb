@@ -23,8 +23,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    flash[:error] = t("posts.auth.edit") unless @post.updatable_by? current_user
-    authorize_action_for @post
+    # flash[:error] = t("posts.auth.edit") unless @post.updatable_by? current_user
+    # authorize_action_for @post
   end
 
   # POST /posts
@@ -48,8 +48,8 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    flash[:error] = t("posts.auth.edit") unless @post.updatable_by? current_user
-    authorize_action_for @post
+    # flash[:error] = t("posts.auth.edit") unless @post.updatable_by? current_user
+    # authorize_action_for @post
     respond_to do |format|
       if @post.update(post_params)
         flash[:success] = t("posts.performed.edit")
@@ -65,8 +65,8 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    flash[:error] = t("posts.auth.destroy") unless @post.deletable_by? current_user
-    authorize_action_for @post
+    # flash[:error] = t("posts.auth.destroy") unless @post.deletable_by? current_user
+    # authorize_action_for @post
     @post.destroy
     respond_to do |format|
       flash[:alert] = t("posts.performed.destroy")

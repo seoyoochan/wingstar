@@ -67,7 +67,4 @@ module ApplicationHelper
     "<span class='glyphicon glyphicon-#{name}'></span>".html_safe
   end
 
-  def user_roles(user)
-    user.roles.map(&:name).join(',').titleize
-  end
 end
