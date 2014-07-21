@@ -29,9 +29,9 @@ ul { list-style: none; }
 /******************************************************************************
 *  Base Style
 ******************************************************************************/
-body { width: 100%;  }
-
+body { overflow-x: hidden; }
 body, #header,#body {
+  width: 100%;
   font-size: 14px;
   font-family: 'barun';
 }
@@ -83,7 +83,7 @@ body.bg-dark {
 body.bg-retro {
   background: asset-url("bg/dark/retro_01-opacity-70.png") no-repeat left top;
 }
-#flash { margin: 10px 0 10px 0; padding: 0; width: 100%; }
+#flash { margin: 10px 0 20px 0; padding: 0; width: 100%; }
 
 .alert {
   margin: 0;
@@ -242,7 +242,7 @@ body.bg-retro {
 
 #body {
   margin: 0;
-  padding: 10px 0 10px 0;
+  padding: 10px;
 }
 
 /******************************************************************************

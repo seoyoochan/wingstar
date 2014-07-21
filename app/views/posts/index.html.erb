@@ -14,8 +14,8 @@
         <td><%= post.user.present? ? post.user.email : "n/a" %>, <%= time_ago_in_words(post.created_at) %></td>
         <td>
           <%= link_to br3_icon("eye-open"), post %>&nbsp;
-          <%= link_to br3_icon("edit"), edit_post_path(post) %>&nbsp;
-          <%= link_to br3_icon("trash"), post, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to br3_icon("edit"), edit_post_path(post) if can? :edit, post %>&nbsp;
+          <%= link_to br3_icon("trash"), post, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, post %>
         </td>
       </tr>
   <% end %>
