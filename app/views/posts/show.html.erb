@@ -13,5 +13,5 @@
   </div>
 </div>
 
-<%= link_to '편집', edit_post_path(@post), class: 'btn btn-default' %>
+<%= link_to '편집', edit_post_path(@post), class: 'btn btn-default' if @post.updatable_by? current_user %>
 <%= link_to '뒤로', posts_path, class: 'btn btn-default' %>

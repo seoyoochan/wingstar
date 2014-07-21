@@ -42,6 +42,7 @@ module ApplicationHelper
       when "success" then "alert-success"
       when "error" then "alert-danger"
       when "alert" then "alert-danger"
+      when "warning" then "alert-warning"
       else type.to_s
     end
   end
@@ -60,5 +61,13 @@ module ApplicationHelper
 
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
+  end
+
+  def br3_icon(name)
+    "<span class='glyphicon glyphicon-#{name}'></span>".html_safe
+  end
+
+  def user_roles(user)
+    user.roles.map(&:name).join(',').titleize
   end
 end

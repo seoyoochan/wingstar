@@ -61,6 +61,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %><span class="caret"></span></a>
         <ul class="dropdown-menu rounded-3" role="menu">
           <li class="settings"><%= link_to t("top_nav.settings_html"), settings_path %></li>
+          <li><%= link_to "Roles : " + user_roles(current_user), "#" %></li>
           <li class="logout"><%= link_to t("top_nav.logout_html"), destroy_user_session_path, :method => :delete  %></li>
           <div class="divider"></div>
           <li class="dropdown-header"><%= link_to t("top_nav.help_html"), "#help" %></li>

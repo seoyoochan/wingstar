@@ -1,4 +1,14 @@
 ko:
+  posts:
+    auth:
+      create: 포스트를 작성할 권한이 없습니다.
+      edit: 포스트를 편집 할 수 있는 권한이 없습니다.
+      destroy: 포스트를 삭제 할 수 있는 권한이 없습니다.
+    performed:
+      create: 포스트가 등록되었습니다.
+      edit: 포스트가 편집되었습니다.
+      destroy: 포스트가 삭제되었습니다.
+
   unfound_locale: 은 미지원 언어거나 존재하지 않는 언어축약형 입니다.
   login_page:
     sns_connector:
