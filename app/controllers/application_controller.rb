@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password, :remember_me) }
   end
 
-  # def default_url_options(options={})
-  #   logger.debug "default_url_options is passed options: #{options.inspect}\n"
-  #   { locale: I18n.locale }
-  # end
+  def default_url_options(options={})
+    logger.debug "default_url_options is passed options: #{options.inspect}\n"
+    { locale: I18n.locale }
+  end
 
 end

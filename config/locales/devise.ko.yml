@@ -26,17 +26,18 @@ ko:
       signed_in: '%{name} 님, 어서오세요.'
       signed_out: '%{name} 님, 로그아웃 되었습니다.'
     passwords:
-      send_instructions: '잠시후에 귀하의 암호를 재설정하는 방법에 대한 안내문이 이메일로 발송됩니다. 등록된 이메일을 확인하시기 바랍니다.'
-      updated: '귀하의 암호가 변경되었습니다. 현재 로그인 상태입니다.'
+      send_instructions: '잠시후에 비밀번호를 재설정하는 방법에 대한 안내문이 이메일로 발송됩니다. 등록된 이메일을 확인하시기 바랍니다.'
+      updated: '성공적으로 비밀번호가 변경되었습니다.'
       send_paranoid_instructions: "귀하의 이메일이 등록되어 있다면 암호복원을 위한 링크가 이메일로 발송될 것입니다. 이메일을 확인하십시요."
+      updated_not_active: "Your password was changed successfully, but not in active."
     confirmations:
       send_instructions: '몇 분 내에 계정확인에 대한 설명을 이메일로 보내드릴것입니다. 확인해주세요.'
       send_paranoid_instructions: 'If your e-mail exists on our database, you will receive an email with instructions about how to confirm your account in a few minutes.'
-      confirmed: '귀하의 계정확인 절차가 완료되었습니다. 현재 로그인 상태입니다.'
+      confirmed: '감사합니다! 회원님의 계정확인 절차가 완료되었습니다.'
     registrations:
       signed_up: '%{name} 님, 윙스타에 오신것을 환영합니다!'
       inactive_signed_up: '이미 윙스타를 사용하고 계시지만 %{reason} 이유로 로그인할 수 없습니다.'
-      updated: '개인정보 변경이 완료되었습니다.'
+      updated: '회원님의 개인정보가 변경되었습니다.'
       destroyed: '회원님의 계정이 성공적으로 삭제되었습니다. 조만간 다시 뵙기를 바랍니다.'
       roles: "권한설정"
       user:
