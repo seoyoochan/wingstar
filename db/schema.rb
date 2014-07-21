@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721141811) do
+ActiveRecord::Schema.define(version: 20140721185059) do
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -57,6 +57,10 @@ ActiveRecord::Schema.define(version: 20140721141811) do
     t.date     "date_of_birth"
     t.string   "locale",                 default: "en"
     t.string   "gender"
+    t.string   "name"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "image"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

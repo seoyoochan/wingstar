@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable
+         :recoverable, :rememberable, :trackable, :confirmable
 
   has_many :posts, dependent: :destroy
 
@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
     add_role :user
   end
 
+  protected
+  def confirmation_required?
+    true
+  end
 end

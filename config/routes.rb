@@ -1,19 +1,25 @@
 Rails.application.routes.draw do
 
   scope "(:locale)", locale: /en|ko/ do
+
     resources :posts, except: :show
     get "posts/:id" => "posts#read"
 
     devise_scope :user do
       get "settings" => "devise/registrations#edit", as: :settings
+      get "find_password" => "devise/passwords#new", as: :find_password
+      get "forgot_password" => "devise/passwords#new", as: :forgot_password
+      get "resend" => "devise/confirmations#new", as: :resend
     end
 
     devise_for :user, path: "",
                path_names: { sign_in: "login", sign_out: "logout", sign_up: "signup", password: "find_password" },
                controllers: {
                    :sessions => "users/sessions",
-                   :registrations => "users/registrations"
+                   :registrations => "users/registrations",
+                   :confirmations => "users/confirmations"
                }
+
   end
 
   get '/:locale' => 'high_voltage/pages#show', id: 'home'
