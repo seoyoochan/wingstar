@@ -83,9 +83,10 @@ body.bg-dark {
 body.bg-retro {
   background: asset-url("bg/dark/retro_01-opacity-70.png") no-repeat left top;
 }
+#flash { margin: 10px 0 10px 0; padding: 0; width: 100%; }
 
 .alert {
-  margin: 0 15px 15px 15px;
+  margin: 0;
   padding: 15px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -181,7 +182,7 @@ body.bg-retro {
   }
 
   .navbar-toggle:hover {
-    .icon-bar { background: #57d1eb; }
+    .icon-bar { background: #5CD2EA; }
   }
 
   #top_nav, #top_nav ul, #top_nav ul li a {
@@ -232,7 +233,7 @@ body.bg-retro {
         li:hover {
           color: #fff;
           a { color: #fff; }
-          background: #4cabc0;
+          background: #5CD2EA;
         }
       }
   }

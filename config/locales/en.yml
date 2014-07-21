@@ -20,6 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  posts:
+    auth:
+      create: You are unauthorized to write posts.
+      edit: You are unauthorized to edit posts.
+      destroy: You are unauthorized to delete posts.
+    performed:
+      create: Your posts has been posted!
+      edit: Your posts has been edited.
+      destroy: Your posts has been deleted.
+
   unfound_locale: is unsupported or does not exist
   login_page:
     sns_connector:

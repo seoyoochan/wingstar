@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   scope "(:locale)", locale: /en|ko/ do
     resources :posts
+
     devise_scope :user do
       get "settings" => "devise/registrations#edit", as: :settings
     end

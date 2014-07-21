@@ -23,6 +23,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    # flash[:error] = t("posts.auth.edit") unless @post.updatable_by? current_user
+    # authorize_action_for @post
   end
 
   # POST /posts
@@ -33,7 +35,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to posts_url, success: "글이 등록되었습니다." }
+        flash[:success] = t("posts.performed.create")
+        format.html { redirect_to posts_url }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { render action: 'new' }
@@ -45,9 +48,12 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    # flash[:error] = t("posts.auth.edit") unless @post.updatable_by? current_user
+    # authorize_action_for @post
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to post_path(@post), success: "글이 등록되었습니다." }
+        flash[:success] = t("posts.performed.edit")
+        format.html { redirect_to post_path(@post) }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -59,9 +65,12 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    # flash[:error] = t("posts.auth.destroy") unless @post.deletable_by? current_user
+    # authorize_action_for @post
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, warning: "글이 삭제되었습니다." }
+      flash[:alert] = t("posts.performed.destroy")
+      format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
   end

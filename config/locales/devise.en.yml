@@ -12,7 +12,7 @@ en:
       invalid: "Invalid email or password."
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account will be locked."
-      not_found_in_database: "Invalid email or password."
+      not_found_in_database: "This account does not exist"
       timeout: "Your session expired. Please sign in again to continue."
       unauthenticated: "You need to sign in or sign up before continuing."
       unconfirmed: "You have to confirm your account before continuing."
@@ -42,7 +42,7 @@ en:
       updated: "You updated your account successfully."
     sessions:
       signed_in: "Welcome, %{name}."
-      signed_out: ""
+      signed_out: "You are successfully logged out, %{name}"
     unlocks:
       send_instructions: "You will receive an email with instructions about how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions about how to unlock it in a few minutes."

@@ -5,7 +5,6 @@ module ApplicationHelper
   end
 
   def default_locale
-
     if signed_in?
       logger.debug "* User Preference Language: #{current_user.locale}."
       I18n.locale = current_user.locale.to_sym # User locale is the highest priority
@@ -43,6 +42,7 @@ module ApplicationHelper
       when "success" then "alert-success"
       when "error" then "alert-danger"
       when "alert" then "alert-danger"
+      when "warning" then "alert-warning"
       else type.to_s
     end
   end
@@ -62,4 +62,9 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def br3_icon(name)
+    "<span class='glyphicon glyphicon-#{name}'></span>".html_safe
+  end
+
 end
