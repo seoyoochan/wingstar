@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-
+  resourcify
   belongs_to :user
 
   validates :title, presence: true

@@ -9,5 +9,5 @@
 <%= render 'form' %>
 
 <hr>
-<%= link_to 'Show', @post, class: 'btn btn-default' %>
+<%= link_to 'Read', @post, class: 'btn btn-default' if can? :read, @post %>
 <%= link_to 'Back', posts_path, class: 'btn btn-default' %>
