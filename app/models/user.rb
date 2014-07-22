@@ -3,13 +3,9 @@ class User < ActiveRecord::Base
   rolify
   after_create :set_default_roles, if: Proc.new { User.count > 1 }
 
-
-
-
-
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :confirmable, :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :posts, dependent: :destroy
 
@@ -99,4 +95,8 @@ class User < ActiveRecord::Base
     add_role :user
   end
 
+  protected
+  def confirmation_required?
+    true
+  end
 end

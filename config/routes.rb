@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :posts, except: :show
 
   get "posts/:id" => "posts#read"
@@ -8,6 +9,9 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get "settings" => "devise/registrations#edit", as: :settings
+    get "find_password" => "devise/passwords#new", as: :find_password
+    get "forgot_password" => "devise/passwords#new", as: :forgot_password
+    get "resend" => "devise/confirmations#new", as: :resend
   end
 
   devise_for :user, path: "",
@@ -15,15 +19,9 @@ Rails.application.routes.draw do
              controllers: {
                  :sessions => "users/sessions",
                  :registrations => "users/registrations",
+                 :confirmations => "users/confirmations",
                  :omniauth_callbacks => "users/omniauth_callbacks"
              }
-
-
-
-
-
-
-
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
