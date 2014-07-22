@@ -1,24 +1,25 @@
 Rails.application.routes.draw do
 
-  scope "(:locale)", locale: /en|ko/ do
-    resources :posts, except: :show
-    get "posts/:id" => "posts#read"
+  resources :posts, except: :show
 
-    devise_scope :user do
-      get "settings" => "devise/registrations#edit", as: :settings
-    end
-
-    devise_for :user, path: "",
-               path_names: { sign_in: "login", sign_out: "logout", sign_up: "signup", password: "find_password" },
-               controllers: {
-                   :sessions => "users/sessions",
-                   :registrations => "users/registrations"
-               }
-  end
-
-  get '/:locale' => 'high_voltage/pages#show', id: 'home'
+  get "posts/:id" => "posts#read"
 
   root 'high_voltage/pages#show', id: 'home'
+
+  devise_scope :user do
+    get "settings" => "devise/registrations#edit", as: :settings
+  end
+
+  devise_for :user, path: "",
+             path_names: { sign_in: "login", sign_out: "logout", sign_up: "signup", password: "find_password" },
+             controllers: {
+                 :sessions => "users/sessions",
+                 :registrations => "users/registrations",
+                 :omniauth_callbacks => "users/omniauth_callbacks"
+             }
+
+
+
 
 
 

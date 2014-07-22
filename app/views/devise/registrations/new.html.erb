@@ -57,7 +57,7 @@
 
           <div class="gender_container">
             <h5 class="title"><%= t("signup_page.label.gender_html") %></h5>
-            <%= f.collection_radio_buttons :gender, [["F", t("signup_page.collection.gender.female_html") ], ["M", t("signup_page.collection.gender.male_html")]], :first, :last, wrapper: false %>
+            <%= f.collection_radio_buttons :gender, [["female", t("signup_page.collection.gender.female_html") ], ["male", t("signup_page.collection.gender.male_html")]], :first, :last, wrapper: false %>
           </div>
 
           <div class="agreement_container rounded-3">

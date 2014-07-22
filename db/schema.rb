@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721141811) do
+ActiveRecord::Schema.define(version: 20140722105807) do
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -35,12 +35,12 @@ ActiveRecord::Schema.define(version: 20140721141811) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",   null: false
-    t.string   "encrypted_password",     default: "",   null: false
+    t.string   "email",                                     default: "",     null: false
+    t.string   "encrypted_password",                        default: "",     null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,    null: false
+    t.integer  "sign_in_count",                             default: 0,      null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -53,10 +53,22 @@ ActiveRecord::Schema.define(version: 20140721141811) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "agreement",              default: true
+    t.boolean  "agreement",                                 default: true
     t.date     "date_of_birth"
-    t.string   "locale",                 default: "en"
-    t.string   "gender"
+    t.string   "locale",                                    default: "en"
+    t.string   "gender",                                    default: "male"
+    t.boolean  "name_format",                               default: true
+    t.string   "website"
+    t.string   "name"
+    t.binary   "profile_image",          limit: 2147483647
+    t.string   "provider"
+    t.integer  "uid",                    limit: 8
+    t.integer  "fb_id",                  limit: 8
+    t.text     "about"
+    t.text     "bio"
+    t.binary   "education"
+    t.string   "fb_profile_link"
+    t.string   "location"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

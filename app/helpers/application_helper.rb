@@ -1,8 +1,10 @@
 module ApplicationHelper
 
-  def app_locale_set
-    @locales = {"en" => "English" , "ko" => "한국어"}
+  def ws_locales
+    @locales = {"en" => "English (US)" , "ko" => "한국어"}
   end
+
+
 
   def default_locale
     if signed_in?
@@ -21,7 +23,7 @@ module ApplicationHelper
   end
 
   def available_locale(source)
-    app_locale_set
+    ws_locales
     if @locales.include?(source.to_s)
       logger.debug "* Language: '#{source}' was set."
       I18n.locale = source

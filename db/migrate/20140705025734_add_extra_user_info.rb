@@ -5,7 +5,11 @@ class AddExtraUserInfo < ActiveRecord::Migration
     add_column :users, :agreement, :boolean, default: true
     add_column :users, :date_of_birth, :date
     add_column :users, :locale, :string, default: 'en'
-    add_column :users, :gender, :string
+    add_column :users, :gender, :string, default: 'male'
+    add_column :users, :name_format, :boolean, default: true
+    add_column :users, :website, :string
+    add_column :users, :name, :string
+    add_column :users, :profile_image, :binary, :limit => 20.megabyte
   end
 
   def down
@@ -15,5 +19,9 @@ class AddExtraUserInfo < ActiveRecord::Migration
     remove_column :users, :date_of_birth
     remove_column :users, :locale
     remove_column :users, :gender
+    remove_column :users, :name_format
+    remove_column :users, :website
+    remove_column :users, :name
+    remove_column :profile_image, :binary
   end
 end
