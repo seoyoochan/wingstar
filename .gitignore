@@ -13,5 +13,10 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
+/tmp/
 
+doc/*
+db/schema.rb
+tmp/*
+config/database.yml
+config/social_keys.yml

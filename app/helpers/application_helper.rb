@@ -5,7 +5,6 @@ module ApplicationHelper
   end
 
 
-
   def default_locale
     if signed_in?
       logger.debug "* User Preference Language: #{current_user.locale}."

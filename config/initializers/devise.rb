@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = '3930c7dcd8b0594baef721c2aebd146af4f58c907ae6ad4424eaf1290bb9d618b8ed0fa9020c5bc9f2f5250a205ece174adb32a720ca7ac1d7471da2823590ad'
+  config.secret_key = '3930c7dcd8b0594baef721c2aebd146af4f58c907ae6ad4424eaf1290bb9d618b8ed0fa9020c5bc9f2f5250a205ece174adb32a720ca7ac1d7471da2823590ad'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -137,7 +137,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 6..20
+  config.password_length = 6..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -230,7 +230,13 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :facebook, ENV["FB_APP_ID"], ENV["FB_APP_SECRET"]
+
+  require 'devise/orm/active_record'
+  config.omniauth :facebook, ENV["FB_APP_ID"], ENV["FB_APP_SECRET"], { scope: "email, offline_access", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
+  config.omniauth :twitter, ENV["TW_API_KEY"], ENV["TW_API_SECRET"], { scope: "r_fullprofile, r_emailaddress", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
+  config.omniauth :linkedin, ENV["IN_API_KEY"], ENV["IN_API_SECRET"], { scope: "r_fullprofile, r_emailaddress", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
+  config.omniauth :github, ENV["GIT_CLIENT_ID"], ENV["GIT_CLIENT_SECRET"], scope: "user, public_repo"
+  config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

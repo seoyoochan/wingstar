@@ -23,6 +23,8 @@ Rails.application.routes.draw do
                  :omniauth_callbacks => "users/omniauth_callbacks"
              }
 
+  match '/users/add_email' => 'users/omniauth_callbacks#add_email', :as => :omniauth_add_email
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
