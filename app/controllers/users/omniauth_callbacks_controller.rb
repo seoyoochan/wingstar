@@ -18,10 +18,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def all
     auth = request.env["omniauth.auth"]
     sns_provider = auth.provider.humanize
+    @identity = User.from_omniauth(auth, current_user)
 
     if current_user
 
-       @identity = User.from_omniauth(auth, current_user)
        logger.debug " * @identity  : #{@identity}"
        if @identity.changed?
          if @identity.save!(:validate => false)
@@ -37,26 +37,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
        end
 
     else
-      @identity = User.from_omniauth(auth)
 
-      if @identity.changed?
-        # 이메일을 제공해주는 SNS일경우
-        if @identity.email.present?
-          flash[:success] = "#{sns_provider} 계정으로 회원가입이 완료되었습니다."
-          redirect_to root_path
-
-          # In case user's email was not confirmed
-          if @identity.confirmed_at.blank?
-            flash[:error] = "#{sns_provider} 계정의 이메일 확인이 실패했습니다. 이 오류는 관리자에게 문의해주셔야합니다."
-            redirect_to root_path
-          end
-        else
-        # 트위터같은 이메일 비제공 SNS 일경우, 따로 이메일 추가입력을 하도록 한다.
-          session["devise.omniauth_data"] = User.build_twitter_auth_cookie_hash(request.env["omniauth.auth"])
-          flash[:error] = "#{sns_provider}는 이메일정보를 제공하지 않으므로 윙스타에서 새로 인증을 하셔야합니다."
-          render "users/omniauth_callbacks/add_email"
-        end
+      # 최초가입?
+      if @identity.nil?
+      logger.debug " @identity.inspect : #{@identity.inspect}"
       end
+
     end
 
 

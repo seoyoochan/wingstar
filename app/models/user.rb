@@ -68,10 +68,10 @@ class User < ActiveRecord::Base
     identity = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token).first_or_initialize
     logger.debug " * authorizaiton : #{identity} "
     # 해당 SNS의 계정 이메일도 User 데이터베이스에서 조회
-    user = current_user.nil? ? User.where(:email => auth["info"]["email"]).first : current_user
+    user = User.where(:email => auth.info.email).first()
 
     # 이미 로그인한 사용자(시나리오01: SNS 최초인증 / SNS 이미 인증)
-    if current_user
+    if current_user.present?
 
       # 로그인 사용자의 SNS 최초인증 (identity.user_id는 공백 상태이므로)
       if identity.user_id != current_user.id
@@ -91,20 +91,30 @@ class User < ActiveRecord::Base
       if identity.user_id.present?
         # 아이디 식별후 리턴
         if identity.user_id == user.id
+          logger.debug " * 아이디 식별후 리턴 실행 "
           user
         end
       else
       # 비인증된 최초의 SNS로그인(사실상 SNS를 통한 회원가입)과 동시에 이메일을 등록한적이 없어야 가입진행
-        if user.blank?
+        logger.debug " * 98번째줄 실행 "
+
+        if user.nil?
+          logger.debug " * 101번째줄 실행 "
           if auth.provider == "twitter"
+            logger.debug "트위터 프로바이더"
             signup_by_twitter(auth, identity)
           else
+            logger.debug " * 106번째줄 실행 "
             signup_by_facebook(auth, identity) if auth.provider == "facebook"
             signup_by_google_oauth2(auth, identity) if auth.provider == "google_oauth2"
             signup_by_github(auth, identity) if auth.provider == "github"
             signup_by_linkedin(auth, identity) if auth.provider == "linkedin"
           end
+        else
+          logger.debug " * 113번째줄 실행 : #{ user.inspect }"
+          user
         end
+
       end
     end
 
@@ -112,7 +122,9 @@ class User < ActiveRecord::Base
 
 
   def self.signup_by_facebook(auth, identity)
+    logger.debug " * 124번째줄 실행 "
     if auth.provider == "facebook"
+      logger.debug " * 126번째줄 실행 "
       user = User.create(
         :email => auth.info.email,
         :password => Devise.friendly_token[0,20],
@@ -130,7 +142,8 @@ class User < ActiveRecord::Base
       )
       identity.user_id = user.id
       identity.save!
-      user
+      user.save!
+      return user
     end
   end
 
