@@ -22,12 +22,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if current_user
 
        @identity = User.from_omniauth(auth, current_user)
+       logger.debug " * @identity  : #{@identity}"
        if @identity.changed?
-         if @identity.save
+         if @identity.save!(:validate => false)
            flash[:success] = "#{sns_provider} 계정이 연결되었습니다."
            redirect_to edit_user_registration_path
          else
-           flash[:error] = "알수없는 이유로 #{sns_provider} 계정 연결이 실패되었습니다."
+           flash[:error] = "알수없는 이유로 #{sns_provider} 계정이 저장되지 못했습니다."
            redirect_to ""
          end
        else

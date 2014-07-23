@@ -12,10 +12,9 @@ class User < ActiveRecord::Base
   has_many :authorizations, dependent: :destroy
 
 
-
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :email, presence: true, :allow_blank => true, :on => create
+  validates :email, presence: true
   validates :email, uniqueness: { :case_sensitive => false, :allow_blank => false }, format: { :with => Devise.email_regexp }, :if => :email_changed?
   validates :password, presence: { length: { within: Devise.password_length } }, :on => :create
   validates :password, presence: true, :on => :update, :unless => lambda { |user| user.password.blank? }
@@ -64,12 +63,12 @@ class User < ActiveRecord::Base
 
 
   def self.from_omniauth(auth, current_user = nil)
-    logger.debug " * auth : #{auth} "
+
     # 해당 SNS의 계정이 존재하는지 Authorization 데이터베이스에서 조회
     identity = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token).first_or_initialize
     logger.debug " * authorizaiton : #{identity} "
     # 해당 SNS의 계정 이메일도 User 데이터베이스에서 조회
-    user = current_user.nil? ? User.where('email = ?', auth["info"]["email"]).first : current_user
+    user = current_user.nil? ? User.where(:email => auth["info"]["email"]).first : current_user
 
     # 이미 로그인한 사용자(시나리오01: SNS 최초인증 / SNS 이미 인증)
     if current_user
@@ -79,7 +78,7 @@ class User < ActiveRecord::Base
         # 인증 표시
         identity.user_id = current_user.id
         # 현재 유저의 DB에 가져온 SNS의 정보를 입력함
-        sns_crawling(auth.provider)
+        sns_crawling(auth)
       else
       # 로그인 사용자가 SNS 이미 인증한것을 클릭할때
         current_user
@@ -97,13 +96,13 @@ class User < ActiveRecord::Base
       else
       # 비인증된 최초의 SNS로그인(사실상 SNS를 통한 회원가입)과 동시에 이메일을 등록한적이 없어야 가입진행
         if user.blank?
-          if provide_email?
-            signup_by_facebook
-            signup_by_google_oauth2
-            signup_by_github
-            signup_by_linkedin
+          if auth.provider == "twitter"
+            signup_by_twitter(auth, identity)
           else
-            signup_by_twitter
+            signup_by_facebook(auth, identity) if auth.provider == "facebook"
+            signup_by_google_oauth2(auth, identity) if auth.provider == "google_oauth2"
+            signup_by_github(auth, identity) if auth.provider == "github"
+            signup_by_linkedin(auth, identity) if auth.provider == "linkedin"
           end
         end
       end
@@ -111,34 +110,34 @@ class User < ActiveRecord::Base
 
   end
 
-  def self.generate_default_signup_info
-    user = User.new
-    user.password = Devise.friendly_token[0,20]
-    user.agreement = 1
-  end
 
-  def self.signup_by_facebook
+  def self.signup_by_facebook(auth, identity)
     if auth.provider == "facebook"
-      generate_default_signup_info
-      user.confirmed_at = Time.now
-      user.name = auth.info.name if user.name.blank?
-      user.email = auth.info.email if user.email.blank?
-      user.username = auth.info.nickname if user.username.blank?
-      user.first_name = auth.info.first_name if user.first_name.blank?
-      user.last_name = auth.info.last_name if user.last_name.blank?
-      user.locale = fb_locales_available(auth.extra.raw_info.locale) if user.locale.blank?
-      user.gender = auth.extra.raw_info.gender if user.gender.blank?
-      user.location = auth.info.location if user.location.blank?
-      user.facebook_account_url = auth.info.urls.Facebook if user.facebook_account_url.blank?
-      user.profile_image = auth.info.image if user.profile_image.blank?
-      user.save
+      user = User.create(
+        :email => auth.info.email,
+        :password => Devise.friendly_token[0,20],
+        :agreement => 1,
+        :confirmed_at => Time.now,
+        :name => auth.info.name,
+        :username => auth.info.nickname,
+        :first_name => auth.info.first_name,
+        :last_name => auth.info.last_name,
+        :locale => fb_locales_available(auth.extra.raw_info.locale),
+        :gender => auth.extra.raw_info.gender,
+        :location => auth.info.location,
+        :facebook_account_url => auth.info.urls.Facebook,
+        :profile_image => auth.info.image
+      )
       identity.user_id = user.id
+      identity.save!
       user
     end
   end
 
-  def self.signup_by_google_oauth2
-    generate_default_signup_info
+  def self.signup_by_google_oauth2(auth, identity)
+    user = User.new
+    user.password = Devise.friendly_token[0,20]
+    user.agreement = 1
     user.confirmed_at = Time.now
     user.name = auth.info.name if user.name.blank?
     user.email = auth.info.email if user.email.blank?
@@ -150,17 +149,21 @@ class User < ActiveRecord::Base
     user.date_of_birth = auth.extra.raw_info.birthday if user.date_of_birth
     user.locale = auth.extra.raw_info.locale if user.locale
     # user.website = auth.extra.raw_info.hd if user.website
-    user.save
+    user.save!
+
     identity.user_id = user.id
+    identity.save!
     user
   end
 
-  def self.signup_by_github
+  def self.signup_by_github(auth, identity)
 
   end
 
-  def self.signup_by_twitter
-    generate_default_signup_info
+  def self.signup_by_twitter(auth, identity)
+    user = User.new
+    user.password = Devise.friendly_token[0,20]
+    user.agreement = 1
     user.name = auth.info.name if user.name.blank?
     user.username = auth.info.nickname if user.username.blank?
     user.location = auth.info.location if user.location.blank?
@@ -170,12 +173,17 @@ class User < ActiveRecord::Base
     user.twitter_account_url = auth.info.urls.Twitter if user.twitter_account_url.blank?
     user.locale = tw_locales_available(auth.extra.lang) if user.locale.blank?
     user.email = nil
+
+    identity.user_id = user.id
+    identity.save!
     # Note that user MUST NOT be saved here
     user
   end
 
-  def self.signup_by_linkedin
-    generate_default_signup_info
+  def self.signup_by_linkedin(auth, identity)
+    user = User.new
+    user.password = Devise.friendly_token[0,20]
+    user.agreement = 1
     user.confirmed_at = Time.now
     user.email = auth.info.email if user.email.blank?
     user.name = auth.info.name if user.name.blank?
@@ -187,21 +195,16 @@ class User < ActiveRecord::Base
     user.about = auth.info.description if user.about.blank?
     user.linkedin_account_url = auth.info.urls.public_profile if user.linkedin_account_url.blank?
     user.locale = linkedin_locales_available(auth.extra.raw_info.location.country.code) if user.locale.blank?
-    user.save
+    user.save!
+
+    identity.user_id = user.id
+    identity.save!
     user
   end
 
-  def self.provide_email?
-    # 이메일 제공하지 않는 SNS 블랙리스트
-    if auth.provider == "twitter"
-      false
-    else
-      true
-    end
-  end
 
-  def self.sns_crawling(provider)
-    if provider == "facebook"
+  def self.sns_crawling(data)
+    if data.provider == "facebook"
       current_user.name = auth.info.name if current_user.name.blank?
       current_user.email = auth.info.email if current_user.email.blank?
       current_user.username = auth.info.nickname if current_user.username.blank?
@@ -216,7 +219,7 @@ class User < ActiveRecord::Base
       current_user
     end
 
-    if provider == "twitter"
+    if data.provider == "twitter"
       current_user.name = auth.info.name if current_user.name.blank?
       current_user.username = auth.info.nickname if current_user.username.blank?
       current_user.location = auth.info.location if current_user.location.blank?
@@ -229,7 +232,7 @@ class User < ActiveRecord::Base
       current_user
     end
 
-    if provider == "google_oauth2"
+    if data.provider == "google_oauth2"
       current_user.name = auth.info.name if current_user.name.blank?
       current_user.email = auth.info.email if current_user.email.blank?
       current_user.first_name = auth.info.first_name if current_user.first_name.blank?
@@ -244,7 +247,7 @@ class User < ActiveRecord::Base
       current_user
     end
 
-    if provider == "github"
+    if data.provider == "github"
 
     end
   end
