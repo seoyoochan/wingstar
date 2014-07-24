@@ -39,7 +39,7 @@ body, #header,#body {
 ul > li {  }
 ul > li > a > i { margin-right: 10px; }
 
-input, textarea, a, span {
+input, textarea, a, span, .transition {
   -webkit-transition: all 0.30s ease-in-out !important;
   -moz-transition: all 0.30s ease-in-out !important;
   -ms-transition: all 0.30s ease-in-out !important;
@@ -112,6 +112,25 @@ body.bg-retro {
   border: 1px solid #97c1da;
 }
 
+.profile_image {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  left: -55px;
+  top: -10px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  text-indent: -9999em;
+  /* Prevent background color leak outs */
+  -webkit-background-clip: padding-box;
+  -moz-background-clip:    padding;
+  background-clip:         padding-box;
+}
 /******************************************************************************
 *  Layout & Custom Style
 ******************************************************************************/
@@ -129,7 +148,7 @@ body.bg-retro {
     float: left;
     z-index: 10;
     text-indent: -9999em;
-    background:  asset_url('logo-34x34.png') no-repeat left top;
+    background:  asset_url('logo-transparent_34x34.png') no-repeat left top;
     -webkit-transition: all 0.50s ease-in-out !important;
     -moz-transition: all 0.50s ease-in-out !important;
     -ms-transition: all 0.50s ease-in-out !important;
@@ -138,7 +157,7 @@ body.bg-retro {
   }
 
   .logo:hover {
-    background: asset_url('logo-hover-34x34.png') no-repeat left top;
+    background: asset_url('logo-transparent-hover_34x34.png') no-repeat left top;
   }
 
   #search_container {
@@ -207,7 +226,7 @@ body.bg-retro {
         margin: 0;
         padding: 13px 0 6px 0 ;
         top: 30px;
-        left: 0px;
+        left: -50px;
         border: 1px solid #a7a7a7;
         z-index: 9999 !important;
         box-shadow: none;
@@ -271,9 +290,12 @@ body.bg-retro {
           display: block;
           margin: 0;
           padding-left: 30px;
-          background:  asset_url('logo-34x34.png') no-repeat 35% center;
+          background:  asset_url('logo-transparent_34x34.png') no-repeat 35% center;
           color: #fff;
           text-transform: uppercase;
+        }
+        .logo:hover {
+          background:  asset_url('logo-transparent-hover_34x34.png') no-repeat 35% center;
         }
       }
     }
@@ -456,7 +478,10 @@ body.bg-retro {
   }
 
   .header > .title > .logo {
-    background:  asset_url('logo-34x34.png') no-repeat 30% center !important;
+    background:  asset_url('logo-transparent_34x34.png') no-repeat 30% center !important;
+  }
+  .header > .title > .logo:hover {
+    background:  asset_url('logo-transparent-hover_34x34.png') no-repeat 30% center !important;
   }
 
   .body {

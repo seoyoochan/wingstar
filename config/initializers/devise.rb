@@ -232,11 +232,11 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
   require 'devise/orm/active_record'
-  config.omniauth :facebook, ENV["FB_APP_ID"], ENV["FB_APP_SECRET"], { scope: "email, offline_access", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
+  config.omniauth :facebook, ENV["FB_APP_ID"], ENV["FB_APP_SECRET"], { scope: "publish_stream, offline_access, email", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
   config.omniauth :twitter, ENV["TW_API_KEY"], ENV["TW_API_SECRET"], { scope: "r_fullprofile, r_emailaddress", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
-  config.omniauth :linkedin, ENV["IN_API_KEY"], ENV["IN_API_SECRET"], { scope: "r_fullprofile, r_emailaddress", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
-  config.omniauth :github, ENV["GIT_CLIENT_ID"], ENV["GIT_CLIENT_SECRET"], scope: "user, public_repo"
-  config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {}
+  config.omniauth :linkedin, ENV["IN_API_KEY"], ENV["IN_API_SECRET"], { scope: "r_basicprofile r_fullprofile r_network r_contactinfo r_emailaddress", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
+  config.omniauth :github, ENV["GIT_CLIENT_ID"], ENV["GIT_CLIENT_SECRET"], { scope: "user, public_repo" }
+  config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], { scope: "email, profile" }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

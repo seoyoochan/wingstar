@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include ApplicationHelper
 
   rolify
-  after_create :set_default_roles, if: Proc.new { User.count > 1 }
+  after_create :set_default_roles, if: Proc.new { User.count > 0 }
 
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,16 +12,25 @@ class User < ActiveRecord::Base
   has_many :authorizations, dependent: :destroy
 
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :email, presence: true
+  validates :first_name, presence: true, :unless => Proc.new { |current_user| current_user.authorizations.present? }
+  validates :last_name, presence: true, :unless => Proc.new { |current_user| current_user.authorizations.present? }
+  validates :email, presence: true, :unless => Proc.new { |current_user| current_user.authorizations.present? }
   validates :email, uniqueness: { :case_sensitive => false, :allow_blank => false }, format: { :with => Devise.email_regexp }, :if => :email_changed?
   validates :password, presence: { length: { within: Devise.password_length } }, :on => :create
   validates :password, presence: true, :on => :update, :unless => lambda { |user| user.password.blank? }
   validates :date_of_birth, presence: false
-  validates :locale, presence: true
-  validates :gender, presence: true
+  validates :locale, presence: false
+  validates :gender, presence: false
   validates :agreement, presence: true
+
+  # Skip 'current password' requirement
+  def update_with_password(params={})
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+    update_attributes(params)
+  end
 
   def self.fb_locales_available(fb_user_locale)
     locales = {"en_US" => "en", "ko_KR" => "ko"}
@@ -65,86 +74,53 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth, current_user = nil)
 
     # 해당 SNS의 계정이 존재하는지 Authorization 데이터베이스에서 조회
-    identity = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token).first_or_initialize
-    logger.debug " * authorizaiton : #{identity} "
-    # 해당 SNS의 계정 이메일도 User 데이터베이스에서 조회
-    user = User.where(:email => auth.info.email).first()
+    identity = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s).first_or_initialize
 
-    # 이미 로그인한 사용자(시나리오01: SNS 최초인증 / SNS 이미 인증)
-    if current_user.present?
+    # 해당 SNS의 계정으로 인증한적이 있는지
+    if identity.user.blank?
 
-      # 로그인 사용자의 SNS 최초인증 (identity.user_id는 공백 상태이므로)
-      if identity.user_id != current_user.id
-        # 인증 표시
-        identity.user_id = current_user.id
-        # 현재 유저의 DB에 가져온 SNS의 정보를 입력함
-        sns_crawling(auth)
+      user = current_user.nil? ? User.where('email = ?', auth.info.email).first : current_user
+
+      if user.blank?
+        # 최초로그인엔 user가 없으므로 회원가입
+        signup_by_facebook(auth, identity) if auth.provider == "facebook"
+        signup_by_google_oauth2(auth, identity) if auth.provider == "google_oauth2"
+        signup_by_github(auth, identity) if auth.provider == "github"
+        signup_by_linkedin(auth, identity) if auth.provider == "linkedin"
+        signup_by_twitter(auth, identity) if auth.provider == "twitter"
       else
-      # 로그인 사용자가 SNS 이미 인증한것을 클릭할때
-        current_user
+        # 이미 로그인 사용자가 다른 SNS 연결할때 정보 업데이트
+        logger.debug "# 이미 로그인 사용자가 다른 SNS 연결할때 정보 업데이트"
+        sns_crawling(user, auth, identity)
       end
-
     else
-    # 로그인하지 않은 상태(시나리오02: 이미 인증한 사용자의 SNS를 통한 로그인 / 비인증된 최초의 SNS로그인(사실상 SNS를 통한 회원가입))
-
-      # 이미 인증한 사용자의 SNS를 통한 로그인
-      if identity.user_id.present?
-        # 아이디 식별후 리턴
-        if identity.user_id == user.id
-          logger.debug " * 아이디 식별후 리턴 실행 "
-          user
-        end
-      else
-      # 비인증된 최초의 SNS로그인(사실상 SNS를 통한 회원가입)과 동시에 이메일을 등록한적이 없어야 가입진행
-        logger.debug " * 98번째줄 실행 "
-
-        if user.nil?
-          logger.debug " * 101번째줄 실행 "
-          if auth.provider == "twitter"
-            logger.debug "트위터 프로바이더"
-            signup_by_twitter(auth, identity)
-          else
-            logger.debug " * 106번째줄 실행 "
-            signup_by_facebook(auth, identity) if auth.provider == "facebook"
-            signup_by_google_oauth2(auth, identity) if auth.provider == "google_oauth2"
-            signup_by_github(auth, identity) if auth.provider == "github"
-            signup_by_linkedin(auth, identity) if auth.provider == "linkedin"
-          end
-        else
-          logger.debug " * 113번째줄 실행 : #{ user.inspect }"
-          user
-        end
-
-      end
+      logger.debug "코코코코코코코코코코코코코코코코코코코"
+      sns_crawling(identity.user, auth, identity)
+      identity.user # 이미 인증한 경우엔 해당 identity에 연결된 user를 리턴
     end
 
   end
 
 
   def self.signup_by_facebook(auth, identity)
-    logger.debug " * 124번째줄 실행 "
-    if auth.provider == "facebook"
-      logger.debug " * 126번째줄 실행 "
-      user = User.create(
-        :email => auth.info.email,
-        :password => Devise.friendly_token[0,20],
-        :agreement => 1,
-        :confirmed_at => Time.now,
-        :name => auth.info.name,
-        :username => auth.info.nickname,
-        :first_name => auth.info.first_name,
-        :last_name => auth.info.last_name,
-        :locale => fb_locales_available(auth.extra.raw_info.locale),
-        :gender => auth.extra.raw_info.gender,
-        :location => auth.info.location,
-        :facebook_account_url => auth.info.urls.Facebook,
-        :profile_image => auth.info.image
-      )
+      user = User.new
+      user.password = Devise.friendly_token[0,20]
+      user.email = auth.info.email
+      user.agreement = 1
+      user.confirmed_at = Time.now
+      user.name = auth.info.name
+      user.username = auth.info.name
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.locale = fb_locales_available(auth.extra.raw_info.locale)
+      user.gender = auth.extra.raw_info.gender
+      user.facebook_account_url = auth.info.urls.Facebook
+      user.profile_image = auth.info.image
+      user.save(validate: false)
+      identity.username = user.name
       identity.user_id = user.id
-      identity.save!
-      user.save!
-      return user
-    end
+      identity.save(validate: false)
+      user
   end
 
   def self.signup_by_google_oauth2(auth, identity)
@@ -152,20 +128,19 @@ class User < ActiveRecord::Base
     user.password = Devise.friendly_token[0,20]
     user.agreement = 1
     user.confirmed_at = Time.now
-    user.name = auth.info.name if user.name.blank?
-    user.email = auth.info.email if user.email.blank?
-    user.first_name = auth.info.first_name if user.first_name.blank?
-    user.last_name = auth.info.last_name if user.last_name.blank?
-    user.profile_image = auth.info.image if user.profile_image.blank?
-    user.googleplus_account_url = auth.extra.raw_info.profile if user.googleplus_account_url
-    user.gender = auth.extra.raw_info.gender if user.gender
-    user.date_of_birth = auth.extra.raw_info.birthday if user.date_of_birth
-    user.locale = auth.extra.raw_info.locale if user.locale
-    # user.website = auth.extra.raw_info.hd if user.website
-    user.save!
-
+    user.name = auth.info.name
+    user.email = auth.info.email
+    user.first_name = auth.info.first_name
+    user.last_name = auth.info.last_name
+    user.profile_image = auth.info.image
+    user.googleplus_account_url = auth.extra.raw_info.profile
+    user.gender = auth.extra.raw_info.gender
+    user.date_of_birth = auth.extra.raw_info.birthday
+    user.locale = auth.extra.raw_info.locale
+    user.save(validate: false)
+    identity.username = auth.info.name
     identity.user_id = user.id
-    identity.save!
+    identity.save
     user
   end
 
@@ -173,231 +148,136 @@ class User < ActiveRecord::Base
 
   end
 
-  def self.signup_by_twitter(auth, identity)
-    user = User.new
-    user.password = Devise.friendly_token[0,20]
-    user.agreement = 1
-    user.name = auth.info.name if user.name.blank?
-    user.username = auth.info.nickname if user.username.blank?
-    user.location = auth.info.location if user.location.blank?
-    user.profile_image = auth.info.image if user.profile_image.blank?
-    user.about = auth.info.description if user.about.blank?
-    user.website = auth.info.urls.Website if user.website.blank?
-    user.twitter_account_url = auth.info.urls.Twitter if user.twitter_account_url.blank?
-    user.locale = tw_locales_available(auth.extra.lang) if user.locale.blank?
-    user.email = nil
-
-    identity.user_id = user.id
-    identity.save!
-    # Note that user MUST NOT be saved here
-    user
-  end
-
   def self.signup_by_linkedin(auth, identity)
     user = User.new
     user.password = Devise.friendly_token[0,20]
     user.agreement = 1
     user.confirmed_at = Time.now
-    user.email = auth.info.email if user.email.blank?
-    user.name = auth.info.name if user.name.blank?
-    user.first_name = auth.info.first_name if user.first_name.blank?
-    user.last_name = auth.info.last_name if user.last_name.blank?
-    user.username = auth.info.nickname if user.username.blank?
-    user.location = auth.info.location if user.location.blank?
-    user.profile_image = auth.info.image if user.profile_image.blank?
-    user.about = auth.info.description if user.about.blank?
-    user.linkedin_account_url = auth.info.urls.public_profile if user.linkedin_account_url.blank?
-    user.locale = linkedin_locales_available(auth.extra.raw_info.location.country.code) if user.locale.blank?
-    user.save!
-
+    user.email = auth.info.email
+    user.name = auth.info.name
+    user.first_name = auth.info.first_name
+    user.last_name = auth.info.last_name
+    user.username = auth.info.nickname
+    user.location = auth.info.location
+    user.profile_image = auth.info.image
+    user.about = auth.info.description
+    user.industry = auth.info.industry
+    user.phone = auth.info.phone
+    user.linkedin_account_url = auth.info.urls.public_profile
+    user.locale = linkedin_locales_available(auth.extra.raw_info.location.country.code)
+    user.save(validate: false)
+    identity.username = auth.info.name
     identity.user_id = user.id
-    identity.save!
+    identity.save
+    user
+  end
+
+  def self.signup_by_twitter(auth, identity)
+    user = User.new
+    user.password = Devise.friendly_token[0,20]
+    user.agreement = 1
+    user.name = auth.info.name
+    user.username = auth.info.nickname
+    user.location = auth.info.location
+    user.profile_image = auth.info.image
+    user.about = auth.info.description
+    user.website = auth.info.urls.Website
+    user.twitter_account_url = auth.info.urls.Twitter
+    user.locale = tw_locales_available(auth.extra.lang)
+    # user.email = nil
+    user.skip_confirmation!
+    user.save(validate: false)
+    identity.username = auth.info.nickname
+    identity.user_id = user.id
+    identity.save
     user
   end
 
 
-  def self.sns_crawling(data)
-    if data.provider == "facebook"
-      current_user.name = auth.info.name if current_user.name.blank?
-      current_user.email = auth.info.email if current_user.email.blank?
-      current_user.username = auth.info.nickname if current_user.username.blank?
-      current_user.first_name = auth.info.first_name if current_user.first_name.blank?
-      current_user.last_name = auth.info.last_name if current_user.last_name.blank?
-      current_user.locale = fb_locales_available(auth.extra.raw_info.locale) if current_user.locale.blank?
-      current_user.gender = auth.extra.raw_info.gender if current_user.gender.blank?
-      current_user.location = auth.info.location if current_user.location.blank?
-      current_user.facebook_account_url = auth.info.urls.Facebook if current_user.facebook_account_url.blank?
-      current_user.profile_image = auth.info.image if current_user.profile_image.blank?
-      # current_user.save!
-      current_user
+  def self.sns_crawling(user, auth, identity)
+    if auth.provider == "facebook"
+      user.name = auth.info.name if auth.info.name
+      user.email = auth.info.email if auth.info.email
+      user.username = auth.info.nickname if auth.info.nickname
+      user.first_name = auth.info.first_name if auth.info.first_name
+      user.last_name = auth.info.last_name if auth.info.last_name
+      user.locale = fb_locales_available(auth.extra.raw_info.locale) if auth.extra.raw_info.locale
+      user.gender = auth.extra.raw_info.gender if auth.extra.raw_info.gender
+      user.location = auth.info.location if auth.info.location
+      user.facebook_account_url = auth.info.urls.Facebook if auth.info.urls.Facebook
+      user.profile_image = auth.info.image if auth.info.image
+      identity.username = user.username
+      identity.user_id = user.id
+      identity.save
+      user.save
     end
 
-    if data.provider == "twitter"
-      current_user.name = auth.info.name if current_user.name.blank?
-      current_user.username = auth.info.nickname if current_user.username.blank?
-      current_user.location = auth.info.location if current_user.location.blank?
-      current_user.profile_image = auth.info.image if current_user.profile_image.blank?
-      current_user.about = auth.info.description if current_user.about.blank?
-      current_user.website = auth.info.urls.Website if current_user.website.blank?
-      current_user.twitter_account_url = auth.info.urls.Twitter if current_user.twitter_account_url.blank?
-      current_user.locale = tw_locales_available(auth.extra.lang) if current_user.locale.blank?
-      # current_user.save!
-      current_user
+    if auth.provider == "twitter"
+      user.name = auth.info.name if auth.info.name
+      user.username = auth.info.nickname if auth.info.nickname
+      user.location = auth.info.location if auth.info.location
+      user.profile_image = auth.info.image if auth.info.image
+      user.about = auth.info.description if auth.info.description
+      user.website = auth.info.urls.Website if auth.info.urls.Website
+      user.twitter_account_url = auth.info.urls.Twitter if auth.info.urls.Twitter
+      user.locale = tw_locales_available(auth.extra.lang) if auth.extra.lang
+      identity.username = user.username
+      identity.user_id = user.id
+      identity.save
+      user.save
     end
 
-    if data.provider == "google_oauth2"
-      current_user.name = auth.info.name if current_user.name.blank?
-      current_user.email = auth.info.email if current_user.email.blank?
-      current_user.first_name = auth.info.first_name if current_user.first_name.blank?
-      current_user.last_name = auth.info.last_name if current_user.last_name.blank?
-      current_user.profile_image = auth.info.image if current_user.profile_image.blank?
-      current_user.googleplus_account_url = auth.extra.raw_info.profile if current_user.googleplus_account_url
-      current_user.gender = auth.extra.raw_info.gender if current_user.gender
-      current_user.date_of_birth = auth.extra.raw_info.birthday if current_user.date_of_birth
-      current_user.locale = auth.extra.raw_info.locale if current_user.locale
-      # current_user.website = auth.extra.raw_info.hd if current_user.website
-      # current_user.save!
-      current_user
+    if auth.provider == "google_oauth2"
+      user.name = auth.info.name if auth.info.name
+      user.email = auth.info.email if auth.info.email
+      user.first_name = auth.info.first_name if auth.info.first_name
+      user.last_name = auth.info.last_name if auth.info.last_name
+      user.profile_image = auth.info.image if auth.info.image
+      user.googleplus_account_url = auth.extra.raw_info.profile if auth.extra.raw_info.profile
+      user.gender = auth.extra.raw_info.gender if auth.extra.raw_info.gender
+      user.date_of_birth = auth.extra.raw_info.birthday if user.date_of_birth
+      user.locale = auth.extra.raw_info.locale if auth.extra.raw_info.locale
+      identity.username = user.name
+      identity.user_id = user.id
+      identity.save
+      user.save
     end
 
-    if data.provider == "github"
+    if auth.provider == "github"
 
+    end
+
+    if auth.provider == "linkedin"
+      user.email = auth.info.email if auth.info.email
+      user.name = auth.info.name if auth.info.name
+      user.first_name = auth.info.first_name if auth.info.first_name
+      user.last_name = auth.info.last_name if auth.info.last_name
+      user.username = auth.info.nickname if auth.info.nickname
+      user.location = auth.info.location if auth.info.location
+      user.profile_image = auth.info.image if auth.info.image
+      user.about = auth.info.description if auth.info.description
+      user.linkedin_account_url = auth.info.urls.public_profile if auth.info.urls.public_profile
+      user.locale = linkedin_locales_available(auth.extra.raw_info.location.country.code) if auth.extra.raw_info.location.country.code
+      identity.username = user.username
+      identity.user_id = user.id
+      identity.save
+      user.save
     end
   end
 
-  def self.build_twitter_auth_cookie_hash(data)
-    {
-        :provider => data.provider,
-        :uid => data.uid.to_i,
-        :credentials => {
-            :token => data.credentials.token
-        },
-        :secret => data.credentials.secret,
-        :name => data.info.name,
-        :username => data.info.nickname,
-        :location => data.info.location,
-        :profile_image => data.info.image,
-        :about => data.info.description,
-        :website => data.info.urls.Website,
-        :twitter_account_url => data.info.urls.Twitter,
-        :locale => tw_locales_available(data.extra.lang)
-    }
-  end
-
-  def add_email_identity(data)
-    identity = Authorization.where(:provider => data.provider, :uid => data.uid.to_s, :token => data.credentials.token).first_or_initialize
-
-    generate_default_signup_info
-    user.confirmed_at = Time.now
-    user.name = data.name if user.name.blank?
-    user.username = data.username if user.username.blank?
-    user.location = data.location if user.location.blank?
-    user.profile_image = data.profile_image if user.profile_image.blank?
-    user.about = data.about if user.about.blank?
-    user.website = data.website if user.website.blank?
-    user.twitter_account_url = data.twitter_account_url if user.twitter_account_url.blank?
-    user.locale = data.locale if user.locale.blank?
-    user.email = data.email
-    user.save
-    identity.user_id = user.id
-    user
+  def self.add_email_identity(provider, uid, email)
+    identity = Authorization.where(:provider => provider, :uid => uid.to_s).first
+    identity.user.email = email
+    identity.user.save(validate: false)
+    identity.user
   end
 
 
-
-  # def self.from_omniauth(auth, current_user)
-  #   authorization = Authorization.where(:provider => auth.provider, :uid => auth.uid.to_s, :token => auth.credentials.token, :secret => auth.credentials.secret).first_or_initialize
-  #
-  #   if authorization.user.blank?
-  #     user = current_user.nil? ? User.where('email = ?', auth["info"]["email"]).first : current_user
-  #
-  #     if user.blank?
-  #       user = User.new
-  #       user.password = Devise.friendly_token[0,10]
-  #       user.name = auth.info.name
-  #       user.email = auth.info.email
-  #       auth.provider == "twitter" ?  user.save(:validate => false) :  user.save
-  #     end
-  #
-  #     authorization.username = auth.info.nickname
-  #     authorization.user_id = user.id
-  #     authorization.save
-  #   end
-  #
-  #   authorization.user
-  # end
-
-
-
-  #
-  # def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
-  #
-  #   basic_data = access_token.extra.raw_info
-  #   if user = User.where(:email => basic_data.email).first
-  #     user
-  #   else
-  #
-  #     User.create!(
-  #         :provider => access_token.provider,
-  #         :uid => access_token.uid,
-  #         :profile_image => access_token.info.image,
-  #         :email => basic_data.email,
-  #         :password => Devise.friendly_token[0,20],
-  #         :first_name => basic_data.first_name,
-  #         :last_name => basic_data.last_name,
-  #         :name => basic_data.name,
-  #         :gender => basic_data.gender,
-  #         :locale => fb_locales_available(basic_data.locale),
-  #         :fb_profile_link => basic_data.link#,
-  #         #:date_of_birth => Date.strptime(basic_data.birthday,'%m/%d/%Y')
-  #     )
-  #   end
-  # end
-  #
-  # def self.new_with_session(params, session)
-  #   super.tap do |user|
-  #     if basic_data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-  #       user.email = basic_data["email"]
-  #     end
-  #   end
-  # end
-
-
-  # 효성님 튜토리얼
-  # def self.find_for_facebook_oauth(auth)
-  #   user = where(auth.slice(:provider, :uid)).first_or_create do |user|
-  #     user.provider = auth.provider
-  #     user.uid = auth.uid
-  #     user.email = auth.info.email
-  #     user.password = Devise.friendly_token[0,20]
-  #     user.name = auth.info.name   # assuming the user model has a name
-  #     user.image = auth.info.image # assuming the user model has an image
-  #   end
-  #
-  #   # 이 때는 이상하게도 after_create 콜백이 호출되지 않아서 아래와 같은 조치를 했다.
-  #   user.add_role :user if user.roles.empty?
-  #   user   # 최종 반환값은 user 객체이어야 한다.
-  # end
-  #
-  # def self.new_with_session(params, session)
-  #   super.tap do |user|
-  #     if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-  #       user.email = data["email"] if user.email.blank?
-  #       user.first_name = data["first_name"] if user.first_name.blank?
-  #       user.last_name = data["last_name"] if user.last_name.blank?
-  #       user.gender = data["gender"] if user.gender.blank?
-  #       user.locale = data["locale"] if user.locale.blank?
-  #     end
-  #   end
-  # end
 
   private
   def set_default_roles
     add_role :user
   end
 
-  protected
-  def confirmation_required?
-    true
-  end
+
 end

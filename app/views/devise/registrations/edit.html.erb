@@ -22,8 +22,6 @@
 
   <%= f.input :locale, collection: @locales.map { |k,v| [v,k] }, selected: current_user.locale %>
 
-  <%= f.input :current_password, autocomplete: "off", required: true, placeholder: t("placeholder.settings.current_password") %>
-
 
   <div><%= f.submit "Update" %></div>
 <% end %>

@@ -7,6 +7,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # POST /resource/confirmation
   def create
     self.resource = resource_class.send_confirmation_instructions(resource_params)
+
     yield resource if block_given?
 
     if successfully_sent?(resource)
@@ -39,8 +40,10 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # The path used after confirmation.
   def after_confirmation_path_for(resource_name, resource)
     unless signed_in?(resource_name)
+      logger.debug "ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ"
       signed_in_root_path(resource)
     else
+      logger.debug "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
       new_session_path(resource_name)
     end
   end
