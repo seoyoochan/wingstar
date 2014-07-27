@@ -32,6 +32,4 @@ $(document).ready(function(){
         increaseArea: '-10%' // optional
     });
 
-
 });
-
