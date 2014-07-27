@@ -1,20 +1,65 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
-  def facebook
-    # You need to implement the method below in your model (e.g. app/models/user.rb)
+  skip_before_filter :authenticate_user!
 
-    logger.debug " * omniauth : #{request.env['omniauth.auth']} "
-    @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
 
-    if @user.persisted?
-      flash[:success] = "페이스북 계정으로 로그인했습니다."
-      # set_flash_message(:success, :success, :kind => "Facebook") if is_navigational_format?
-      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+  def provider_name?(auth)
+    name = case auth.provider
+             when "facebook" then "Facebook"
+             when "twitter" then "Twitter"
+             when "google_oauth2" then "Google+"
+             when "linkedin" then "Linkedin"
+             when "github" then "Github"
+           end
+  end
 
+  def set_auth_session(auth=nil,provider=nil,uid=nil)
+    if auth
+      session[:current_user_provider] = "#{auth.provider}"
+      session[:current_user_provider_uid] = auth.uid
     else
-      session["devise.facebook_data"] = request.env["omniauth.auth"]
-      redirect_to new_user_registration_url
+      session[:current_user_provider] = "#{provider}"
+      session[:current_user_provider_uid] = uid
     end
   end
+
+  def all
+    auth = request.env["omniauth.auth"]
+    sns_provider = provider_name?(auth)
+
+    identity = User.from_omniauth(auth, current_user) # Start Callback
+
+
+    if identity.blank? # Validate the returned data
+
+      identity = User.from_omniauth(auth, current_user) # Fetch the data
+
+      if identity
+        identity = User.from_omniauth(auth, current_user)
+        sign_in_and_redirect identity
+      end
+
+    else
+      identity = User.from_omniauth(auth, current_user) # Fetch the data
+      set_auth_session(auth)
+        if identity.present?
+          sign_in_and_redirect identity
+        end
+    end
+  end
+
+  def failure
+    #handle you logic here..
+    #and delegate to super.
+    super
+  end
+
+
+  alias_method :facebook, :all
+  alias_method :twitter, :all
+  alias_method :linkedin, :all
+  alias_method :github, :all
+  alias_method :passthru, :all
+  alias_method :google_oauth2, :all
 
 end

@@ -12,6 +12,11 @@ Rails.application.routes.draw do
     get "find_password" => "devise/passwords#new", as: :find_password
     get "forgot_password" => "devise/passwords#new", as: :forgot_password
     get "resend" => "devise/confirmations#new", as: :resend
+    post "auth/facebook" => "users/omniauth_callbacks#all"
+    post "auth/linkedin" => "users/omniauth_callbacks#all"
+    post "auth/google_oauth2" => "users/omniauth_callbacks#all"
+    post "auth/twitter" => "users/omniauth_callbacks#all"
+    post "auth/github" => "users/omniauth_callbacks#all"
   end
 
   devise_for :user, path: "",
@@ -22,6 +27,8 @@ Rails.application.routes.draw do
                  :confirmations => "users/confirmations",
                  :omniauth_callbacks => "users/omniauth_callbacks"
              }
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
