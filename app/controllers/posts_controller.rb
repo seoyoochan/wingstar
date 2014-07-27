@@ -5,16 +5,16 @@ class PostsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @posts = Post.paginate(:page => params[:page], :per_page => 2).order('created_at desc')
+    @posts = Post.paginate(:page => params[:page], :per_page => 100).order('created_at desc')
   end
 
   def read
-    @posts = Post.paginate(:page => params[:page], :per_page => 5).order('created_at desc')
+    @posts = Post.paginate(:page => params[:page], :per_page => 10).order('created_at desc')
     @post = Post.find(params[:id])
   end
 
 
-  def new
+  def newS
     @post = Post.new
   end
 

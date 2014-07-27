@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.1'
 gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.3'
+gem 'http_accept_language'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -23,7 +24,7 @@ gem 'jquery-ui-rails'
 gem 'friendly_id', '~> 5.0.0'
 gem 'ancestry'
 gem 'prawn'
-gem 'mailboxer'
+# gem 'mailboxer'
 gem 'table_print'
 gem 'public_activity'
 gem 'country_select'
@@ -33,17 +34,16 @@ gem 'dynamic_form'
 gem 'enumerize'
 gem 'active_model_serializers'
 gem 'font-awesome-sass'
-gem 'high_voltage', github: 'thoughtbot/high_voltage'
+gem 'high_voltage'
 gem 'devise'
-gem 'mailcatcher'
 gem 'autoprefixer-rails'
-gem 'cancancan', '~> 1.9', github: 'bryanrite/cancancan'
+gem 'cancancan', '~> 1.9'
 gem 'rolify'
 gem 'carrierwave'
-# gem 'twitter'
-# gem 'json'
+gem 'twitter'
+gem 'json'
 gem 'koala'
-# gem 'linkedin'
+gem 'linkedin'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-github'
@@ -51,20 +51,22 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'omniauth-twitter'
 gem 'omniauth-kakao'
-# gem 'rmagick'
+gem 'rmagick'
 
 group :development, :test do
-  gem 'byebug'
+  # gem 'byebug'
   gem 'better_errors'
   gem 'quiet_assets'
   gem 'annotate', '>=2.6.0'
-  gem 'letter_opener'
-  gem 'factory_girl_rails' # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
-  gem 'guard' # https://github.com/guard/guard
-  gem 'guard-cucumber'
-  gem 'guard-rspec'
 
-  #gem 'binding_of_caller'
+  gem 'mailcatcher'
+  # gem 'factory_girl_rails' # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
+  # gem 'guard' # https://github.com/guard/guard
+  # gem 'guard-cucumber'
+  # gem 'guard-rspec'
+
+  # gem 'letter_opener'
+  # gem 'binding_of_caller'
   #gem 'brakeman', :require => false
   #gem 'bullet'
   #gem 'debugger'
@@ -91,10 +93,9 @@ group :development, :test do
 end
 
 group :test do
-  gem 'cucumber-rails', :require => false # https://github.com/cucumber/cucumber-rails
-  gem 'database_cleaner' # https://github.com/bmabey/database_cleaner
-  gem 'shoulda-matchers' # https://github.com/thoughtbot/shoulda-matchers
-  gem 'launchy'
+  # gem 'database_cleaner' # https://github.com/bmabey/database_cleaner
+  # gem 'shoulda-matchers' # https://github.com/thoughtbot/shoulda-matchers
+  # gem 'launchy'
 end
 
 group :doc do

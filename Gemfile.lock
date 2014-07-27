@@ -1,15 +1,3 @@
-GIT
-  remote: git://github.com/bryanrite/cancancan.git
-  revision: 96d820976825bea2d3892cfc3d1e3571c8a7b109
-  specs:
-    cancancan (1.9.0)
-
-GIT
-  remote: git://github.com/thoughtbot/high_voltage.git
-  revision: 1f727ac742e8d07837a076695ad301e9f5a48f16
-  specs:
-    high_voltage (2.2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -56,23 +44,14 @@ GEM
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
+    buftok (0.2.0)
     builder (3.2.2)
-    byebug (3.1.2)
-      columnize (~> 0.8)
-      debugger-linecache (~> 1.2)
-    capybara (2.4.1)
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
+    cancancan (1.9.1)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    celluloid (0.15.2)
-      timers (~> 1.1.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -81,34 +60,18 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.1)
-    columnize (0.8.9)
     countries (0.9.3)
       currencies (~> 0.4.2)
     country_select (1.3.1)
       countries (= 0.9.3)
-    cucumber (1.3.15)
-      builder (>= 2.1.2)
-      diff-lcs (>= 1.1.3)
-      gherkin (~> 2.12)
-      multi_json (>= 1.7.5, < 2.0)
-      multi_test (>= 0.1.1)
-    cucumber-rails (1.4.1)
-      capybara (>= 1.1.2, < 3)
-      cucumber (>= 1.3.8, < 2)
-      mime-types (~> 1.16)
-      nokogiri (~> 1.5)
-      rails (>= 3, < 5)
     currencies (0.4.2)
     daemons (1.1.9)
-    database_cleaner (1.3.0)
-    debugger-linecache (1.2.0)
     devise (3.2.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    diff-lcs (1.2.5)
     draper (1.3.1)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -117,42 +80,25 @@ GEM
     dynamic_form (1.1.4)
     enumerize (0.8.0)
       activesupport (>= 3.2)
+    equalizer (0.0.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.2.1)
-    factory_girl (4.4.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.4.1)
-      factory_girl (~> 4.4.0)
-      railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.3)
     font-awesome-sass (4.1.0)
       sass (~> 3.2)
-    foreigner (1.6.1)
-      activerecord (>= 3.0.0)
-    formatador (0.2.5)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
-    gherkin (2.12.2)
-      multi_json (~> 1.3)
-    guard (2.6.1)
-      formatador (>= 0.2.4)
-      listen (~> 2.7)
-      lumberjack (~> 1.0)
-      pry (>= 0.9.12)
-      thor (>= 0.18.1)
-    guard-cucumber (1.4.1)
-      cucumber (>= 1.2.0)
-      guard (>= 1.1.0)
-    guard-rspec (4.2.10)
-      guard (~> 2.1)
-      rspec (>= 2.14, < 4.0)
     haml (4.0.5)
       tilt
     hashie (3.2.0)
+    high_voltage (2.2.0)
     hike (1.2.3)
+    http (0.6.1)
+      http_parser.rb (~> 0.6.0)
+    http_accept_language (2.0.1)
+    http_parser.rb (0.6.0)
     i18n (0.6.11)
     jbuilder (2.1.3)
       activesupport (>= 3.0.0, < 5)
@@ -164,26 +110,16 @@ GEM
       railties (>= 3.2.16)
     json (1.8.1)
     jwt (1.0.0)
-    koala (1.9.0)
+    koala (1.10.0)
       addressable
       faraday
       multi_json
-    launchy (2.4.2)
-      addressable (~> 2.3)
-    letter_opener (1.2.0)
-      launchy (~> 2.2)
-    listen (2.7.9)
-      celluloid (>= 0.15.2)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-    lumberjack (1.0.9)
+    linkedin (0.2.2)
+      nokogiri (~> 1.4.4)
+      oauth (~> 0.4.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mailboxer (0.12.1)
-      carrierwave (>= 0.5.8)
-      foreigner (>= 0.9.1)
-      rails (>= 3.2.0)
     mailcatcher (0.2.4)
       eventmachine
       haml
@@ -194,17 +130,16 @@ GEM
       skinny (>= 0.1.2)
       sqlite3-ruby
       thin
-    method_source (0.8.2)
+    memoizable (0.4.2)
+      thread_safe (~> 0.3, >= 0.3.1)
     mime-types (1.25.1)
-    mini_portile (0.6.0)
     minitest (5.4.0)
     multi_json (1.10.1)
-    multi_test (0.1.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mysql2 (0.3.16)
-    nokogiri (1.6.3)
-      mini_portile (= 0.6.0)
+    naught (1.0.0)
+    nokogiri (1.4.7)
     oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
@@ -245,10 +180,6 @@ GEM
     prawn (1.1.0)
       pdf-core (~> 0.2.5)
       ttfunk (~> 1.2.0)
-    pry (0.10.0)
-      coderay (~> 1.1.0)
-      method_source (~> 0.8.1)
-      slop (~> 3.4)
     public_activity (1.4.1)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
@@ -277,25 +208,11 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
-    rb-fsevent (0.9.4)
-    rb-inotify (0.9.5)
-      ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
     request_store (1.0.7)
+    rmagick (2.13.2)
     rolify (3.4.0)
-    rspec (3.0.0)
-      rspec-core (~> 3.0.0)
-      rspec-expectations (~> 3.0.0)
-      rspec-mocks (~> 3.0.0)
-    rspec-core (3.0.2)
-      rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.2)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.0.0)
-    rspec-mocks (3.0.2)
-      rspec-support (~> 3.0.0)
-    rspec-support (3.0.2)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -305,11 +222,10 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
-    shoulda-matchers (2.6.2)
-      activesupport (>= 3.0.0)
     simple_form (3.0.2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
+    simple_oauth (0.2.0)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -317,7 +233,6 @@ GEM
     skinny (0.2.3)
       eventmachine (~> 1.0.0)
       thin (~> 1.5.0)
-    slop (3.6.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -338,11 +253,21 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    timers (1.1.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.2.0)
+    twitter (5.11.0)
+      addressable (~> 2.3)
+      buftok (~> 0.2.0)
+      equalizer (~> 0.0.9)
+      faraday (~> 0.9.0)
+      http (~> 0.6.0)
+      http_parser.rb (~> 0.6.0)
+      json (~> 1.8)
+      memoizable (~> 0.4.0)
+      naught (~> 1.0)
+      simple_oauth (~> 0.2.0)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -351,8 +276,6 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.7)
-    xpath (2.0.0)
-      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -364,31 +287,24 @@ DEPENDENCIES
   attr_searchable
   autoprefixer-rails
   better_errors
-  byebug
-  cancancan (~> 1.9)!
+  cancancan (~> 1.9)
   carrierwave
   coffee-rails (~> 4.0.0)
   country_select
-  cucumber-rails
-  database_cleaner
   devise
   draper (~> 1.3)
   dynamic_form
   enumerize
-  factory_girl_rails
   font-awesome-sass
   friendly_id (~> 5.0.0)
-  guard
-  guard-cucumber
-  guard-rspec
-  high_voltage!
+  high_voltage
+  http_accept_language
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  json
   koala
-  launchy
-  letter_opener
-  mailboxer
+  linkedin
   mailcatcher
   mysql2
   omniauth
@@ -402,12 +318,13 @@ DEPENDENCIES
   public_activity
   quiet_assets
   rails (= 4.1.1)
+  rmagick
   rolify
   sass-rails (~> 4.0.3)
   sdoc
-  shoulda-matchers
   simple_form
   sqlite3
   table_print
+  twitter
   uglifier (>= 1.3.0)
   will_paginate (~> 3.0)

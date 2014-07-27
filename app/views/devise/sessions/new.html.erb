@@ -4,8 +4,8 @@
 <div id="login_container">
   <div class="container rounded-10">
     <div class="header">
-      <div class="title">
-        <h2 class="logo"><%= t("title.login") %></h2>
+      <div class="title animate-plus" data-animations="fadeIn" data-animation-when-visible="true" data-animation-reset-offscreen="true">
+        <h2 class="logo transition"><%= t("title.login") %></h2>
       </div>
     </div>
     <div class="body">
@@ -49,12 +49,12 @@
         <h5 class="title"><%= t("login_page.sns_connector.title_html") %></h5>
         <ul>
           <div class="wrapper">
-            <li class="twitter"><%= link_to t("login_page.sns_connector.twitter_html"), "#", class: "rounded-3" %></li>
-            <li class="facebook"><%= link_to t("login_page.sns_connector.facebook_html"), "#", class: "rounded-3" %></li>
+            <li class="twitter"><%= link_to t("login_page.sns_connector.twitter_html"), user_omniauth_authorize_path(:twitter), class: "rounded-3" %></li>
+            <li class="facebook"><%= link_to t("login_page.sns_connector.facebook_html"), user_omniauth_authorize_path(:facebook), class: "rounded-3" %></li>
           </div>
           <div class="wrapper">
-            <li class="linkedin"><%= link_to t("login_page.sns_connector.linkedin_html"), "#", class: "rounded-3" %></li>
-            <li class="google"><%= link_to t("login_page.sns_connector.google_html"), "#", class: "rounded-3" %></li>
+            <li class="linkedin"><%= link_to t("login_page.sns_connector.linkedin_html"), user_omniauth_authorize_path(:linkedin), class: "rounded-3" %></li>
+            <li class="google"><%= link_to t("login_page.sns_connector.google_html"), user_omniauth_authorize_path(:google_oauth2), class: "rounded-3" %></li>
           </div>
         </ul>
       </div>

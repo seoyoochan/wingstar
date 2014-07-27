@@ -1,8 +1,9 @@
 module ApplicationHelper
 
-  def app_locale_set
-    @locales = {"en" => "English" , "ko" => "한국어"}
+  def ws_locales
+    @locales = {"en" => "English (US)" , "ko" => "한국어"}
   end
+
 
   def default_locale
     if signed_in?
@@ -21,7 +22,7 @@ module ApplicationHelper
   end
 
   def available_locale(source)
-    app_locale_set
+    ws_locales
     if @locales.include?(source.to_s)
       logger.debug "* Language: '#{source}' was set."
       I18n.locale = source
@@ -65,6 +66,37 @@ module ApplicationHelper
 
   def br3_icon(name)
     "<span class='glyphicon glyphicon-#{name}'></span>".html_safe
+  end
+
+  def name_mapper(current_user)
+    eastern_format = "#{current_user.last_name}" + "#{current_user.first_name}"
+    western_format = "#{current_user.first_name}" + "#{current_user.last_name}"
+
+    # 1. user's name exists?
+    if current_user.name
+      current_user.name
+    else
+      # 2. then his favorite name format exists?
+      if current_user.name_format.present?
+        if current_user.name_format == "eastern"
+          eastern_format
+        else
+          western_format
+        end
+      else
+        # 3. then his locale exists?
+        western_format if current_user.locale == "en" # default locale is en
+        eastern_format if current_user.locale == "ko"
+      end
+    end
+  end
+
+  def sns_provider
+    session[:current_user_provider] if session[:current_user_provider]
+  end
+
+  def sns_provider_uid
+    session[:current_user_provider_uid] if session[:current_user_provider_uid]
   end
 
 end

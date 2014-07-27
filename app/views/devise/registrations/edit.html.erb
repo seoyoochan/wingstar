@@ -12,15 +12,15 @@
 
   <%= f.input :email, placeholder: t("placeholder.settings.email") %>
 
-  <%= f.input :date_of_birth, as: :date, order: [:year, :month, :day], prompt: {year: t('date.year'), month: t('date.month.name'), day: t('date.day')}, start_year: Date.current.year, end_year: 1920, use_month_names: [t("date.month.jan"), t("date.month.feb"), t("date.month.mar"), t("date.month.apr"), t("date.month.may"), t("date.month.jun"), t("date.month.jul"), t("date.month.aug"), t("date.month.sep"), t("date.month.oct"), t("date.month.nov"), t("date.month.dec")], required: true %>
+    <%= f.input :date_of_birth, as: :date, wrapper: false, order: [:year, :month, :day], prompt: {year: t('date.year'), month: t('date.month'), day: t('date.day')},
+                start_year: Date.current.year, end_year: 1920, use_month_names: t(:month_names, scope: :date),
+                required: false, label: false, input_html: { class: "date_of_birth" }  %>
 
   <%= f.input :password, autocomplete: "off", required: false, placeholder: t("placeholder.settings.password") %>
 
   <%= f.input :password_confirmation, autocomplete: "off", required: false, placeholder: t("placeholder.settings.password_confirmation") %>
 
   <%= f.input :locale, collection: @locales.map { |k,v| [v,k] }, selected: current_user.locale %>
-
-  <%= f.input :current_password, autocomplete: "off", required: true, placeholder: t("placeholder.settings.current_password") %>
 
 
   <div><%= f.submit "Update" %></div>

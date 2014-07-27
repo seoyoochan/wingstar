@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_devise_params, if: :devise_controller?
-  before_filter :default_locale, :app_locale_set
+  before_filter :default_locale, :ws_locales
 
 
   protected
@@ -18,11 +18,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :current_password, :first_name, :last_name, :date_of_birth, :locale, :gender) }
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :first_name, :last_name, :agreement, :date_of_birth, :locale, :gender) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password, :remember_me) }
-  end
-
-  def default_url_options(options={})
-    logger.debug "default_url_options is passed options: #{options.inspect}\n"
-    { locale: I18n.locale }
   end
 
 end

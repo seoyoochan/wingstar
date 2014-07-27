@@ -4,13 +4,13 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = '3930c7dcd8b0594baef721c2aebd146af4f58c907ae6ad4424eaf1290bb9d618b8ed0fa9020c5bc9f2f5250a205ece174adb32a720ca7ac1d7471da2823590ad'
+  config.secret_key = '3930c7dcd8b0594baef721c2aebd146af4f58c907ae6ad4424eaf1290bb9d618b8ed0fa9020c5bc9f2f5250a205ece174adb32a720ca7ac1d7471da2823590ad'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'welcome@wingstar.net'
+  config.mailer_sender = 'welcom@wingstar.net'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -133,11 +133,11 @@ Devise.setup do |config|
 
   # Options to be passed to the created cookie. For instance, you can set
   # secure: true in order to force SSL only cookies.
-  # config.rememberable_options = {}
+  # config.rememberable_options = { secure: false }
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 6..20
+  config.password_length = 6..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -231,6 +231,13 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+  require 'devise/orm/active_record'
+  config.omniauth :facebook, ENV["FB_APP_ID"], ENV["FB_APP_SECRET"], { scope: "publish_stream, offline_access, email", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
+  config.omniauth :twitter, ENV["TW_API_KEY"], ENV["TW_API_SECRET"], { scope: "r_fullprofile, r_emailaddress", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
+  config.omniauth :linkedin, ENV["IN_API_KEY"], ENV["IN_API_SECRET"], { scope: "r_basicprofile r_fullprofile r_network r_contactinfo r_emailaddress", client_options: { ssl: { ca_file: "/usr/lib/ssl/cert.pem" } } }
+  config.omniauth :github, ENV["GIT_CLIENT_ID"], ENV["GIT_CLIENT_SECRET"], { scope: "user, public_repo" }
+  config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], { scope: "email, profile" }
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
@@ -253,4 +260,5 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  config.omniauth_path_prefix = "/users/auth"
 end

@@ -24,13 +24,41 @@
   <link rel="icon" type="image/png" href="<%= asset_url('favicon-96x96.png') %>" sizes="96x96">
   <link rel="icon" type="image/png" href="<%= asset_url('favicon-16x16.png') %>" sizes="16x16">
   <link rel="icon" type="image/png" href="<%= asset_url('favicon-32x32.png') %>" sizes="32x32">
-  <meta name="msapplication-TileColor" content="#24282f">
+  <meta name="msapplication-TileColor" content="#23252b">
   <meta name="msapplication-TileImage" content="<%= asset_url('mstile-144x144.png') %>">
   <meta name="application-name" content="Wingstar">
   <title><%= content_for?(:title) ? yield(:title) : "Wingstar" %></title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <% if flash.present? %>
+      <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                $(".alert-success").delay(1500).fadeOut(300);
+                $(".alert-warning, .alert-danger").delay(5000).fadeOut(300);
+            });
+        })(jQuery);
+      </script>
+  <% end %>
+
+  <% if resource.present? && resource.errors.present? %>
+    <script type="text/javascript">
+        (function($) {
+              $(document).ready(function() {
+                  $("#flash").delay(5000).fadeOut(300);
+              });
+        })(jQuery);
+    </script>
+  <% end %>
+
+  <% if signed_in? %>
+      <style>
+        <% if current_user.profile_image.present? %>
+        .profile_image { background: url("<%= current_user.profile_image %>") no-repeat left top !important; }
+        <% end %>
+      </style>
+  <% end %>
 </head>
 <body class="default">
 <header id="header">
@@ -58,7 +86,9 @@
       <li class="signup"><%= link_to t("top_nav.signup_html"), new_registration_path(resource_name)  %></li>
       <% else %>
       <li class="dropdown settings">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %><span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <div class="profile_image">profile image</div><%= name_mapper(current_user) %>
+          <span class="caret"></span></a>
         <ul class="dropdown-menu rounded-3" role="menu">
           <li class="settings"><%= link_to t("top_nav.settings_html"), settings_path %></li>
           <li class="logout"><%= link_to t("top_nav.logout_html"), destroy_user_session_path, :method => :delete  %></li>
