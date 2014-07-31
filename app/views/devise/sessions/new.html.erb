@@ -1,15 +1,15 @@
 <style type="text/css">
-    body { background: url('<%= asset_url("bg/dark/retro_01-opacity-70.png") %>') no-repeat left top !important; }
+    body { background: url('<%= asset_url("bg/dark/retro_01.jpg") %>') no-repeat left top !important; }
 </style>
 <div id="login_container">
   <div class="container rounded-10">
     <div class="header">
-      <div class="title animate-plus" data-animations="fadeIn" data-animation-when-visible="true" data-animation-reset-offscreen="true">
-        <h2 class="logo transition"><%= t("title.login") %></h2>
+      <div class="title" data-animations="fadeIn" data-animation-when-visible="true" data-animation-reset-offscreen="true">
+        <h2 class="logo ease"><%= t("title.login") %></h2>
       </div>
     </div>
     <div class="body">
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), id: "loginForm") do |f| %>
 
           <% if resource.errors.any? %>
               <div class="alert alert-danger">
@@ -23,7 +23,7 @@
 
           <div class="email_container">
             <i class="fa fa-envelope-o fa-fw email"></i>
-            <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email rounded-3-top-left rounded-3-top-right", "aria-required" => true }  %>
+            <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email rounded-3-top-left rounded-3-top-right", "aria-required" => true }, data: { :progression => "", :helper => "Help users through forms by prividing helpful hinters" }  %>
           </div>
 
           <div class="password_container">

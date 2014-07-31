@@ -12,15 +12,15 @@ class User < ActiveRecord::Base
   has_many :authorizations, dependent: :destroy
 
 
-  validates :first_name, presence: true, :unless => Proc.new { |current_user| current_user.authorizations.present? }
-  validates :last_name, presence: true, :unless => Proc.new { |current_user| current_user.authorizations.present? }
-  validates :email, presence: true, :unless => Proc.new { |current_user| current_user.authorizations.present? }
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
   validates :email, uniqueness: { :case_sensitive => false, :allow_blank => false }, format: { :with => Devise.email_regexp }, :if => :email_changed?
   validates :password, presence: { length: { within: Devise.password_length } }, :on => :create
   validates :password, presence: true, :on => :update, :unless => lambda { |user| user.password.blank? }
-  validates :date_of_birth, presence: false
-  validates :locale, presence: false
-  validates :gender, presence: false
+  validates :date_of_birth, presence: true
+  validates :locale, presence: true
+  validates :gender, presence: true
   validates :agreement, presence: true
 
   # Skip 'current password' requirement

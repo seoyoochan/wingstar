@@ -12,8 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require lib/jquery.easings.min
+//= require lib/jquery.slimscroll.min
+//= require lib/jquery.fullPage.min
+//= require lib/jquery.transit
 //= require lib/bootstrap.min
-//= require lib/animate-plus.min
+//= require lib/progression.min
 //= require lib/icheck.min
 //= require lib/modernizr.custom.min
 
@@ -30,6 +34,31 @@ $(document).ready(function(){
         checkboxClass: 'icheckbox_polaris',
         radioClass: 'iradio_polaris',
         increaseArea: '-10%' // optional
+    });
+
+    $('#fullpage').fullpage();
+
+
+    setInterval(function() {
+        $('#fullpage #main .logo').transition({
+            perspective: '100px',
+            rotateY: '180deg',
+        }, function() { $('#fullpage #main .logo').removeAttr('style'); });
+    }, 5000);
+
+    $("#loginForm").progression({
+        tooltipWidth: '200',
+        tooltipPosition: 'right',
+        tooltipOffset: '50',
+        showProgressBar: true,
+        showHelper: true,
+        tooltipFontSize: '14',
+        tooltipFontColor: 'fff',
+        progressBarBackground: 'fff',
+        progressBarColor: '6EA5E1',
+        tooltipBackgroundColor: 'a2cbfa',
+        tooltipPadding: '10',
+        tooltipAnimate: true
     });
 
 });
