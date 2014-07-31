@@ -1,11 +1,11 @@
-<div id="loginModal_container" class="modal fade randbg" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <button type="button" class="close" data-dismiss="modal">
-    <span aria-hidden="true" class="close-x">&times;</span><span class="sr-only">Close</span>
-  </button>
-  <div class="container">
+<div id="loginModal_container" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="container rounded-10">
+    <button type="button" class="close" data-dismiss="modal">
+      <span aria-hidden="true" class="close-x">&times;</span><span class="sr-only">Close</span>
+    </button>
     <div class="header">
       <div class="title">
-        <h2 class="logo"><%= t("title.login") %></h2>
+        <h2 class="logo ease"><%= t("title.login") %></h2>
       </div>
     </div>
     <div class="body">
@@ -23,12 +23,12 @@
 
       <div class="email_container">
         <i class="fa fa-envelope-o fa-fw email"></i>
-        <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email inner-shadow-focus rounded-3-top-left rounded-3-top-right", "aria-required" => true }  %>
+        <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email rounded-3-top-left rounded-3-top-right", "aria-required" => true }  %>
       </div>
 
       <div class="password_container">
         <i class="fa fa-lock fa-fw password"></i>
-        <%= f.input :password, placeholder: t("placeholder.login.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password inner-shadow-focus rounded-3-bottom-left rounded-3-bottom-right", "aria-required" => true } %>
+        <%= f.input :password, placeholder: t("placeholder.login.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password rounded-3-bottom-left rounded-3-bottom-right", "aria-required" => true } %>
       </div>
 
       <div class="submit_wrapper">
@@ -48,12 +48,12 @@
       <div class="sns_connector">
         <ul>
           <div class="wrapper">
-          <li class="twitter"><%= link_to t("login_modal.sns_connector.twitter_html"), "#", class: "rounded-3" %></li>
-          <li class="facebook"><%= link_to t("login_modal.sns_connector.facebook_html"), "#", class: "rounded-3" %></li>
+          <li class="twitter"><%= link_to t("login_page.sns_connector.twitter_html"), "#", class: "rounded-3" %></li>
+          <li class="facebook"><%= link_to t("login_page.sns_connector.facebook_html"), "#", class: "rounded-3" %></li>
           </div>
           <div class="wrapper">
-          <li class="linkedin"><%= link_to t("login_modal.sns_connector.linkedin_html"), "#", class: "rounded-3" %></li>
-          <li class="google"><%= link_to t("login_modal.sns_connector.google_html"), "#", class: "rounded-3" %></li>
+          <li class="linkedin"><%= link_to t("login_page.sns_connector.linkedin_html"), "#", class: "rounded-3" %></li>
+          <li class="google"><%= link_to t("login_page.sns_connector.google_html"), "#", class: "rounded-3" %></li>
           </div>
         </ul>
       </div>
@@ -61,8 +61,8 @@
 
     <div class="footer rounded-3">
         <ul>
-          <li><%= link_to t("login_modal.footer.fotgot_password_html"), new_user_password_path %></li>
-          <li><%= link_to t("login_modal.footer.signup_html"), new_user_registration_path %></li>
+          <li><%= link_to t("login_page.footer.fotgot_password_html"), new_user_password_path %></li>
+          <li><%= link_to t("login_page.footer.signup_html"), new_user_registration_path %></li>
         </ul>
     </div>
   </div>
