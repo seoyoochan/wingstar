@@ -35,6 +35,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       identity = User.from_omniauth(auth, current_user) # Fetch the data
 
       if identity
+        flash[:warning] = "Please changer your twitter email address" if identity.email.include? ("@twitter.com")
         identity = User.from_omniauth(auth, current_user)
         sign_in_and_redirect identity
       end
@@ -43,6 +44,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       identity = User.from_omniauth(auth, current_user) # Fetch the data
       set_auth_session(auth)
         if identity.present?
+          flash[:warning] = "Please changer your twitter email address" if identity.email.include? ("@twitter.com")
           sign_in_and_redirect identity
         end
     end

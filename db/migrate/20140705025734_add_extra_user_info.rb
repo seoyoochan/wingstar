@@ -13,8 +13,6 @@ class AddExtraUserInfo < ActiveRecord::Migration
     add_column :users, :username, :string
     add_column :users, :profile_image, :string
     add_column :users, :location, :string
-    # add_column :users, :remote_avatar_url, :string
-    # add_column :users, :remote_image_url, :string
     add_column :users, :facebook_account_url, :string
     add_column :users, :twitter_account_url, :string
     add_column :users, :linkedin_account_url, :string
@@ -38,8 +36,6 @@ class AddExtraUserInfo < ActiveRecord::Migration
     remove_column :users, :username
     remove_column :users, :profile_image
     remove_column :users, :location
-    # remove_column :users, :remote_avatar_url
-    # remove_column :users, :remote_image_url
     remove_column :users, :facebook_account_url
     remove_column :users, :twitter_account_url
     remove_column :users, :linkedin_account_url

@@ -11,12 +11,16 @@
  * file per style scope.
  *
  *= require lib/fonts/NanumBarunGothic
+ *= require lib/fonts/Tahoma
+ *= require lib/fonts/Helvetica
  *= require font-awesome
  *= require lib/bootstrap
  * require lib/icheck_skins/flat/green
+ * require lib/jquery.jscrollpane
  *= require lib/icheck_skins/polaris/polaris
  *= require lib/jquery.fullPage
  *= require lib/progression
+
 
  *= require style
  *= require responsive

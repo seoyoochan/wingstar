@@ -5,11 +5,11 @@ ko:
       login: 로그인
       signup: 회원가입
       top_nav:
-        about: 윙스타 소개
+        about: 소개
         blog: 블로그
         terms: 이용약관
         privacy: 개인정보
-        cookies: 쿠키
+        cookies: 쿠키사용
         help: 도움말
   performed:
     posts:
@@ -48,7 +48,7 @@ ko:
        male_html: <i class="fa fa-male"></i><span>남자</span>
   logo: 윙스타
   instruction:
-    signup_notice_html: '아래 버튼을 클릭시 귀하는 저희의 <a href="terms">약관</a>과 <a href="privacy">데이터이용정책</a>, 및 <a href="cookies">쿠키사용</a>에 대해 읽고 동의한것으로 간주합니다.'
+    signup_notice_html: '아래 버튼을 클릭시 <a href="terms">서비스이용약관</a>과 <a href="privacy">데이터이용정책</a>, 및 <a href="cookies">쿠키사용</a>에 대해 읽고 동의한것으로 간주합니다.'
   title:
     signup: "회원가입"
     login: "로그인"

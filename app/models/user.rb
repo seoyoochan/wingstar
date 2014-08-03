@@ -90,11 +90,9 @@ class User < ActiveRecord::Base
         signup_by_twitter(auth, identity) if auth.provider == "twitter"
       else
         # 이미 로그인 사용자가 다른 SNS 연결할때 정보 업데이트
-        logger.debug "# 이미 로그인 사용자가 다른 SNS 연결할때 정보 업데이트"
         sns_crawling(user, auth, identity)
       end
     else
-      logger.debug "코코코코코코코코코코코코코코코코코코코"
       sns_crawling(identity.user, auth, identity)
       identity.user # 이미 인증한 경우엔 해당 identity에 연결된 user를 리턴
     end
@@ -103,27 +101,30 @@ class User < ActiveRecord::Base
 
 
   def self.signup_by_facebook(auth, identity)
-      user = User.new
-      user.password = Devise.friendly_token[0,20]
-      user.email = auth.info.email
-      user.agreement = 1
-      user.confirmed_at = Time.now
-      user.name = auth.info.name
-      user.username = auth.info.name
-      user.first_name = auth.info.first_name
-      user.last_name = auth.info.last_name
-      user.locale = fb_locales_available(auth.extra.raw_info.locale)
-      user.gender = auth.extra.raw_info.gender
-      user.facebook_account_url = auth.info.urls.Facebook
-      user.profile_image = auth.info.image
-      user.save(validate: false)
-      identity.username = user.name
-      identity.user_id = user.id
-      identity.save(validate: false)
-      user
+    logger.debug " * signup_by_facebook 시작 "
+    user = User.new
+    user.password = Devise.friendly_token[0,20]
+    user.email = auth.info.email
+    user.agreement = 1
+    user.confirmed_at = Time.now
+    user.name = auth.info.name
+    user.username = auth.info.name
+    user.first_name = auth.info.first_name
+    user.last_name = auth.info.last_name
+    user.locale = fb_locales_available(auth.extra.raw_info.locale)
+    user.gender = auth.extra.raw_info.gender
+    user.facebook_account_url = auth.info.urls.Facebook
+    user.profile_image = auth.info.image
+    user.skip_confirmation_notification!
+    user.save(validate: false)
+    identity.username = user.name
+    identity.user_id = user.id
+    identity.save(validate: false)
+    user
   end
 
   def self.signup_by_google_oauth2(auth, identity)
+    logger.debug " * signup_by_google_oauth2 시작 "
     user = User.new
     user.password = Devise.friendly_token[0,20]
     user.agreement = 1
@@ -137,6 +138,7 @@ class User < ActiveRecord::Base
     user.gender = auth.extra.raw_info.gender
     user.date_of_birth = auth.extra.raw_info.birthday
     user.locale = auth.extra.raw_info.locale
+    user.skip_confirmation_notification!
     user.save(validate: false)
     identity.username = auth.info.name
     identity.user_id = user.id
@@ -165,6 +167,7 @@ class User < ActiveRecord::Base
     user.phone = auth.info.phone
     user.linkedin_account_url = auth.info.urls.public_profile
     user.locale = linkedin_locales_available(auth.extra.raw_info.location.country.code)
+    user.skip_confirmation_notification!
     user.save(validate: false)
     identity.username = auth.info.name
     identity.user_id = user.id
@@ -184,7 +187,7 @@ class User < ActiveRecord::Base
     user.website = auth.info.urls.Website
     user.twitter_account_url = auth.info.urls.Twitter
     user.locale = tw_locales_available(auth.extra.lang)
-    # user.email = nil
+    user.email = "#{auth.uid}@#{auth.provider}.com" if user.email.blank?
     user.skip_confirmation!
     user.save(validate: false)
     identity.username = auth.info.nickname
@@ -209,7 +212,8 @@ class User < ActiveRecord::Base
       identity.username = user.username
       identity.user_id = user.id
       identity.save
-      user.save
+      user.skip_confirmation_notification!
+      user.save(validate: false)
     end
 
     if auth.provider == "twitter"
@@ -224,7 +228,8 @@ class User < ActiveRecord::Base
       identity.username = user.username
       identity.user_id = user.id
       identity.save
-      user.save
+      user.skip_confirmation_notification!
+      user.save(validate: false)
     end
 
     if auth.provider == "google_oauth2"
@@ -240,7 +245,8 @@ class User < ActiveRecord::Base
       identity.username = user.name
       identity.user_id = user.id
       identity.save
-      user.save
+      user.skip_confirmation_notification!
+      user.save(validate: false)
     end
 
     if auth.provider == "github"
@@ -261,7 +267,8 @@ class User < ActiveRecord::Base
       identity.username = user.username
       identity.user_id = user.id
       identity.save
-      user.save
+      user.skip_confirmation_notification!
+      user.save(validate: false)
     end
   end
 

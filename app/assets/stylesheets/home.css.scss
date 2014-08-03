@@ -10,8 +10,6 @@
 
 .icon-bar { background: #fff; width: 30px !important; height: 4px !important; }
 
-
-
 #main {
   margin: 0;
   padding: 0;
@@ -87,6 +85,7 @@
       font-style: italic;
       font-family: "Noto Serif", sans-serif;
       text-transform: capitalize;
+      line-height: 1.2em;
     }
     .inner-center {
       width: 270px;
@@ -108,7 +107,7 @@
           position: absolute;
           top: 0;
           left: 0;
-          padding: 20px;
+          padding: 23px 20px 20px 20px;
           display: block;
           width: 265px;
           height: 65px;

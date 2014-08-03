@@ -11,15 +11,18 @@
 
 # encoding: UTF-8
 
-admin_user = User.create(first_name: "유찬", last_name: "서", email: "admin@wingstar.net", password: "123123", locale: "ko", gender: "male", confirmed_at: Time.now )
+admin_user = User.new(first_name: "유찬", last_name: "서", email: "admin@wingstar.net", password: "123123", locale: "ko", gender: "male", confirmed_at: Time.now, name: "서유찬", about: "Web Developer", date_of_birth: "1992-01-05", username: "yoochan", website: "http://wingstar.net" )
+admin_user.save(validate: false)
 admin_user.add_role :admin
 
-user01 = User.create(first_name: "길동", last_name: "홍", email: "gildong@wingstar.net", password: "123123", locale: "ko", gender: "male", confirmed_at: Time.now )
+user01 = User.new(first_name: "길동", last_name: "홍", email: "gildong@wingstar.net", password: "123123", locale: "ko", gender: "male", confirmed_at: Time.now )
+user01.save(validate: false)
 Post.create(title: "오늘의 명언", content: "\"고통이 고통이라는 이유로 그 자체를 사랑하고 소유하려는 자는 없다\"", user_id: user01.id, created_at: Time.now)
 
 
 
-user02 = User.create(first_name: "Carroll", last_name: "Alison", email: "carroll@wingstar.net", password: "123123", locale: "en", gender: "female", confirmed_at: Time.now )
+user02 = User.new(first_name: "Carroll", last_name: "Alison", email: "carroll@wingstar.net", password: "123123", locale: "en", gender: "female", confirmed_at: Time.now )
+user02.save(validate: false)
 Post.create(title: "About Weather!", content: "wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.
 I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls
 like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
