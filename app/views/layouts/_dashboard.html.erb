@@ -1,117 +1,51 @@
 <style type="text/css">
-    .profile_image{background: <% if current_user.gender == "male" %>url(".<%= asset_path('default_avatar/male.jpg') %>") no-repeat center center<% else %>url("<%= asset_url('default_avatar/female.jpg') %>") no-repeat center center<% end %>}
+    #notificationModal_container .profile_image{background-image: <% if current_user.gender == "male" %>url(".<%= asset_path('default_avatar/male.png') %>");<% else %>url("<%= asset_url('default_avatar/female.png') %>");<% end %>}
 </style>
 <div id="dashboard">
   <div class="header_container">
     <div class="header">
 
-      <div class="modal fade writePostModal_container" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
-
+      <div id="writePostModal_container" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+         <div class="wrapper">
+           <div class="modal_header">
+             <h5 class="title">TIMELINE</h5>
+           </div>
+           <div class="modal_body">
+             <form role="form">
+               <textarea class="contents rounded-10 ease" rows="3" autofocus required placeholder="Tell the world what's on your mind"></textarea>
+               <button type="submit" class="submit rounded-10 ease">SUBMIT</button>
+             </form>
+           </div>
+         </div>
       </div>
 
-      <div id="notificationModal_container" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+      <div id="notificationModal_container" class="modal fade rounded-5-bottom-left rounded-5-bottom-right" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
          <div class="wrapper">
            <div class="modal_arrow"></div>
-           <div class="modal_header">
+           <div class="modal_header rounded-5-top-left rounded-5-top-right">
              <h5 class="title"><a href="#notification_center">Notification</a></h5>
-             <span class="settings"><a href="#settings">Settings</a></span>
+             <span class="settings"><a href="#settings" class="icon-setting-gear"></a></span>
            </div>
            <div class="modal_body">
              <ul>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">Autumn Heckard</strong><span class="preview">&nbsp;commented on your photo: "She's also in a move called Life Happens."</span></p>
-                   <time>3 hrs</time>
+               <li class="ease">
+                 <a href="#01">
+                   <!-- 썸네일 존재하지 않을때 와 존재할때에 따라서 class명 붙이기 -->
+                   <picture class="profile_image rounded-full ease">profile image</picture>
+                   <div class="wrapper_01">
+                   <p class="narrow_text"><strong class="user">Autumn Heckard</strong><span class="preview"><%= "commented on your photo: \"She's also in a move called Life Happens.\""[0..55].gsub(/\s\w+\s*$/,'...') %></span></p>
                    <picture class="thumnail"><img src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/s110x80/10533490_880767938617867_4129755720465695150_n.jpg"/></picture>
+                   <time>3 hrs</time>
+                   </div>
                  </a>
                </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">Yoochan Seo</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
+               <li class="ease">
+                 <a href="#02">
+                   <picture class="profile_image rounded-full ease">profile image</picture>
+                   <div class="wrapper_01">
+                   <p class="wide_text"><strong class="user">Yoochan Seo</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
                    <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
-                 </a>
-               </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">Yoochan Seo</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
-                   <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
-                 </a>
-               </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">Yoochan Seo</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
-                   <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
-                 </a>
-               </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">Yoochan Seo</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
-                   <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
-                 </a>
-               </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">Yoochan Seo</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
-                   <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
-                 </a>
-               </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">서유찬</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
-                   <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
-                 </a>
-               </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">서유찬</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
-                   <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
-                 </a>
-               </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">서유찬</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
-                   <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
-                 </a>
-               </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">서유찬</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
-                   <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
-                 </a>
-               </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">서유찬</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
-                   <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
-                 </a>
-               </li>
-               <li>
-                 <a href="#">
-                   <picture class="profile_image">profile image</picture>
-                   <p><strong class="user">서유찬</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
-                   <time>3 hrs</time>
-                   <picture class="thumnail"><img src="https://fbexternal-a.akamaihd.net/safe_image.php?d=AQBBLvZ5hv4olwDw&w=470&h=246&url=http%3A%2F%2Fuf.demoday.co.kr%2Fcontent_images%2Fd423226cae9e5eac70953b0f939a1b5a.png&cfs=1&upscale"/></picture>
+                   </div>
                  </a>
                </li>
              </ul>
@@ -122,10 +56,10 @@
        <h2 class="logo"><a href="<%= root_path %>">logo</a></h2>
        <nav class="defaultNav">
          <ul>
-           <li><a href="#"><i class="fa fa-comments-o"></i></a></li>
-           <li><a href="#" data-toggle="modal" data-target="#notificationModal_container" data-backdrop="true" data-keyboard="true"><span class="countItem" id="notificationsCountValue">14</span><i class="fa fa-bell-o"></i></a></li>
-           <li><a href="#" data-toggle="modal" data-target="#writePostModal_container"><i class="fa fa-pencil-square-o"></i></a></li>
-           <li><a href="#" class="default-avatar"><i class="fa fa-user"></i></a></li>
+           <li class="message ease"><a href="#"><i class="icon-bubble-comment-1"></i></a></li>
+           <li class="notification ease"><a href="#" data-toggle="modal" data-target="#notificationModal_container" data-backdrop="true" data-keyboard="true"><span class="countItem_02" id="notificationsCountValue">13</span><i class="icon-bell"></i></a></li>
+           <li class="quick_write ease"><a href="#" data-toggle="modal" data-target="#writePostModal_container"><i class="icon-pencil-1"></i></a></li>
+           <li class="user_settings ease"><a href="#" class="default-avatar"><i class="icon-user-setting-2"></i></a></li>
          </ul>
        </nav>
     </div>
@@ -144,13 +78,13 @@
     <aside class="left_column navbar-collapse collapse">
       <nav class="menu_list">
         <ul>
-          <li class="profile"><a href="#">프로필</a></li>
-          <li class="portfolio"><a href="#">포트폴리오</a></li>
-          <li class="talentshow"><a href="#">탤런트쇼</a></li>
-          <li class="blog"><a href="#">블로그</a></li>
-          <li class="scraps"><a href="#">스크랩</a></li>
-          <li class="connection"><a href="#">사람들</a></li>
-          <li class="report"><a href="#">보고서</a></li>
+          <li class="profile" data-toggle="tooltip" data-placement="right" title="Tooltip on right"><a href="#"><picture class="rounded-full profile_image ease"></picture></a></li>
+          <li class="portfolio"><a href="#"><i class="icon-photos-2"></i></a></li>
+          <li class="talentshow"><a href="#"><i class="icon-diamond"></i></a></li>
+          <li class="blog"><a href="#"><i class="icon-newspaper-1"></i></a></li>
+          <li class="scraps"><a href="#"><i class="icon-document-box-1"></i></a></li>
+          <li class="connection"><a href="#"><i class="icon-connection-3"></i></a></li>
+          <li class="report"><a href="#"><i class="icon-file-graph-2"></i></a></li>
         </ul>
       </nav>
     </aside>
@@ -159,8 +93,7 @@
       </section>
       <aside class="contents_left_column">
         <section class="contents">
-          contents<br/>
-          <%= link_to "logout",destroy_user_session_path, :method => :delete %>
+          <%= link_to "logout",destroy_user_session_path, :method => :delete %><br/>
         </section>
       </aside>
       <aside class="contents_right_column">

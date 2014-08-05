@@ -9,19 +9,14 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- *
- *= require lib/fonts/NanumBarunGothic
- *= require lib/fonts/Tahoma
- *= require lib/fonts/Helvetica
+ *************************************************************************************************
+ * Library
+ *************************************************************************************************
  *= require font-awesome
  *= require lib/bootstrap
  * require lib/icheck_skins/flat/green
- * require lib/jquery.jscrollpane
  *= require lib/icheck_skins/polaris/polaris
- *= require lib/jquery.fullPage
- *= require lib/progression
-
-
+ *************************************************************************************************
  *= require style
  *= require responsive
  *= require posts

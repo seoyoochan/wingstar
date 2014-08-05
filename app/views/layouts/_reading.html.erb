@@ -1,14 +1,11 @@
-<link href='http://fonts.googleapis.com/css?family=Noto+Serif|Open+Sans' rel='stylesheet' type='text/css'>
-<style>
-    body, html { overflow: hidden !important; font-family: "Open Sans","Noto Serif",sans-serif; }
+<style type="text/css">
+    body { background: #151d20; overflow-x: hidden; }
 </style>
-<div id="fullpage">
-  <div id="main" class="section">
-
+<link href='http://fonts.googleapis.com/css?family=Noto+Serif|Open+Sans' rel='stylesheet' type='text/css'>
+  <div id="main">
     <div class="logo" data-scroll-reveal="enter from the bottom after 1s">
       <%= link_to t("logo"), root_path %>
     </div>
-
     <div class="center">
       <h1 class="wingstar" data-scroll-reveal="enter from the bottom after 1s">WINGSTAR</h1>
       <span class="tagline" data-scroll-reveal="enter from the bottom after 1s">Unleash Your Talents,<br/>
@@ -19,8 +16,7 @@
         <div class="signup rounded-3 btn_style ease"><%= link_to t("page.home.signup"), "#", data: { :toggle => "modal", :target => "#signupModal_container" } %></div>
       </div>
     </div>
-
-    <nav id="top_nav">
+    <nav>
       <ul class="navbar-nav nav">
         <li><%= link_to t("page.home.top_nav.about"), "#" %></li>
         <li><%= link_to t("page.home.top_nav.blog"), "#" %></li>
@@ -30,12 +26,4 @@
         <li><%= link_to t("page.home.top_nav.help"), "#" %></li>
       </ul>
     </nav>
-
   </div>
-  <div id="section1" class="section">
-    <h1 data-scroll-reveal="enter top move 50px, after 0.3s">섹션1</h1>
-  </div>
-  <div id="section2" class="section">
-    <h1 data-scroll-reveal="enter top move 50px, after 0.3s">섹션2</h1>
-  </div>
-</div>

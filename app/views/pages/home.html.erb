@@ -3,10 +3,5 @@
 <% if signed_in? %>
   <%= render "layouts/dashboard" %>
 <% else %>
-    <script type="text/javascript">
-        $(document).ready(function(){
-          $('#fullpage').fullpage();
-        });
-    </script>
   <%= render "layouts/reading" %>
 <% end %>

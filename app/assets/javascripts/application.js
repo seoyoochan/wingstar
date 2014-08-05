@@ -14,10 +14,8 @@
 //= require jquery_ujs
 //= require lib/jquery.easings.min
 //= require lib/jquery.slimscroll.min
-//= require lib/jquery.fullPage.min
 //= require lib/jquery.transit
 //= require lib/bootstrap.min
-//= require lib/progression.min
 //= require lib/icheck.min
 //= require lib/modernizr.custom.min
 
@@ -32,13 +30,13 @@ $(document).ready(function(){
     *********************************************************************/
     $(window).keyup(function(event) {
         if(event.which === 27) {
-            $("#notificationModal_container, #signupModal_container, #loginModal_container").modal("hide");
+            $(".modal").modal("hide");
         }
     });
 
     $(window).mouseup(function (e)
     {
-        var container = $("#notificationModal_container, #signupModal_container, #loginModal_container");
+        var container = $(".modal");
 
         if (!container.is(e.target) // if the target of the click isn't the container...
             && container.has(e.target).length === 0) // ... nor a descendant of the container
@@ -48,8 +46,7 @@ $(document).ready(function(){
     });
 
 
-    $("#notificationModal_container .modal_body").niceScroll({ autohidemode: true, cursorcolor: "#000", cursorwidth: "7px", cursorborder: "0px", cursoropacitymin: "0.3", cursoropacitymax: "0.5", touchbehavior: " true"});
-
+    $("#notificationModal_container .modal_body, #writePostModal_container .contents").niceScroll({ autohidemode: true, cursorcolor: "#000", cursorwidth: "7px", cursorborder: "0px", cursoropacitymin: "0.3", cursoropacitymax: "0.5", touchbehavior: " true"});
 
 
 
@@ -89,25 +86,10 @@ $(document).ready(function(){
 
 
     setInterval(function() {
-        $('#fullpage #main .logo, #dashboard .header .logo').transition({
+        $('#main .logo, #dashboard .header .logo').transition({
             perspective: '100px',
             rotateY: '180deg',
-        }, function() { $('#fullpage #main .logo, #dashboard .header .logo').removeAttr('style'); });
-    }, 5000);
-
-    $("#loginForm").progression({
-        tooltipWidth: '200',
-        tooltipPosition: 'right',
-        tooltipOffset: '50',
-        showProgressBar: true,
-        showHelper: true,
-        tooltipFontSize: '14',
-        tooltipFontColor: 'fff',
-        progressBarBackground: 'fff',
-        progressBarColor: '6EA5E1',
-        tooltipBackgroundColor: 'a2cbfa',
-        tooltipPadding: '10',
-        tooltipAnimate: true
-    });
+        }, function() { $('#main .logo, #dashboard .header .logo').removeAttr('style'); });
+    }, 3000);
 
 });

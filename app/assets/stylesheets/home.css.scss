@@ -1,3 +1,4 @@
+
 /* Scroll Effects */
 .hidden{
   opacity: 0;
@@ -7,13 +8,13 @@
   opacity: 1;
 }
 
-
 .icon-bar { background: #fff; width: 30px !important; height: 4px !important; }
 
 #main {
+  text-align: center;
+  height: 100%;
   margin: 0;
-  padding: 0;
-  background: #151d20;
+  padding: 70px 0 0 0;
 
   .navbar-toggle {
     position: absolute;
@@ -21,27 +22,7 @@
     left: 0;
   }
 
-  #top_nav {
-    position: relative;
-    width: 600px;
-    margin: 0 auto;
-    padding: 0 0 0 30px;
 
-    left: 0;
-    bottom: 0;
-    ul {
-      margin: 0;
-      padding: 0;
-    }
-    ul li {
-      display: inline-block;
-      margin-right: 20px;
-      font-size: 14px;
-      text-transform: capitalize;
-      a { color: #fff; }
-      a:hover{ background: none; color: #999; }
-    }
-  }
 
   .logo {
     position: relative;
@@ -137,10 +118,32 @@
     }
   }
 
-}
+  nav {
+    font-size: 14px;
+    left:50%;
+    bottom: 0;
+    position:relative;
 
-.section{
-  text-align: center;
+    ul {
+      width:500px;
+      margin-left:-250px;
+      height:100%;
+      text-align:center;
+      max-width:500px;
+      max-height:500px;
+    }
+
+    ul li {
+      display: inline;
+      text-align: inherit;
+      margin: 0 6px 0 0;
+      padding: 0;
+      text-transform: capitalize;
+      a { color: #fff; }
+      a:hover{ background: none; color: #999; }
+    }
+  }
+
 }
 
 /******************************************************************************
@@ -155,7 +158,9 @@
 * Tablet
 ******************************************************************************/
 @media (max-width: 768px) {
+ nav {
 
+ }
 }
 
 
@@ -164,10 +169,6 @@
 ******************************************************************************/
 @media (max-width: 480px) {
 
-  #top_nav {
-    width: 100% !important;
-    ul li { }
-  }
 }
 
 /******************************************************************************

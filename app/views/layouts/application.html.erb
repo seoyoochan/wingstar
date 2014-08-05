@@ -37,16 +37,13 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <% if flash.present? %>
       <script type="text/javascript">
         (function($) {
             $(document).ready(function() {
-                $(".alert-success").delay(1500).fadeOut(300);
-                $(".alert-warning, .alert-danger").delay(5000).fadeOut(300);
+                $("#flash").delay(1500).fadeOut(300);
             });
         })(jQuery);
       </script>
-  <% end %>
   <% if resource.present? && resource.errors.present? %>
     <script type="text/javascript">
         (function($) {
@@ -56,18 +53,6 @@
         })(jQuery);
     </script>
   <% end %>
-  <style>
-  <% if signed_in? %>
-     <% if current_user.profile_image.present? %>
-        .profile_image {background: url("<%= current_user.profile_image %>") no-repeat left top !important;}
-     <% end %>
-  <% end %>
-  <% if I18n.locale == :ko %>
-     body {font-family: "barun","Helvetica", "Tahoma";}
-  <% else %>
-     body {font-family: "Helvetica", "Tahoma";}
-  <% end %>
-  </style>
 </head>
 <body tabindex="-1">
   <%= render "flashes" %>
