@@ -1,0 +1,36 @@
+<style type="text/css">
+    body { background: #151d20; overflow-x: hidden; }
+    #flash {
+      top: 0;
+      margin: 0 auto;
+    }
+</style>
+  <div id="main">
+    <div class="logo" data-scroll-reveal="enter from the bottom after 1s">
+      <%= link_to t("logo"), root_path %>
+    </div>
+    <div class="center">
+      <h1 class="wingstar" data-scroll-reveal="enter from the bottom after 1s">WINGSTAR</h1>
+      <span class="tagline" data-scroll-reveal="enter from the bottom after 1s">Unleash Your Talents,<br/>
+      We are your wingman</span>
+      <div class="inner-center">
+        <div class="login rounded-3 btn_style ease"><%= link_to t("page.intro.login"), "#", data: { :toggle => "modal", :target => "#loginModal_container" } %></div>
+
+        <div class="signup rounded-3 btn_style ease"><%= link_to t("page.intro.signup"), "#", data: { :toggle => "modal", :target => "#signupModal_container" } %></div>
+      </div>
+    </div>
+
+    <div class="footer">
+            <nav>
+              <ul class="navbar-nav nav">
+                <li><%= link_to t("page.intro.top_nav.about"), "#" %></li>
+                <li><%= link_to t("page.intro.top_nav.blog"), "#" %></li>
+                <li><%= link_to t("page.intro.top_nav.terms"), "#" %></li>
+                <li><%= link_to t("page.intro.top_nav.privacy"), "#" %></li>
+                <li><%= link_to t("page.intro.top_nav.cookies"), "#" %></li>
+                <li><%= link_to t("page.intro.top_nav.help"), "#" %></li>
+              </ul>
+            </nav>
+    <small class="copyright">Wingstar © 2014 · <%= current_locale %></small>
+    </div>
+  </div>

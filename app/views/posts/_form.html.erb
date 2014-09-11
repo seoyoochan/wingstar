@@ -1,12 +1,17 @@
-<%= simple_form_for(@post) do |f| %>
-    <%= f.error_notification %>
-
-    <div class="form-group">
-      <%= f.input :title, input_html: { class: 'form-control' } %>
+<% content_for :content do %>
+    <div id="post-new">
+      <div class="contents_container">
+        <section class="contents_full_column">
+          <div class="contents">
+            <%= link_to t("system.text.back"), :back, class: "WS_btn2 back" %>
+            <%= nested_form_for(@post, html: { multipart: true }) do  |f| %>
+                <%= f.text_field :title, class: 'title WS_input', placeholder: t("page.post.action.new.form.title.placeholder") %>
+                <%= f.text_area :content, class: 'content WS_input redactor', placeholder: t("page.post.action.new.form.content.placeholder") %>
+                <%= f.text_field :tag_list, class: 'tags WS_input', placeholder: t("page.post.action.new.form.tags.placeholder") %>
+                <%= f.submit t("system.text.submit"), class: "WS_submit submit" %>
+            <% end %>
+          </div>
+        </section>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.input :content, input_html: { class: 'form-control' } %>
-    </div>
-    <%= f.button :submit, class: 'btn btn-default'%>
-
 <% end %>

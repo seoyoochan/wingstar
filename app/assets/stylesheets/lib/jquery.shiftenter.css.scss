@@ -1,0 +1,18 @@
+div.shiftenter,
+div.shiftenterInactive {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    font-size: 0.8em;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+div.shiftenter {
+    display: inline-block;
+}
+div.shiftenterInactive {
+    display: none;
+}

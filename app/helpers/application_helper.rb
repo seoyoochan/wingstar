@@ -1,9 +1,12 @@
 module ApplicationHelper
 
   def ws_locales
-    @locales = {"en" => "English (US)" , "ko" => "한국어"}
+    @locales = {"en" => "English (US)" , "ko" => "한국어",}
   end
 
+  def current_locale
+    ws_locales[I18n.locale.to_s]
+  end
 
   def default_locale
     if signed_in?
@@ -29,9 +32,7 @@ module ApplicationHelper
     else
       logger.debug "* Language: '#{source}' isn't supported, then set English as default."
       I18n.locale = :en
-
       flash[:error] = "#{source.to_s} " + t("unfound_locale")
-
       redirect_to root_path
     end
   end
@@ -47,6 +48,7 @@ module ApplicationHelper
       else type.to_s
     end
   end
+
 
   #############################
   # Helper methods for Devise #
@@ -68,9 +70,13 @@ module ApplicationHelper
     "<span class='glyphicon glyphicon-#{name}'></span>".html_safe
   end
 
-  def name_mapper(current_user)
-    eastern_format = "#{current_user.last_name}" + "#{current_user.first_name}"
-    western_format = "#{current_user.first_name}" + "#{current_user.last_name}"
+  def name_mapper(current_user=nil)
+
+    if current_user.nil?
+      return nil
+    end
+    eastern_format = "#{current_user.last_name} #{current_user.first_name}"
+    western_format = "#{current_user.first_name} #{current_user.last_name}"
 
     # 1. user's name exists?
     if current_user.name
@@ -85,8 +91,13 @@ module ApplicationHelper
         end
       else
         # 3. then his locale exists?
-        western_format if current_user.locale == "en" # default locale is en
-        eastern_format if current_user.locale == "ko"
+
+        case current_user.locale
+          when "en" then western_format
+          when "ko" then eastern_format
+          else western_format
+        end
+
       end
     end
   end
@@ -97,6 +108,50 @@ module ApplicationHelper
 
   def sns_provider_uid
     session[:current_user_provider_uid] if session[:current_user_provider_uid]
+  end
+
+  def blog_link_provider(user)
+    if user == current_user
+      if current_user.blogs.present?
+        "/blog/#{current_user.username}"
+      else
+        new_blog_path
+      end
+    else
+      if user.blogs.present?
+        "/blog/#{user.username}"
+      else
+        :back
+      end
+    end
+  end
+
+  def parsed_user
+    @parsed_user =
+    if request.params[:username].present?
+      parsed_user = User.find_by_username("#{params[:username]}")
+    else
+      current_user
+    end
+  end
+
+  def redirect_back
+    session[:return_to] ||= request.referer
+    logger.debug "request.referer: #{request.referer}"
+    redirect_to session.delete(:return_to)
+  end
+
+  def required?(obj, attr)
+    target = (obj.class == Class) ? obj : obj.class
+    target.validators_on(attr).map(&:class).include?(ActiveModel::Validations::PresenceValidator)
+  end
+
+  def parsed_address
+    if @parsed_user && @parsed_user.location.present? && @parsed_user.location.address.present?
+      @parsed_address = Geocoder.search("#{@parsed_user.location.address}", params: {language: I18n.locale }).first.data["formatted_address"]
+    else
+      nil
+    end
   end
 
 end

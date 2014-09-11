@@ -1,11 +1,48 @@
 Rails.application.routes.draw do
 
+  mount RedactorRails::Engine => '/redactor_rails'
+  resources :locations
+  resources :blogs, except: :show
 
-  resources :posts, except: :show
+  get "/comments/new/(:parent_id)", to: "comments#new", as: :new_comment
+  post "/comments/new/(:parent_id)", to: "comments#create", as: :create_nested_comment
 
-  get "posts/:id" => "posts#read"
+  resources :posts, except: :show do
 
-  root 'high_voltage/pages#show', id: 'home'
+    member do
+      post "like", to: "posts#like", as: :like
+      post "unlike", to: "posts#unlike", as: :unlike
+      get ":slug", to: "posts#read", as: :read
+      get ":slug/edit", to: "posts#edit"
+      delete ":slug", to: "posts#destroy"
+      patch ":slug", to: "posts#update"
+      # get ":slug/comments", to: "comments#index", as: :post_comments
+      post "comments", to: "comments#create", as: :comments_create
+      delete "comments/:id", to: "comments#destroy", as: :comment_destroy
+      get "comments/:id/edit", to: "comments#edit", as: :comment_edit
+      patch "comments/:id", to: "comments#update", as: :comment
+      put "comments/:id", to: "comments#update", as: :comment_update
+      post "comments/like", to: "comments#like", as: :comment_like
+      post "comments/unlike", to: "comments#unlike", as: :comment_unlike
+      # get ":slug/comments/:id", to: "comments#show"
+
+    end
+    collection do
+      delete 'destroy_multiple'
+    end
+  end
+
+  get "post/:username/:id", to: "posts#read"
+
+  scope :profile do
+    get ":username" => "profile#show", as: :profile_show
+    post ":username/cover" => "profile#cover", as: :profile_cover
+    delete ":username/cover/destroy" => "profile#destroy", as: :profile_cover_destroy
+  end
+
+  get "blog/:username" => "blogs#show", except: :empty, as: :blog_show
+
+  root :to => "application#index"
 
   devise_scope :user do
     get "settings" => "devise/registrations#edit", as: :settings

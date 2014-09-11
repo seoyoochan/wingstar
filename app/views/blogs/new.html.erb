@@ -1,0 +1,12 @@
+<%= content_for :content do %>
+<div id="blog-new">
+  <div class="contents_container">
+    <section class="contents_full_column">
+      <div class="contents">
+        <p class="blog_address">생성될 회원님의 블로그 주소는 "http://wingstar.net/blog/<%= current_user.username %>" 입니다.</p>
+        <%= render "form" %>
+      </div>
+    </section>
+  </div>
+</div>
+<% end %>

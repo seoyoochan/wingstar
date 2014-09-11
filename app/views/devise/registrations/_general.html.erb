@@ -1,0 +1,17 @@
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.input :username, placeholder: t("placeholder.settings.username"), class: "WS_btn" %>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <%= t("placeholder.settings.unconfirmed_email") %><%= resource.unconfirmed_email %>
+    <% end %>
+    <%= f.input :email, placeholder: t("placeholder.settings.email"), class: "WS_btn" %>
+    <%= f.input :first_name, placeholder: t("placeholder.settings.first_name")  %>
+    <%= f.input :last_name, placeholder: t("placeholder.settings.last_name")  %>
+    <%= f.input :password, autocomplete: "off", required: false, placeholder: t("placeholder.settings.password")  %>
+    <%= f.input :password_confirmation, autocomplete: "off", required: false, placeholder: t("placeholder.settings.password_confirmation")  %>
+    <%= f.input :locale, collection: @locales.map { |k,v| [v,k] }, selected: current_user.locale  %>
+    <%= f.input :date_of_birth, as: :date, order: [:year, :month, :day], prompt: {year: t('date.year'), month: t('date.month'), day: t('date.day')},
+                start_year: Date.current.year, end_year: 1920, use_month_names: t(:month_names, scope: :date),
+                required: false, input_html: { class: "date_of_birth" } %>
+    <%= f.collection_radio_buttons :gender, [["female", t("signup_page.collection.gender.female_html") ], ["male", t("signup_page.collection.gender.male_html")]], :first, :last %>
+    <%= f.submit t("page.settings.submit"), class: "general_submit clearfix WS_submit" %>
+<% end %>

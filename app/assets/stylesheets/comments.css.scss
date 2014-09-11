@@ -1,0 +1,218 @@
+#comment_form_container {
+  .profile_image_container {
+    position: absolute;
+    display: inline-block;
+    width: 4%;
+    margin-right: 10px;
+    z-index: 10;
+
+    a {
+      display: block;
+      width: 32px;
+      height: 32px;
+      .profile_image {
+        width: 32px;
+        height: 32px;
+        float: right;
+      }
+    }
+  }
+
+  form {
+
+    .content {
+      position: relative;
+      float: right;
+      width: 95%;
+      height: 32px;
+      max-width: 95%;
+      min-width: 85%;
+      display: inline-block;
+      border: 1px solid #ddd;
+      margin: 0;
+      padding: 8px 10px 0 10px;
+      font-size: 12px;
+    }
+
+    // Use when redactor editor is used
+    .redactor_box {
+        position: relative;
+        float: right;
+        width: 95%;
+      .redactor_content {
+        font-size: 12px !important;
+        color: #777 !important;
+        p {
+          font-size: 12px !important;
+          color: #777 !important;
+        }
+      }
+
+      .content {
+        height: 32px;
+        min-height: 32px;
+        max-width: 95%;
+        min-width: 85%;
+        display: inline-block;
+        border: 1px solid #ddd;
+        margin: 0;
+        padding: 0 10px;
+        font-size: 12px;
+      }
+    }
+
+    .submit {
+      margin: 10px 0 0 0 !important;
+      width: 100px;
+      height: 32px;
+      display: none;
+      clear: both;
+      float: right;
+    }
+  }
+}
+
+#comment_list_container {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 15px;
+  margin-top: 10px;
+  ul,li { background-color: transparent !important; }
+  .root_comment {
+    margin-bottom: 20px;
+  }
+
+  ul li {
+
+    .profile_image_container {
+      position: absolute;
+      display: inline-block;
+      z-index: 10;
+      top: 3px;
+
+      a {
+        display: block;
+        width: 48px;
+        height: 48px;
+        .profile_image {
+          width: 48px;
+          height: 48px;
+          float: right;
+        }
+      }
+    }
+
+    .comment_contents_container {
+      position: relative;
+      width: 100% !important;
+      padding-left: 60px !important;
+      float: right;
+      display: inline-block !important;
+      font-size: 13px;
+      background-color: transparent !important;
+
+      .author {
+        display: inline;
+        font-size: 12px;
+        color: #404040;
+        margin-right: 8px;
+        font-weight: bold;
+
+        .vote_count {
+          margin-left: 5px;
+          color: rgba(0,180,218,1);
+          font-size: 11px;
+          font-weight: bold;
+          font-style: italic;
+        }
+      }
+
+      .time {
+        display: inline;
+        color: #777;
+        font-size: 11px;
+        letter-spacing: -1px;
+        margin-right: 7px;
+      }
+
+      .comment_content {
+        margin: 5px 0 5px 0;
+        display: block;
+        color: #404040;
+        font-size: 13px;
+      }
+
+      .comment_control {
+        text-align: left;
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: inline;
+          font-size: 11px;
+          letter-spacing: 0px;
+          margin: 0;
+          padding: 0;
+          font-weight: normal;
+          a { color: #999; }
+          a:hover { color: #555; }
+        }
+        .edit {
+
+        }
+        .reply {
+        }
+        .vote {
+
+        }
+      }
+
+      .nested_comments_container {
+        margin-top: 20px;
+
+        .nested_comment {
+          padding: 0 0 0 10px !important;
+          margin: 0 0 20px 0 !important;
+
+          .nested_comment_wrapper {
+            padding-left: 50px;
+          }
+          .profile_image_container {
+            a {
+              display: block;
+              width: 36px;
+              height: 36px;
+              .profile_image {
+                width: 36px;
+                height: 36px;
+                float: right;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+/******************************************************************************
+* Tablet
+******************************************************************************/
+@media (max-width: 768px) {
+  #comment_form_container {
+    form {
+      .content {
+      }
+    }
+  }
+}
+
+/******************************************************************************
+* Usual Mobile
+******************************************************************************/
+@media (max-width: 480px) {
+
+}
+

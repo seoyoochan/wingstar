@@ -1,70 +1,53 @@
+<% content_for :content do %>
 <style type="text/css">
-    body { background: url('<%= asset_url("bg/dark/retro_01.jpg") %>') no-repeat left top !important; }
+  .contents { background: url('<%= asset_url("bg/light/Polygon_v2/01.jpg") %>') repeat left top !important; }
 </style>
 <div id="login_container">
-  <div class="container rounded-10">
-    <div class="header">
-      <div class="title" data-animations="fadeIn" data-animation-when-visible="true" data-animation-reset-offscreen="true">
-        <h2 class="logo ease"><%= t("title.login") %></h2>
-      </div>
-    </div>
-    <div class="body">
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), id: "loginForm") do |f| %>
+    <div class="contents_container">
+        <section class="contents_full_column">
+          <div class="contents">
+            <div class="container rounded-10">
+              <div class="header">
+                <div class="title">
+                  <h2 class="logo ease"></h2><span class="text"><%= t("title.login") %></span>
+                </div>
+              </div>
+              <div class="body">
+                <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), id: "loginForm") do |f| %>
 
-          <% if resource.errors.any? %>
-              <div class="alert alert-danger">
-                <h4><%= pluralize(resource.errors.count, "error") %></h4>
+                    <div class="email_container">
+                      <i class="fa fa-envelope-o fa-fw email"></i>
+                      <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email rounded-3-top-left rounded-3-top-right", "aria-required" => true }, data: { :progression => "", :helper => "Help users through forms by prividing helpful hinters" }  %>
+                    </div>
+
+                    <div class="password_container">
+                      <i class="fa fa-lock fa-fw password"></i>
+                      <%= f.input :password, placeholder: t("placeholder.login.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password rounded-3-bottom-left rounded-3-bottom-right", "aria-required" => true } %>
+                    </div>
+
+                    <div class="submit_wrapper">
+                      <div class="remember_container">
+                        <%= f.input :remember_me, as: :boolean, wrapper: false, input_html: { class: "remember_me checkbox", checked: "checked" } if devise_mapping.rememberable? %>
+                      </div>
+
+                      <div class="submit_container">
+                        <%= f.button :submit, t("button_link.login"), class: "btn btn-info btn-medium submit rounded-3", wrapper: false %>
+                      </div>
+                    </div>
+
+                <% end %>
+
+              </div>
+
+              <div class="footer rounded-3">
                 <ul>
-                  <% resource.errors.full_messages.each do |msg| %> <li><%= msg %></li>
-                  <% end %>
+                  <li><%= link_to t("login_page.footer.fotgot_password_html"), user_password_path %></li>
+                  <li><%= link_to t("login_page.footer.signup_html"), new_user_registration_path %></li>
                 </ul>
               </div>
-          <% end %>
-
-          <div class="email_container">
-            <i class="fa fa-envelope-o fa-fw email"></i>
-            <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email rounded-3-top-left rounded-3-top-right", "aria-required" => true }, data: { :progression => "", :helper => "Help users through forms by prividing helpful hinters" }  %>
-          </div>
-
-          <div class="password_container">
-            <i class="fa fa-lock fa-fw password"></i>
-            <%= f.input :password, placeholder: t("placeholder.login.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password rounded-3-bottom-left rounded-3-bottom-right", "aria-required" => true } %>
-          </div>
-
-          <div class="submit_wrapper">
-            <div class="remember_container">
-              <%= f.input :remember_me, as: :boolean, wrapper: false, input_html: { class: "remember_me checkbox", checked: "checked" } if devise_mapping.rememberable? %>
-            </div>
-
-            <div class="submit_container">
-              <%= f.button :submit, t("button_link.login"), class: "btn btn-info btn-medium submit rounded-3", wrapper: false %>
             </div>
           </div>
-
-      <% end %>
-
-      <div class="divider rounded-3"></div>
-
-      <div class="sns_connector">
-        <h5 class="title"><%= t("login_page.sns_connector.title_html") %></h5>
-        <ul>
-          <div class="wrapper">
-            <li class="twitter"><%= link_to t("login_page.sns_connector.twitter_html"), user_omniauth_authorize_path(:twitter), class: "rounded-3" %></li>
-            <li class="facebook"><%= link_to t("login_page.sns_connector.facebook_html"), user_omniauth_authorize_path(:facebook), class: "rounded-3" %></li>
-          </div>
-          <div class="wrapper">
-            <li class="linkedin"><%= link_to t("login_page.sns_connector.linkedin_html"), user_omniauth_authorize_path(:linkedin), class: "rounded-3" %></li>
-            <li class="google"><%= link_to t("login_page.sns_connector.google_html"), user_omniauth_authorize_path(:google_oauth2), class: "rounded-3" %></li>
-          </div>
-        </ul>
-      </div>
+        </section>
     </div>
-
-    <div class="footer rounded-3">
-      <ul>
-        <li><%= link_to t("login_page.footer.fotgot_password_html"), new_user_password_path %></li>
-        <li><%= link_to t("login_page.footer.signup_html"), new_user_registration_path %></li>
-      </ul>
-    </div>
-  </div>
 </div>
+<% end %>

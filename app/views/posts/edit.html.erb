@@ -1,13 +1,2 @@
-<h2>Editing post</h2>
-<div class="row">
-  <div class='col-md-12'>
-    <p style='text-align:right;'>
-      작성자: <%= current_user.email %>, <%= time_ago_in_words(@post.created_at.in_time_zone) %>
-    </p>
-  </div>
-</div>
 <%= render 'form' %>
 
-<hr>
-<%= link_to 'Read', @post, class: 'btn btn-default' if can? :read, @post %>
-<%= link_to 'Back', posts_path, class: 'btn btn-default' %>

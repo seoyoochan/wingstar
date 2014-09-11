@@ -1,0 +1,23 @@
+<% content_for :content do %>
+<div id="comment-new">
+  <div class="contents_container">
+    <section class="contents_left_column">
+      <div class="contents">
+          <div id="comment_form_container" class="clearFix">
+            <div class="profile_image_container">
+              <picture class='rounded-full profile_image ease'></picture>
+            </div>
+
+            <%= simple_form_for(@child_comment, url: create_nested_comment_path(@child_comment.id)) do |f| %>
+                <%= f.hidden_field :parent_id %>
+                <%= f.input :commentable_id, :as => :hidden, :value => @child_comment.commentable_id %>
+                <%= f.input :commentable_type, :as => :hidden, :value => @child_comment.commentable_type %>
+                <%= f.input :body, label: false, wrapper: false, input_html: { class: "content" } %>
+                <%= f.button :submit, class: "submit WS_submit" %>
+            <% end %>
+          </div>
+      </div>
+    </section>
+  </div>
+</div>
+<% end %>

@@ -1,33 +1,37 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<% content_for :content do %>
+<% content_for :title do t("page.settings.page_title") end %>
+<div id="settings">
+    <div class="contents_container">
+      <section class="contents_full_column">
+        <div class="contents clearfix">
+          <h1 class="title"><%= t("page.settings.avatar.title") %></h1>
+          <div class="avatar_container">
+            <div class="center">
+                <picture data-toggle="tooltip" data-placement="top" class="profile_image profile_image_80 rounded-full tooltipOn ease" title="가입일: <%= current_user.created_at.strftime("%Y.%m.%d at %I:%M%P") %>"><%= link_to "", profile_show_path(current_user.username), class: "rounded-full" %></picture>
+                <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "avatar_form", multipart: true }) do |f| %>
+                <%= f.file_field :avatar, class: "WS_input", wrapper: false, label: false %>
+                <%= f.submit t("page.settings.avatar.submit"), class: "submit WS_submit" %>
+                <% end %>
+            </div>
+          </div>
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#general" role="tab" data-toggle="tab"><%= t("page.settings.tab_name.general") %></a></li>
+            <li><a href="#security" role="tab" data-toggle="tab" class="preventLink"><%= t("page.settings.tab_name.security") %></a></li>
+            <li><a href="#notifications" role="tab" data-toggle="tab" class="preventLink"><%= t("page.settings.tab_name.notifications") %></a></li>
+            <li><a href="#sns_connect" role="tab" data-toggle="tab" class="preventLink"><%= t("page.settings.tab_name.sns_connect") %></a>
+            </li>
+            <li><a href="#cancellation" role="tab" data-toggle="tab" class="preventLink"><%= t("page.settings.tab_name.cancel") %></a></li>
+          </ul>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <%= t("placeholder.settings.unconfirmed_email") %><%= resource.unconfirmed_email %>
-    <% end %>
-
-  <%= f.input :first_name, placeholder: t("placeholder.settings.first_name") %>
-
-  <%= f.input :last_name, placeholder: t("placeholder.settings.last_name") %>
-
-  <%= f.input :email, placeholder: t("placeholder.settings.email") %>
-
-    <%= f.input :date_of_birth, as: :date, wrapper: false, order: [:year, :month, :day], prompt: {year: t('date.year'), month: t('date.month'), day: t('date.day')},
-                start_year: Date.current.year, end_year: 1920, use_month_names: t(:month_names, scope: :date),
-                required: false, label: false, input_html: { class: "date_of_birth" }  %>
-
-  <%= f.input :password, autocomplete: "off", required: false, placeholder: t("placeholder.settings.password") %>
-
-  <%= f.input :password_confirmation, autocomplete: "off", required: false, placeholder: t("placeholder.settings.password_confirmation") %>
-
-  <%= f.input :locale, collection: @locales.map { |k,v| [v,k] }, selected: current_user.locale %>
-
-
-  <div><%= f.submit "Update" %></div>
+          <div class="tab-content">
+            <div class="tab-pane active fade in" id="general"><%= render "general" %></div>
+            <div class="tab-pane fade" id="security"><%= render "security" %></div>
+            <div class="tab-pane fade" id="notifications"><%= render "notifications" %></div>
+            <div class="tab-pane fade" id="sns_connect"><%= render "sns_connect" %></div>
+            <div class="tab-pane fade" id="cancellation"><%= render "cancellation" %></div>
+          </div>
+        </div>
+      </section>
+    </div>
+</div>
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>

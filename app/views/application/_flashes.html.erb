@@ -1,8 +1,7 @@
 <% unless flash.blank? %>
 <div id="flash">
   <% flash.each do |type, message| %>
-      <div class="alert alert-dismissable <%= bootstrap_flash(type) %> fade in">
-        <button aria-hidden="true" class="close" data-dismiss="alert">×</button>
+      <div class="alert alert-dismissable <%= bootstrap_flash(type) %> fade in rounded-5-bottom-left rounded-5-bottom-right">
         <p><%= message %></p>
   <% end %>
       </div>
@@ -12,11 +11,10 @@
 <% if resource.present? %>
     <% if resource.errors.present? %>
     <div id="flash">
-      <div class="alert alert-dismissable alert-danger fade in">
-        <button aria-hidden="true" class="close" data-dismiss="alert">×</button>
+      <div class="alert alert-dismissable alert-danger fade in rounded-5-bottom-left rounded-5-bottom-right">
         <ul>
           <% resource.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
+           <li><%= msg %></li>
           <% end %>
         </ul>
       </div>

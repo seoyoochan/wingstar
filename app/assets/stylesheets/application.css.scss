@@ -9,19 +9,25 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- *
- *= require lib/fonts/NanumBarunGothic
- *= require font-awesome
+ *************************************************************************************************
+ * Library
+ *************************************************************************************************
  *= require lib/bootstrap
- * require lib/icheck_skins/flat/green
- *= require lib/icheck_skins/polaris/polaris
- *= require lib/jquery.fullPage
- *= require lib/progression
-
- *= require style
+ *= require font-awesome
+ *= require lib/pace/themes/pace-theme-flash
+ *= require lib/jquery.shiftenter
+// *= require lib/icheck_skins/flat/green
+// *= require lib/icheck_skins/polaris/polaris
+ *************************************************************************************************
+ *= require wingstar
  *= require responsive
- *= require posts
+ *= require post
  *= require home
+ *= require blog
+ *= require profile
+ *= require settings
+ *= require redactor-rails
+ *= require comments
  *= require_self
  */
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2144297896">
+    <data-source source="LOCAL" name="Rails wingstar: development" uuid="4f0205bc-c61e-4954-9809-1613c4e6358a">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/wingstar_development</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>df9bdf98df99</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails wingstar: test" uuid="af7ce38b-39bd-419b-b0ec-df07c01cc3f2">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/wingstar_test</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddffddfe3dfe4dfeddff9dffedfebdff8dff5dfeedfe8dff5dffadffddf8ddff7df8adf8fdf94</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails wingstar: production" uuid="16b0fd52-d29e-46de-b1df-5a7d47d8bd01">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/wingstar_production</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddffddfe3dfe4dfeddff9dffedfebdff8dff5dfeedfe8dff5dffadffddf8ddff7df8adf8fdf94</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

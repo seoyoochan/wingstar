@@ -1,6 +1,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  include ApplicationHelper
   prepend_before_filter :require_no_authentication, only: [ :new, :create, :cancel ]
   prepend_before_filter :authenticate_scope!, only: [:edit, :update, :destroy]
+
+  def avatar_upload
+    redirect_to settings_url
+  end
 
   # GET /resource/sign_up
   def new
@@ -15,7 +20,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
     if resource_saved
       if resource.active_for_authentication?
-        set_flash_message(:success, :signed_up, :name => resource.first_name) if is_flashing_format?
+        set_flash_message(:success, :signed_up, :name => name_mapper(resource) ) if is_flashing_format?
+        Profile.create(url: "http://wingstar.net/profile/#{resource.username}", user_id: "#{resource.id}")
+        Blog.create(
+            title: "#{name_mapper(resource)}",
+            url: "http://wingstar.net/blog/#{resource.username}",
+            user_id: "#{resource.id}",
+            created_at: Time.now,
+            updated_at: Time.now
+        )
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
       else
@@ -122,7 +135,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The default url to be used after updating a resource. You need to overwrite
   # this method in your own RegistrationsController.
   def after_update_path_for(resource)
-    signed_in_root_path(resource)
+    settings_path
   end
 
   # Authenticates the current scope and gets the current resource from the session.

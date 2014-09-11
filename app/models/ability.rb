@@ -15,7 +15,7 @@ class Ability
     end
 
     if @user.roles.size == 0
-      visitor_ability
+      guest_ability
     end
 
   end
@@ -26,17 +26,26 @@ class Ability
   end
 
   def user_ability
-    can :index, Post
-    can :new, Post
-    can :create, Post
-    can :read, Post
+    can [:index, :new, :create, :read, :like, :unlike], Post
     can :ud, Post, :user_id => @user.id
+
+    can [:index, :show, :new, :create], Blog
+    can [:ud], Blog, :user_id => @user.id
+
+    can [:show], Profile
+
+    can :all, Vote
+    can [:index, :show, :new, :create], Location
+    can [:ud], Location, :user_id => @user.id
+
+    can [:index, :new, :create, :like, :unlike], Comment
+    can :ud, Comment, :user_id => @user.id
   end
 
-  def visitor_ability
+  def guest_ability
     can :index, :all
-    can :show, :all
-    can :read, :all
+    can :read, Post
+    can :show, [Blog, Profile]
   end
 
 end

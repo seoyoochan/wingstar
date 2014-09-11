@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+  <tr>
+  <th>블로그 이름</th>
+  <th>블로그 주소</th>
+  <th>블로그 주인</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @blogs.each do |blog| %>
+      <tr>
+        <td class="col-md-6 col-xs-6"><%= blog.title %></td>
+        <td><%= blog.url.present? ? blog.url : "n/a" %>, <%= time_ago_in_words(blog.created_at) %></td>
+        <td><%= blog.user.username %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

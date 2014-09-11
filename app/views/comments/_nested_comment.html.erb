@@ -1,0 +1,21 @@
+<li class="nested_comment comment_depth-1">
+  <div class="profile_image_container">
+    <%= link_to "<picture class='rounded-5 profile_image ease'></picture>".html_safe, "/profile/#{@obj.user.username}", class: "default-avatar tooltipOn", data: { :toggle => "tooltip", :placement => "bottom" }, title: "#{name_mapper(@obj.user)}" %>
+  </div>
+  <div class="nested_comment_wrapper">
+    <h4 class="author"><%= name_mapper(nested_comment.user) %><% if nested_comment.vote_count > 0 %><strong class="vote_count">+<%= nested_comment.vote_count %></strong><% end %></h4>
+    <span class="time tooltipOn" data-toggle="tooltip" data-placement="right" title="<%= nested_comment.created_at.strftime("%Y.%m.%d at %I:%M%P") %>"><%= time_ago_in_words(nested_comment.created_at) %></span>
+    <p class="comment_content"><%= nested_comment.body %></p>
+    <ul class="comment_control clearFix">
+      <% if signed_in? %>
+          <% if (can? :edit, nested_comment)%><li class="edit"><%= link_to t("comment.comment_control.edit"), comment_edit_post_path(nested_comment) %></li><% end %>
+          <li class="reply"><%= link_to t("comment.comment_control.reply"), new_comment_path(nested_comment) %></li>
+          <li class="vote"><%= link_to t("comment.comment_control.unlike"), comment_unlike_post_path(nested_comment), method: :post if current_user.voted_on?(nested_comment) %></li>
+          <li class="vote"><%= link_to t("comment.comment_control.like"), comment_like_post_path(nested_comment), method: :post unless current_user.voted_on?(nested_comment) %></li>
+      <% else %>
+          <li class="reply"><%= link_to t("comment.comment_control.reply"), "#", class: "like preventLink tooltipOn ease", data: { :toggle => "modal", :"toggle-tooltip" => "tooltip", :placement => "top", :target => "#loginModal_container" }, title: t("unauthorized.tooltip") %></li>
+          <li class="vote"><%= link_to t("comment.comment_control.like"), "#", class: "like preventLink tooltipOn ease", data: { :toggle => "modal", :"toggle-tooltip" => "tooltip", :placement => "top", :target => "#loginModal_container" }, title: t("unauthorized.tooltip") %></li>
+      <% end %>
+    </ul>
+  </div>
+</li>

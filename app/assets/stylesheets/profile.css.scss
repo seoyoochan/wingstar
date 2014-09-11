@@ -1,0 +1,82 @@
+body.cover_popover {
+
+  .popover {
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  }
+
+  .popover-content {
+    padding: 7px 10px 2px 10px;
+    width: 150px;
+  }
+
+  #cover_photo_menu {
+    li {
+      display: block;
+      margin-bottom: 5px;
+      list-style: none;
+
+      a > i, div > i { font-size: 16px; margin-right: 5px; vertical-align: middle; }
+      a > .text, div > .text { font-size: 11px; }
+      a:hover { color: #333; }
+
+      .remove_photo {
+        i  { color: rgba(212, 106, 106, 1); }
+      }
+
+      .upload_photo {
+        width: 80px;
+        i { color: rgba(0,180,218,1); }
+        cursor: pointer;
+      }
+
+      form {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+      }
+
+      .submit_photo {
+        position: absolute;
+        right: 7px;
+        top: 0;
+        color: #555;
+        font-size: 14px;
+      }
+
+      .photo_uploader {
+        display: inline-block;
+        outline: none;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        cursor: pointer;
+        color: transparent;
+        background-color: transparent;
+        width: 80px;
+        -moz-opacity: 0;
+        filter:alpha(opacity=0);
+        opacity: 0;
+        float: left;
+      }
+
+      .submit {
+        padding: 3px;
+        display: inline-block;
+        outline: none;
+        background: transparent;
+        color: transparent;
+        font-size: 11px;
+      }
+
+    }
+  }
+}
+
+#cover_photo_menu_container {
+  display: none;
+}
+
+
+

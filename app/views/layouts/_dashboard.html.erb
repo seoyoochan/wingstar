@@ -1,0 +1,310 @@
+<style type="text/css">
+    <% if signed_in? %>
+    #notificationModal_container .profile_image{background-image: <% if current_user.gender == "male" %>url(".<%= asset_path('default_avatar/male.png') %>");<% else %>url("<%= asset_url('default_avatar/female.png') %>");<% end %>}
+    <% end %>
+    .modal-open, .modal-open .navbar-fixed-top {
+        margin-right: -15px !important;
+        overflow: auto !important;
+    }
+
+    <% if (defined? @obj) && (@obj.user.avatar.url.present?) %>
+      .root_comment .profile_image, .nested_comment .profile_image { background-image: url(<%= @obj.user.avatar.url %>); }
+    <% end %>
+    <% if signed_in? && current_user.avatar.url.present? %>
+    .defaultNav .profile_image,  #comment_form_container .profile_image { background-image: url(<%= current_user.avatar.url %>) !important; }
+    <% end %>
+    <% if @parsed_user.present? %>
+    #sidebar .profile_image, #settings .profile_image, #dashboard .cover .profile_image { background-image: url(<%= @parsed_user.avatar.url %>); }
+    <% end %>
+    <% if @parsed_user && @parsed_user.profile.attachments.first.present? && @parsed_user.profile.attachments.first.file_name.present? %>
+    .cover {background-image: url("<%= @parsed_user.profile.attachments.first.file_name %>") !important;}
+    <% else %>
+    .cover {background-color: rgba(208,234,241,1);background: filter-gradient(#d0eaf1, #73bace, horizontal);background-image: radial-gradient( center, ellipse cover, rgba(208,234,241,1) 0%, rgba(171,215,227,1) 41%, rgba(115,186,206,1) 100%);}
+    <% end %>
+</style>
+<div id="dashboard">
+  <div class="header_container">
+    <div class="header">
+       <h2 class="logo"><a href="<%= root_path %>"><div class="visual"></div><span class="text visible-lg-inline visible-md-inline visible-sm-inline"><%= t("page.dashboard.logo_text") %></span></a></h2>
+      <% if signed_in? %>
+       <nav class="defaultNav">
+         <ul>
+           <li class="message ease"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Message" class="tooltipOn"><i class="icon-bubble-comment-1"></i></a></li>
+           <li class="notification ease"><a href="#" data-toggle="modal" data-toggle-tooltip="tooltip" data-target="#notificationModal_container" data-backdrop="true" data-keyboard="true" data-placement="bottom" title="Notification" class="tooltipOn"><span class="countItem_02" id="notificationsCountValue">13</span><i class="icon-bell"></i></a></li>
+           <li class="quick_write ease"><%= link_to "<i class='icon-pencil-1'></i>".html_safe , "#", class: "tooltipOn", data: { :"toggle-tooltip" => "tooltip", placement: "bottom", toggle: "modal", target: "#writePostModal_container"  }, title: "Write Post" %></li>
+           <li class="user_settings ease"><%= link_to settings_path, class: "default-avatar tooltipOn", data: { :"toggle-tooltip" => "tooltip", :placement => "bottom"}, title: "Go to Settings" do %><picture class="rounded-full profile_image ease"></picture><% end %></li>
+         </ul>
+       </nav>
+      <% end %>
+      <div class="menu_opener">
+        <div class="navbar-toggle tooltipOn" data-toggle="collapse" data-target="#sidebar" data-toggle-tooltip="tooltip" data-placement="bottom" title="Menu">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="body">
+    <aside id="sidebar" class="navbar-collapse ease">
+      <nav class="menu_list">
+        <ul>
+          <% if parsed_user.present? %>
+          <li class="profile <% if (params[:controller] == "profile") || (params[:controller] == "application") %>active<% end %>"><%= link_to t("page.dashboard.sidebar.profile_html", :username => "#{name_mapper(@parsed_user)}"), profile_show_path(@parsed_user.username), data: { :toggle => "tooltip", :placement => "right" }, class: "tooltipOn ease", :title => t("page.dashboard.sidebar.profile_text" ) %></li>
+          <li class="portfolio"><%= link_to t("page.dashboard.sidebar.portfolio_html"), "#", data: { :toggle => "tooltip", :placement => "right" }, class: "tooltipOn ease", :title => t("page.dashboard.sidebar.portfolio_text") %></li>
+          <li class="talentshow"><%= link_to t("page.dashboard.sidebar.talentShow_html"), "#", data: { :toggle => "tooltip", :placement => "right" }, class: "tooltipOn ease", :title => t("page.dashboard.sidebar.talentShow_text") %></li>
+          <li class="blog <% if params[:controller] == "blogs" || params[:controller] == "posts" %>active<% end %>"><%= link_to t("page.dashboard.sidebar.blog_html"), blog_link_provider(@parsed_user), data: { :toggle => "tooltip", :placement => "right" }, class: "tooltipOn ease", :title => t("page.dashboard.sidebar.blog_text") %></li>
+          <li class="connections"><%= link_to t("page.dashboard.sidebar.connections_html"), "#", data: { :toggle => "tooltip", :placement => "right" }, class: "tooltipOn ease", :title => t("page.dashboard.sidebar.connections_text") %></li>
+          <% end %>
+          <% if current_user == parsed_user && signed_in? %>
+          <li class="scraps"><%= link_to t("page.dashboard.sidebar.scrap_html"), "#", data: { :toggle => "tooltip", :placement => "right" }, class: "tooltipOn ease", :title => t("page.dashboard.sidebar.scrap_text") %></li>
+          <li class="report"><%= link_to t("page.dashboard.sidebar.report_html"), "#", data: { :toggle => "tooltip", :placement => "right" }, class: "tooltipOn ease", :title => t("page.dashboard.sidebar.report_text") %></li>
+          <% end %>
+          <% if signed_in? %><li class="logout"><%= link_to t("page.dashboard.sidebar.logout_html"), destroy_user_session_path, :method => :delete, data: { :toggle => "tooltip", :placement => "right" }, class: "tooltipOn ease", :title => t("page.dashboard.sidebar.logout_text") %></li><% else %><li class="login"><%= link_to t("page.dashboard.sidebar.login_html"), "#", data: { :toggle => "modal", :"toggle-tooltip" => "tooltip", :placement => "right", :target => "#loginModal_container" }, class: "tooltipOn ease", :title => t("page.dashboard.sidebar.login_text") %></li><% end %>
+        </ul>
+      </nav>
+    </aside>
+    <% if (params["controller"] == "application") && (params["action"] == "index") %>
+        <div class="contents_container">
+          <section class="contents_center_column">
+            <div class="cover">
+              <% if current_user == @parsed_user %>
+              <div class="cover_photo_container">
+                <a class="popWindow_cover effect" data-container="body" data-placement="bottom" data-toggle="popover" href="#" title=""><i class="fa fa-camera"></i><span class="text"><%= t("page.dashboard.full_profile.cover.photo_update") %></span></a>
+                <div id="cover_photo_menu_container">
+                  <ul id="cover_photo_menu">
+                    <li>
+                      <div class="upload_photo"><i class="fa fa-plus"></i><span class="text"><%= t("page.dashboard.full_profile.cover.photo_upload") %></span></div>
+                      <div class="submit_photo"><i class="fa fa-upload"></i><span class="text"><%= t("system.text.save") %></span></div>
+                      <%= nested_form_for(current_user.profile, url: profile_cover_path(current_user.profile), method: :post) do |f| %>
+                          <%= f.fields_for :attachments do |attachment| %>
+                              <%= attachment.file_field :file_name, :accept => "image/png,image/gif,image/jpeg", class: "photo_uploader" %>
+                          <% end %>
+                          <%= f.submit "upload", class: "submit" %>
+                      <% end %>
+                    </li>
+                    <li><%= link_to t("page.dashboard.full_profile.cover.remove_photo_html"), profile_cover_destroy_path(current_user.profile), class: "remove_photo", data: { confirm: t("system.alert.delete_confirmation"), method: "delete" } %></li>
+                  </ul>
+                </div>
+              </div>
+              <% end %>
+              <div class="info">
+                <div class="about">
+                  <picture data-toggle="tooltip" data-placement="top" class="profile_image profile_image_80 rounded-full tooltipOn ease <% if @parsed_user.online? %>online<% else %>offline<% end %>" title="<% if @parsed_user.online? %>online<% else %>offline<% end %>"><%= link_to "", profile_show_path(@parsed_user.username), class: "rounded-full" %></picture>
+                  <h3 class="name WS_text_brave"><%= name_mapper(@parsed_user) %></h3>
+                  <span class="job WS_text_brave"><%= @parsed_user.job? ? @parsed_user.job : t("default_state.job") %></span>
+                  <p class="description WS_text_brave">"<%= @parsed_user.description? ? @parsed_user.description : t("default_state.description") %>"</p>
+                  <% if (@parsed_user.authorizations.any?) || (signed_in? && (@parsed_user != current_user)) %>
+                      <div class="connect">
+                        <% if @parsed_user.authorizations.any? %>
+                            <nav class="sns">
+                              <ul>
+                                <% if @parsed_user.facebook_account_url.present? %><li class="facebook"><%= link_to "<i class=\"fa fa-facebook\"></i>".html_safe, @parsed_user.facebook_account_url, target: "_blank", class: "rounded-full ease" %><% end %></li>
+                                <% if @parsed_user.twitter_account_url.present? %><li class="twitter"><%= link_to "<i class=\"fa fa-twitter\"></i>".html_safe, @parsed_user.twitter_account_url, target: "_blank", class: "rounded-full ease" %><% end %></li>
+                                <% if @parsed_user.googleplus_account_url.present? %><li class="google"><%= link_to "<i class=\"fa fa-google-plus\"></i>".html_safe, @parsed_user.googleplus_account_url, target: "_blank", class: "rounded-full ease" %><% end %></li>
+                              </ul>
+                            </nav>
+                        <% end %>
+
+                        <% if signed_in? && (@parsed_user != current_user) %>
+                            <div class="relationship">
+                              <%= link_to t("page.dashboard.full_profile.cover.connect.follow"), "#follow", class: "follow rounded-10 ease" %>
+                              <%= link_to t("page.dashboard.full_profile.cover.connect.add_friend"), "#", class: "add_friend rounded-10 ease" %>
+                              <% # link_to t("page.dashboard.cover.connect.following"), "#", class: "following rounded-10 ease" %>
+                              <% # link_to t("page.dashboard.cover.connect.frieind_request_sent"), "#", class: "frieind_request_sent rounded-10 ease" %>
+                            </div>
+                        <% end %>
+                      </div>
+                  <% end %>
+                  <div class="bottom_nav">
+                    <nav class="left">
+                      <ul>
+                        <li><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.left.followers_html", :content => "51"), "#"  %></li>
+                        <li><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.left.following_html", :content => "179"), "#" %></li>
+                        <li><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.left.friends_html", :content => "270"), "#" %></li>
+                      </ul>
+                    </nav>
+                    <nav class="right">
+                      <ul>
+                        <li class="ask"><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.right.ask_html"), "#" %></li>
+                        <li class="resume"><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.right.resume_html"), "#" %></li>
+                        <li class="message"><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.right.message_html"), "#" %></li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <aside class="contents_left_column">
+            <section class="contents">
+              <%= link_to "logout",destroy_user_session_path, :method => :delete %><br/>
+            </section>
+          </aside>
+          <aside class="contents_right_column">
+            <div class="contents">
+              <section class="widget about">
+                <h3 class="title"><%= link_to t("page.dashboard.full_profile.contents_right_column.title.about_html"), "#" %></h3>
+                <div class="content">
+                  <ul>
+                    <li class="location">
+                      <% if current_user == @parsed_user %>
+                          <% if @parsed_address.present? %>
+                              <%= link_to t("page.dashboard.full_profile.contents_right_column.about.contents.location_html", address: "#{@parsed_address}"), "#", data: {toggle: "modal", target: "#locationForm_container"} %>
+                          <% else %>
+                              <%= link_to t("default_state.location_html"), "#", data: {toggle: "modal", target: "#locationForm_container"} %>
+                          <% end %>
+                      <% else %>
+                          <% if @parsed_address.present? %>
+                              <%= link_to t("page.dashboard.full_profile.contents_right_column.about.contents.location_html", address: "#{@parsed_address}"), "https://www.google.co.kr/maps/place/#{@parsed_address}", target: "_blank"  %>
+                          <% else %>
+                              <%= t("default_state.location_html") %>
+                          <% end %>
+                      <% end %>
+                    </li>
+                    <li class="birthday">
+                      <% if current_user == @parsed_user %>
+                          <% if @parsed_user.date_of_birth.present? %>
+                              <%= link_to t("page.dashboard.full_profile.contents_right_column.about.contents.birthday_html", date_of_birth: "#{@parsed_user.date_of_birth}", age: "#{age(@parsed_user)}"), "#", data: {toggle: "modal", target: "#birthdayForm_container"} %>
+                          <% else %>
+                              <%= link_to t("default_state.birthday_html"), "#", data: {toggle: "modal", target: "#birthdayForm_container"} %>
+                          <% end %>
+                      <% else %>
+                          <% if @parsed_user.date_of_birth.present? %>
+                              <%= t("page.dashboard.full_profile.contents_right_column.about.contents.birthday_html", date_of_birth: "#{@parsed_user.date_of_birth}", age: "#{age(@parsed_user)}") %>
+                          <% else %>
+                              <%= t("default_state.birthday_html") %>
+                          <% end %>
+                      <% end %>
+                    </li>
+                    <li class="profile_url"><i class="icon-profile-1"></i><span class="text"><%= @parsed_user.profile.url %></span></li>
+                    <li class="phone"><i class="icon-mobile-phone-1"></i><span class="text"><%= @parsed_user.phone? ? @parsed_user.phone : t("default_state.phone") %></span></li>
+                    <li class="email"><i class="icon-mail-1"></i><span class="text"><%= @parsed_user.email %></span></li>
+                    <li class="website"><i class="icon-link-2"></i><span class="text"><%= @parsed_user.website? ? @parsed_user.website : t("default_state.website") %></span></li>
+                  </ul>
+                </div>
+              </section>
+              <section class="widget education">
+                <h3 class="title"><%= link_to t("page.dashboard.full_profile.contents_right_column.title.education_html"), "#" %></h3>
+                <div class="content">
+
+                </div>
+              </section>
+              <section class="widget work">
+                <h3 class="title"><%= link_to t("page.dashboard.full_profile.contents_right_column.title.work_html"), "#" %></h3>
+                <div class="content">
+
+                </div>
+              </section>
+            </div>
+          </aside>
+        </div>
+    <% else %>
+        <%= yield :content %>
+    <% end %>
+  </div>
+</div>
+
+<% if signed_in? && current_user == @parsed_user %>
+    <div id="birthdayForm_container" class="modalFormStyle modal fade rounded-5" tabindex="-1" role="dialog" aria-labelledby="birthdayFormModalLabel" aria-hidden="true">
+      <div class="wrapper">
+        <div class="modal_header">
+          <h5 class="title"><i class="icon-heart-2"></i><span class="text">생일</span></h5>
+        </div>
+        <div class="modal_body">
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <%= f.input :date_of_birth, as: :date, order: [:year, :month, :day], prompt: {year: t('date.year'), month: t('date.month'), day: t('date.day')},
+                          start_year: Date.current.year, end_year: 1920, use_month_names: t(:month_names, scope: :date),
+                          required: false, input_html: { class: "WS_select" }, autofocus: true %>
+              </div>
+              <div class="modal_footer">
+                <div class="btn_container">
+                  <ul>
+                    <li><%= f.submit t("system.text.save"), class: "WS_btn" %><% end %></li>
+          <li><%= link_to t("system.text.cancel"), "#", class: "WS_btn", data: { dismiss: "modal" } %></li>
+          </ul>
+          </div>
+          </div>
+          </div>
+    </div>
+<% end %>
+
+<% if signed_in? && current_user == @parsed_user && setup_location(current_user).present? %>
+<div id="locationForm_container" class="modalFormStyle modal fade rounded-5" tabindex="-1" role="dialog" aria-labelledby="locationFormModalLabel" aria-hidden="true">
+  <div class="wrapper">
+    <div class="modal_header">
+      <h5 class="title"><%= icon('map-marker') %><span class="text">위치</span></h5>
+    </div>
+    <div class="modal_body">
+     <%= simple_form_for(@location) do |f| %>
+       <%= f.input :address, placeholder: "위치를 추가해주세요.", required: true, autofocus: true, input_html: { value: @parsed_address, class: "WS_input" } %>
+    </div>
+    <div class="modal_footer">
+      <div class="btn_container">
+        <ul>
+          <li><%= f.submit t("system.text.save"), class: "WS_btn" %><% end %></li>
+          <li><%= link_to t("system.text.cancel"), "#", class: "WS_btn", data: { dismiss: "modal" } %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<% if signed_in? && (@parsed_user == current_user) %>
+<div id="writePostModal_container" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+  <div class="wrapper">
+    <div class="resizer">
+      <i class="fa fa-arrows"></i>
+    </div>
+    <div class="modal_body">
+      <%
+         @post = Post.new
+         @post.attachments.build
+      %>
+      <%= nested_form_for(@post, html: { multipart: true }) do  |f| %>
+          <%= f.text_field :title, class: 'title WS_input', placeholder: t("page.post.action.new.form.title.placeholder") %>
+          <%= f.text_area :content, class: 'content WS_input redactor', placeholder: t("page.post.action.new.form.content.placeholder") %>
+          <%= f.text_field :tag_list, class: 'tags WS_input', placeholder: t("page.post.action.new.form.tags.placeholder") %>
+          <%= f.submit t("system.text.submit"), class: "WS_submit submit" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<div id="notificationModal_container" class="modal fade rounded-5-bottom-left rounded-5-bottom-right" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+  <div class="wrapper">
+    <div class="modal_arrow"></div>
+    <div class="modal_header rounded-5-top-left rounded-5-top-right">
+      <h5 class="title"><a href="#notification_center">Notification</a></h5>
+      <span class="settings"><a href="#settings" class="icon-setting-gear"></a></span>
+    </div>
+    <div class="modal_body">
+      <ul>
+        <li>
+          <a href="#01">
+            <!-- 썸네일 존재하지 않을때 와 존재할때에 따라서 class명 붙이기 -->
+            <picture class="profile_image rounded-full ease">profile image</picture>
+            <div class="wrapper_01">
+              <p class="narrow_text"><strong class="user">Autumn Heckard</strong><span class="preview"><%= "commented on your photo: \"She's also in a move called Life Happens.\""[0..55].gsub(/\s\w+\s*$/,'...') %></span></p>
+              <picture class="thumnail"><img src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/s110x80/10533490_880767938617867_4129755720465695150_n.jpg"/></picture>
+              <time>3 hrs</time>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#02">
+            <picture class="profile_image rounded-full ease">profile image</picture>
+            <div class="wrapper_01">
+              <p class="wide_text"><strong class="user">Yoochan Seo</strong><span class="preview">&nbsp;commented on your post: "I think's this is awesome!"</span></p>
+              <time>3 hrs</time>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+

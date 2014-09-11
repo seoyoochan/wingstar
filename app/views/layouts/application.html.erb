@@ -31,43 +31,124 @@
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
-  <link href='http://fonts.googleapis.com/css?family=Noto+Serif|Open+Sans' rel='stylesheet' type='text/css'>
-  <% if flash.present? %>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <% if I18n.locale == :ko %>
+      <link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css'>
+  <% else %>
+      <link href='http://fonts.googleapis.com/css?family=Noto+Serif|Open+Sans' rel='stylesheet' type='text/css'>
+  <% end %>
       <script type="text/javascript">
         (function($) {
             $(document).ready(function() {
-                $(".alert-success").delay(1500).fadeOut(300);
-                $(".alert-warning, .alert-danger").delay(5000).fadeOut(300);
+                <% if flash[:success] %>
+                $("#flash").delay(3000).fadeOut(300);
+                <% else %>
+                $("#flash").delay(6000).fadeOut(300);
+                <% end %>
             });
         })(jQuery);
       </script>
-  <% end %>
   <% if resource.present? && resource.errors.present? %>
     <script type="text/javascript">
         (function($) {
               $(document).ready(function() {
-                  $("#flash").delay(5000).fadeOut(300);
+                  $("#flash").delay(10000).fadeOut(300);
               });
         })(jQuery);
     </script>
   <% end %>
-  <style>
-  <% if signed_in? %>
-     <% if current_user.profile_image.present? %>
-        .profile_image {background: url("<%= current_user.profile_image %>") no-repeat left top !important;}
-     <% end %>
-  <% end %>
-  <% if I18n.locale == :ko %>
-     body {font-family: "barun";}
-  <% else %>
-     body {font-family: "Open Sans","Noto Serif",sans-serif;}
-  <% end %>
+  <script type="text/javascript">
+      $(document).ready(
+              function(){
+
+                  $('.delete_manager').on('click', function(){
+                      var checkbox = $('.delete_item');
+                      checkbox.trigger('click');
+
+
+                      if ($('body').hasClass('delete_manager_on')) {
+                          $('body').removeClass('delete_manager_on');
+                          $('.btn_select i').replaceWith('<i class="fa fa-check-circle-o"></i>');
+
+                          $('.btn_select span').text('<%= t("system.text.select_all") %>');
+                      } else {
+                          $('body').addClass('delete_manager_on');
+                          $('.btn_select i').replaceWith('<i class="fa fa-check-circle"></i>');
+                          $('.btn_select span').text('<%= t("system.text.cancel_select_all") %>');
+                      }
+
+                  });
+
+                  $('.delete_item').change(function(){
+                      if ( $(this).is(':checked') ) {
+                          $('.submit_delete_manager').prop('disabled', false);
+                          $('.submit_delete_manager').removeClass('disabled');
+                      } else {
+                          $('.submit_delete_manager').prop('disabled', true);
+                          $('.submit_delete_manager').addClass('disabled');
+                      }
+                  });
+
+                  var csrf_token = $('meta[name=csrf-token]').attr('content');
+                  var csrf_param = $('meta[name=csrf-param]').attr('content');
+                  var params;
+                  if (csrf_param !== undefined && csrf_token !== undefined) {
+                      params = csrf_param + "=" + encodeURIComponent(csrf_token);
+                  }
+                  $('.redactor').redactor(
+                          { "imageUpload":"/redactor_rails/pictures?" + params,
+                              "imageGetJson":"/redactor_rails/pictures",
+                              "fileUpload":"/redactor_rails/documents?" + params,
+                              "fileGetJson":"/redactor_rails/documents",
+                              "path":"/assets/redactor-rails",
+                              "lang": "<%= I18n.locale.to_s %>",
+                              "css":""}
+                  );
+                  $('.redactor_air').redactor(
+                          { "imageUpload":"/redactor_rails/pictures?" + params,
+                              "imageGetJson":"/redactor_rails/pictures",
+                              "fileUpload":"/redactor_rails/documents?" + params,
+                              "fileGetJson":"/redactor_rails/documents",
+                              "path":"/assets/redactor-rails",
+                              "lang": "<%= I18n.locale.to_s %>",
+                              "air": true,
+                              "css":""}
+                  );
+              });
+  </script>
+  <style type="text/css">
+      body, #header,#body {
+      <% if I18n.locale == :ko %>
+          font-family: "Nanum Gothic", "barun", "Helvetica", "Tahoma";
+      <% else %>
+          font-family: "Helvetica";
+      <% end %>
+      }
+      .cover .info .description {
+      <% if I18n.locale == :ko %>
+          font-family: "Nanum Gothic", "barun", "Helvetica", "Tahoma";
+      <% else %>
+          font-family: "Noto Serif","open sans","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+      <% end %>
+      }
   </style>
 </head>
-<body>
+<body tabindex="-1">
   <%= render "flashes" %>
+  <% if signed_in? %>
+    <%= render "layouts/dashboard" %>
+  <% else %>
+    <% if request.path == "/"  %>
+        <%= render "layouts/intro" %>
+    <% else %>
+        <%= render "layouts/dashboard" %>
+    <% end %>
+  <% end %>
   <%= render "login_modal" %>
   <%= render "signup_modal" %>
-  <%= yield %>
 </body>
 </html>
