@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.1.1'
 gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.3'
@@ -12,33 +11,41 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 gem 'jquery-rails'
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
-
 gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap'
 gem 'mysql2'
 gem 'simple_form'
 gem 'attr_searchable'
 gem 'jquery-ui-rails'
-gem 'friendly_id', '~> 5.0.0'
 gem 'ancestry'
+# gem 'globalize', '~> 4.0.2'
 gem 'prawn'
 # gem 'mailboxer'
 gem 'table_print'
 gem 'public_activity'
+gem 'nested_form'
 gem 'country_select'
 gem 'draper', '~> 1.3'
 # Translations for the Active Record error_messages_for Helper
+gem 'geocoder'
 gem 'dynamic_form'
 gem 'enumerize'
+gem 'redactor-rails'
+gem 'foreigner'
+gem 'acts_as_commentable_with_threading'
 gem 'active_model_serializers'
+gem 'closure_tree'
 gem 'font-awesome-sass'
-gem 'high_voltage'
 gem 'devise'
 gem 'autoprefixer-rails'
+gem 'stringex'
+gem 'sanitize'
 gem 'cancancan', '~> 1.9'
 gem 'rolify'
+gem 'fog' # for aws cloud storage
+gem 'mini_magick' # photo resizing
 gem 'carrierwave'
 gem 'twitter'
 gem 'json'
@@ -52,6 +59,8 @@ gem 'omniauth-linkedin'
 gem 'omniauth-twitter'
 gem 'omniauth-kakao'
 gem 'rmagick'
+gem 'acts-as-taggable-on'
+gem 'thumbs_up', git: 'https://github.com/bouchard/thumbs_up.git'
 
 group :development, :test do
   # gem 'byebug'

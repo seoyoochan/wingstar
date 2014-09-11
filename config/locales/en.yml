@@ -1,6 +1,76 @@
 en:
+  comment:
+    comment_control:
+      edit: • Edit
+      reply: • Reply
+      like: • Like
+      unlike: • Unlike
+    placeholder:
+      line_break: "Shift+Enter: Line break / Enter: Submit"
+  flash:
+    comment:
+     success_update: Your comment has been updated.
+     success_destroy: Your comment has been removed.
+    cover:
+      empty_attachment: Please attach a cover photo.
+      success_upload: Cover photo has been updated.
+      success_destroy: Cover photo has been removed.
+      error_destroy: You do not have any cover photo.
+  votes:
+    tooltip:
+      like: I like it!
+      unlike: meh..I don't like it
+    warning:
+      like: You already liked it.
+      unlike: You already unliked it.
+  system:
+    text:
+      back: Back
+      cancel: Cancel
+      submit: Submit
+      list: List
+      save: Save
+      edit: Edit
+      open_map: Open Map
+      select_all: Check All
+      cancel_select_all: Uncheck All
+      comment: Comments
+      view: Views
+    alert:
+      delete_confirmation: Are you sure to delete?
+  default_state:
+    job: "Add a job"
+    description: "Add description"
+    birthday_html: <i class="icon-heart-2"></i><span class="text">Add birthday</span>
+    phone: "Add phone number"
+    website: "Add a website"
+    location_html: <i class='icon-map-marker-1'></i><span class='text'>Add location</span>
   page:
-    home:
+    profile:
+      page_title: "%{user}'s Profile"
+    settings:
+      avatar:
+        title: Profile Image
+        submit: Image Upload
+      page_title: Account Settings
+      submit: Save Changes
+      cancel_button: Cancel My Account
+      tab_name:
+        general: General
+        notifications: Notifications
+        security: Security
+        cancel: Cancel
+        sns_connect: SNS Connection
+      sns_connect:
+        connected: Already Connected
+        title_html: <i class="fa fa-sun-o"></i>Connect with SNS
+        twitter_html: <i class="fa fa-twitter"></i>Twitter
+        facebook_html: <i class="fa fa-facebook"></i>Facebook
+        google_html: <i class="fa fa-google-plus"></i>Google
+        linkedin_html: <i class="fa fa-linkedin-square"></i>LinkedIn
+        github_html: <i class="fa fa-github-square"></i>Github
+    intro:
+      page_title: Home
       browser_title: Wingstar
       login: Login
       signup: Sign Up
@@ -11,12 +81,107 @@ en:
         privacy: Privacy
         cookies: Cookies
         help: Help
+    post:
+      action:
+        show:
+          postNum: "No.%{number}"
+          comments: Comments
+          views: Views
+        new:
+          form:
+            title:
+              placeholder: Type your title.
+            content:
+              placeholder: Any new idea on your mind?
+            tags:
+              placeholder: "Type your topics (Ex: Wingstar,Blog,stuff)"
+    blog:
+      post_size: "Total posts: %{post_size}"
+      widget:
+        title:
+          tag_cloud_html: <i class="fa fa-tags"></i><span class="text">태그 클라우드</span>
+      page_title: "%{blog_title} Blog"
+      tooltip:
+        share: Share it!
+      action:
+        new:
+          placeholder: Enter your own blog name.
+        show:
+          delete_selected: Delete The Selected
+          tag_icon_html: <i class='fa fa-tag'></i>
+          blog_empty: This blog doesn't exist or the user doesn't use our blog service.
+          more_html: More <span><i class="fa fa-angle-right"></i></span>
+          write_html: <i class='fa fa-pencil'></i><span class='text'>Write</span>
+          post_control:
+            popover:
+              edit: Edit
+              delete: Delete
+        create:
+          success: "%{user}, your blog has been created!"
+          error: "%{user}, you are already using a blog."
+    dashboard:
+      page_title: Dashboard
+      logo_text: WINGSTAR
+      userControlPanel:
+        notice_html: <i class="fa fa-bullhorn ease"></i><span>Wanna know what Wingstar team is doing?</span>
+        read_blog: Peek our blog!
+        logout_html: <i class="icon-log-out-1 ease"></i><span>Logout</span>
+      full_profile:
+        cover:
+          photo_update: Change Cover
+          photo_upload: Photo Upload
+          remove_photo_html: <i class="fa fa-times"></i><span class="text">Remove Photo</span>
+          connect:
+            follow: Follow
+            following: Following
+            add_friend: Add Friend
+            frieind_request_sent: Send Friend Request
+            cancel_request_request: Cancel Friend Request
+            friended: Friend
+          bottom_nav:
+            left:
+              followers_html: <h5 class="title">FOLLOWERS</h5><span class="content">%{content}</span></a>
+              following_html: <h5 class="title">FOLLOWING</h5><span class="content">%{content}</span></a>
+              friends_html: <h5 class="title">FRIENDS</h5><span class="content">%{content}</span></a>
+            right:
+              ask_html: <i class="icon-bubble-ask-2"></i><h5 class="title">ASK</h5>
+              resume_html: <i class="icon-document-1"></i><h5 class="title">RESUME</h5>
+              message_html: <i class="icon-bubble-chat-2"></i><h5 class="title">MESSAGE</h5>
+        contents_right_column:
+          title:
+            about_html: <i class="icon-profile-3"></i><span class="text">ABOUT</span>
+            education_html: <i class="icon-academic-cap"></i><span class="text">EDUCATION</span>
+            work_html: <i class="icon-suitcase-1"></i><span class="text">WORK</span>
+          about:
+            contents:
+              location_html: <i class='icon-map-marker-1'></i><span class='text'>%{address}</span>
+              birthday_html: <i class="icon-heart-2"></i><span class="text">%{date_of_birth} (%{age} years old)</span>
+      sidebar:
+        profile_html: <picture class="rounded-full profile_image ease"></picture><span>%{username}</span>
+        profile_text: Profile
+        portfolio_html: <i class="icon-photos-2 ease"></i><span>Portfolio</span>
+        portfolio_text: Portfolio
+        talentShow_html: <i class="icon-diamond ease"></i><span>Talent Show</span></a>
+        talentShow_text: Talent Show
+        blog_html: <i class="icon-newspaper-1 ease"></i><span>Blog</span></a>
+        blog_text: Blog
+        scrap_html: <i class="icon-document-box-3 ease"></i><span>Scrap</span></a>
+        scrap_text: Scrap
+        connections_html: <i class="icon-connection-3 ease"></i><span>Connections</span>
+        connections_text: Connections
+        report_html: <i class="icon-file-graph-2 ease"></i><span>Report</span>
+        report_text: Report
+        logout_html: <i class="icon-log-out-1 ease"></i><span>Logout</span>
+        logout_text: Logout
+        login_html: <i class="icon-user-2 ease"></i><span>Login</span>
+        login_text: Login
   performed:
     posts:
       destroy: Post has been deleted.
       update: Post has been updated.
       create: Post has been created.
   unauthorized:
+    tooltip: Please login first.
     posts:
       index: You are unauthorized to access the entire post page.
       new: You are unauthorized to write a post.
@@ -25,7 +190,6 @@ en:
       edit: You are unauthorized to edit this post.
       update: You are unauthorized to edit this post.
       destroy: You are unauthorized to delete this post.
-
   unfound_locale: is unsupported or does not exist
   login_page:
     sns_connector:
@@ -49,7 +213,7 @@ en:
         male_html: <i class="fa fa-male"></i><span>Male</span>
   logo: WINGSTAR
   instruction:
-    signup_notice_html: 'By clicking the button below, you are agreeting with our <a href="terms">Terms</a> and that you have read our <a href="privacy">Data Use Policy</a>, including our <a href="cookies">Cookie Use.'
+    signup_notice_html: 'By clicking the button below, you are agreeing with our <a href="terms">Terms</a> and that you have read our <a href="privacy">Data Use Policy</a>, including our <a href="cookies">Cookie Use.'
   title:
     signup: "Sign Up"
     login: "Login"
@@ -66,9 +230,11 @@ en:
     signup:
       first_name: "First name"
       last_name: "Last name"
+      username: "Username"
       email: "Email address"
       password: "Password"
     settings:
+      username: "Username"
       first_name: "First name"
       last_name: "Last name"
       email: "Email address"
@@ -81,7 +247,10 @@ en:
     ko: "Korean"
   activerecord:
     attributes:
+      location:
+         address: Address
       user:
+        username: "Username"
         first_name: "Fisrt name"
         last_name: "Last name"
         email: "Email address"

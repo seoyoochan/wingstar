@@ -1,0 +1,162 @@
+/*****************************************************************************
+* Post Styles
+*****************************************************************************/
+#post-new {
+  .contents {
+    .redactor_box {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+
+      .redactor_toolbar {
+        background: none;
+        li {
+
+          a {}
+          a:hover {
+            border-color: transparent;
+          }
+        }
+
+        li.redactor_separator {
+          border-left: 0;
+          border-right: 1px solid #ddd;
+        }
+      }
+
+      .redactor_content {
+      }
+
+    }
+
+
+
+    form {
+      .title, .content, .tags {
+      }
+
+      .title {
+        height: 35px;
+        margin-bottom: 15px;
+      }
+      .content {
+        height: 100%;
+        min-height: 480px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .tags {
+        font-size: 12px;
+      }
+
+      .submit {
+        clear: both;
+        margin-top: 30px;
+        width: 100%;
+        height: 50px;
+      }
+    }
+
+    .back {
+      clear: both;
+      float: right;
+    }
+  }
+}
+
+
+#post-read {
+  .contents_container {
+    .contents_right_column {
+      .contents {
+
+      }
+    }
+    .contents_left_column {
+
+      padding-top: 20px !important;
+      .contents {
+
+        .title {
+          color: rgba(0,0,0,0.8);
+          font-size: 30px;
+          font-weight: 900;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+        .general_info {
+          text-align: center;
+
+          li {margin:0;padding:0;line-height: 30px;}
+
+          .user {
+            display: block;
+            margin-bottom: 30px;
+            .profile_image {
+              width: 80px;
+              height: 80px;
+            }
+          }
+
+          .time, .comment {
+            margin-right: 10px;
+          }
+
+          .time, .comment, .views {
+            display: inline-block;
+          }
+        }
+        .divider {
+          position: relative;
+          margin: 0 auto 20px auto;
+          width: 10%;
+          height: 1px;
+          background: #ddd;
+        }
+        .content {
+          margin-bottom: 20px;
+          color: #777;
+          p{
+            color: #777;
+          }
+        }
+        .bottom {
+
+          clear: both;
+
+          .post_control {
+            font-size: 18px;
+            text-align: right;
+
+            li {
+              display: inline;
+              margin-right: 10px;
+              a {
+                color: #a7a7a7;
+              }
+
+              a.edit_delete:hover {
+                color: rgba(0,0,0,.6);
+              }
+
+              a.share:hover {
+                color: rgba(0,191,255,.8);
+              }
+
+              a.like:hover {
+                color: rgba(255,0,0,.6);
+              }
+
+              a.unlike:hover {
+                color: rgba(0,0,0,.6);
+              }
+            }
+            li:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -11,16 +11,6 @@
     <div class="body">
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-      <% if resource.errors.any? %>
-          <div class="alert alert-danger">
-            <h4><%= pluralize(resource.errors.count, "error") %></h4>
-            <ul>
-              <% resource.errors.full_messages.each do |msg| %> <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-      <% end %>
-
       <div class="email_container">
         <i class="fa fa-envelope-o fa-fw email"></i>
         <%= f.input :email, placeholder: t("placeholder.login.email"), required: true, label: false, wrapper: false, autofocus: true, input_html: { class: "email rounded-3-top-left rounded-3-top-right", "aria-required" => true }  %>
@@ -48,7 +38,7 @@
 
     <div class="footer rounded-3">
         <ul>
-          <li><%= link_to t("login_page.footer.fotgot_password_html"), new_user_password_path %></li>
+          <li><%= link_to t("login_page.footer.fotgot_password_html"), user_password_path %></li>
           <li><%= link_to t("login_page.footer.signup_html"), new_user_registration_path %></li>
         </ul>
     </div>

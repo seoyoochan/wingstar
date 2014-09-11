@@ -1,0 +1,28 @@
+<% content_for :content do %>
+    <div id="locations-show">
+      <div class="contents_container">
+        <section class="contents_full_column">
+          <div class="contents">
+            <p>
+              <strong>Address:</strong>
+              <%= @location.address %>
+            </p>
+
+            <p>
+              <strong>Latitude:</strong>
+              <%= @location.latitude %>
+            </p>
+
+            <p>
+              <strong>Longitude:</strong>
+              <%= @location.longitude %>
+            </p>
+
+            <%= link_to 'Edit', edit_location_path(@location), class: "WS_btn" %>
+            <%= link_to 'Back', :back, class: "WS_btn" %>
+          </div>
+        </section>
+      </div>
+    </div>
+<% end %>
+

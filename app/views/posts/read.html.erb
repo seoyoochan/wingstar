@@ -1,17 +1,69 @@
-<div class='post'>
-  <div class="title">
-    <h3><%= @post.title %></h3>
-  </div>
+<% content_for :content do %>
+<% content_for :title do "#{@post.title}" end %>
+<style type="text/css">
+  <% if @post.user.avatar.url.present? %>
+  .general_info .user .profile_image { background-image: url(<%= @post.user.avatar.url %>); }
+  <% end %>
+</style>
+<div id="post-read">
+  <div class="contents_container">
+    <section class="contents_left_column">
+      <div class="contents">
+        <div class="widget_toggler"><i class="fa fa-angle-right"></i></div>
+        <nav class="general_info">
+          <ul>
+            <li class="user"><%= link_to "<picture class='rounded-full profile_image ease'></picture>".html_safe, "/profile/#{@post.user.username}", class: "default-avatar tooltipOn", data: { :toggle => "tooltip", :placement => "bottom" }, title: "#{name_mapper(@post.user)}" %></li>
+            <li class="time"><i class="fa fa-clock-o"></i><%= @post.created_at.strftime("%Y.%m.%d at %I:%M%P") %></li>
+            <li class="comment"><i class="fa fa-comment"></i>3 <%= t("page.post.action.show.comments") %></li>
+            <li class="views"><i class="fa fa-eye"></i><%= @post.views.count %> <%= t("page.post.action.show.views") %></li>
+          </ul>
+        </nav>
+        <div class="divider"></div>
+        <div class="title">
+          <h3><%= @post.title.titleize %></h3>
+        </div>
+        <div class="divider"></div>
+        <div class="content">
+          <%= raw @post.content %>
+        </div>
+        <div class="bottom">
+          <nav class="post_control">
+            <% if (can? :edit, @post) || (can? :destroy, @post) %><li><a href="#post_<%= @post.id %>_id" class="edit_delete popWindow preventLink" data-container="body"  data-placement="bottom" data-toggle="popover" data-content="
+                      <% if can? :edit, @post %><h3 class='edit title'><a href='<%= edit_post_path(@post) %>'><%= t('page.blog.action.show.post_control.popover.edit') %></a></h3><% end %><% if can? :destroy, @post %><h3 class='delete title'><a href='/posts/<%= @post.id %>' data-confirm='<%= t("system.alert.delete_confirmation") %>' data-method='delete' rel='nofollow'><%= t('page.blog.action.show.post_control.popover.delete') %></a></h3><% end %>"><i class="fa fa-gear"></i></a></li><% end %>
+            <li><%= link_to "#{icon('share')}".html_safe, "#", class: "share tooltipOn ease preventLink", data: { :"toggle-tolltip" => "tooltip", :placement => "top" }, title: t("page.blog.tooltip.share") %></li>
+            <li>
+              <% if signed_in? %>
+                  <%= link_to "#{icon('heart-o')} #{@post.vote_count}".html_safe, unlike_post_path(@post.id), method: :post, class: "unlike preventLink tooltipOn ease", data: { toggle: "tooltip", :placement => "top" }, title: t("votes.tooltip.unlike") if current_user.voted_on?(@post) %>
+                  <%= link_to "#{icon('heart')} #{@post.vote_count}".html_safe, like_post_path(@post.id), method: :post, class: "like preventLink tooltipOn ease", data: { toggle: "tooltip", :placement => "top" }, title: t("votes.tooltip.like") unless current_user.voted_on?(@post) %>
+              <% else %>
+                  <%= link_to "#{icon('heart')} #{@post.vote_count}".html_safe, "#", class: "like preventLink tooltipOn ease", data: { :toggle => "modal", :"toggle-tooltip" => "tooltip", :placement => "top", :target => "#loginModal_container" }, title: t("unauthorized.tooltip") %>
+              <% end %>
+            </li>
+          </nav>
+        </div>
+        <div class="tag_container">
+          <ul>
+            <li><%= link_to t("page.blog.action.show.tag_icon_html"), "#", class: "tag_icon" %></li>
+            <% @post.tags.each do |item| %>
+                <li><%= link_to "#{item.name}".html_safe, "#", class: "tag_item" %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="comments_container">
+          <%= render partial: "comments/form" if signed_in? %>
 
-  <div class="content">
-    <%= simple_format(@post.content, {}, sanitize: true) %>
-  </div>
-
-  <div class="user">
-    <strong><%= @post.user.present? ? @post.user.email : "익명사용자" %></strong>,
-    <%= time_ago_in_words(@post.created_at.in_time_zone) %>
+          <% if @obj.comments.present? && @obj.comments.first.user_id.present? %>
+          <div id="comment_list_container">
+            <ul>
+              <%= render partial: "comments/comment", collection: @obj.root_comments.order("created_at DESC") %>
+            </ul>
+          </div>
+          <% end  %>
+        </div>
+        <%= link_to t("system.text.list"), blog_link_provider(@post.user), class: "WS_btn f-r" %>
+      </div>
+    </section>
+    <%= render "blogs/widget" %>
   </div>
 </div>
-
-<%= link_to '편집', edit_post_path(@post), class: 'btn btn-default' if can? :edit, @post %>
-<%= link_to '뒤로', posts_path, class: 'btn btn-default' %>
+<% end %>

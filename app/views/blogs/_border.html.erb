@@ -1,0 +1,64 @@
+<div id="borderStyle">
+  <div class="widget_toggler"><i class="fa fa-angle-right"></i></div>
+  <% if @parsed_user == current_user %><div class="write rounded-5 ease"><%= link_to t("page.blog.action.show.write_html"), new_post_path %></div><% end %>
+  <div class="owner_mode">
+    <%= t("page.blog.post_size", post_size: "#{@posts.size}") %>
+    <% if (can? :destroy, @posts) %>
+        <div class="select_container"><i class="fa fa-check-circle-o"></i><span class="delete_manager">모두선택</span></div>
+    <% end %>
+  </div>
+  <div class="posts">
+    <%= form_tag destroy_multiple_posts_path, method: :delete, class: "delete_manager_container" do %>
+        <% if (can? :destroy, @posts) %>
+            <%= button_tag(type: "submit", class: "submit_delete_manager WS_btn2 disabled ease", name: "commit", disabled: true, data: { confirm: t("system.alert.delete_confirmation") } ) do %>
+                <i class="fa fa-times"></i><span class="text"><%= t("page.blog.action.show.delete_selected") %></span>
+            <% end %>
+        <% end %>
+        <ul>
+          <% @posts.each do |post| %>
+              <li class="post rounded-5 ease">
+                <h3 class="title"><%= check_box_tag "post_ids[]", post.id, false, id: "post_#{post.id}", class: "delete_item" if (can? :destroy, @posts) %><%= link_to "#{sanitize(truncate(post.title.titleize, length: 100))}", post_path(post) , class: "title ease" %></h3>
+                <nav class="info_summary">
+                  <ul>
+                    <li class="user"><%= link_to "<picture class='rounded-full profile_image ease'></picture>".html_safe, "/profile/#{post.user.username}", class: "default-avatar tooltipOn", data: { :toggle => "tooltip", :placement => "bottom" }, title: "#{name_mapper(post.user)}" %></li>
+                    <li class="time"><i class="fa fa-clock-o"></i><%= post.created_at.strftime("%Y.%m.%d at %I:%M%P") %></li>
+                  </ul>
+                </nav>
+                <div class="content">
+                  <%= post.content.html_safe %>
+                </div>
+                <%= link_to t("page.blog.action.show.more_html"), post_path(post), class: "readMore" %>
+                <div class="bottom">
+                  <nav class="post_control">
+                    <% if (can? :edit, post) || (can? :destroy, post) %><li><a href="#" class="edit_delete popWindow preventLink" data-container="body"  data-placement="bottom" data-toggle="popover" data-content="
+                      <% if can? :edit, post %><h3 class='edit title'><a href='<%= edit_post_path(post) %>'><%= t('page.blog.action.show.post_control.popover.edit') %></a></h3><% end %><% if can? :destroy, post %><h3 class='delete title'><a href='/posts/<%= post.id %>' data-confirm='<%= t("system.alert.delete_confirmation") %>' data-method='delete' rel='nofollow'><%= t('page.blog.action.show.post_control.popover.delete') %></a></h3><% end %>"><i class="fa fa-gear"></i></a></li><% end %>
+                    <li><%= link_to "#{icon('share')}".html_safe, "#", class: "share tooltipOn ease preventLink", data: { :"toggle-tolltip" => "tooltip", :placement => "top" }, title: t("page.blog.tooltip.share") %></li>
+                    <li>
+                      <% if signed_in? %>
+                          <%= link_to "#{icon('heart-o')} #{post.vote_count}".html_safe, unlike_post_path(post.id), method: :post, class: "unlike preventLink tooltipOn ease", data: { toggle: "tooltip", :placement => "top" }, title: t("votes.tooltip.unlike") if current_user.voted_on?(post) %>
+                          <%= link_to "#{icon('heart')} #{post.vote_count}".html_safe, like_post_path(post.id), method: :post, class: "like preventLink tooltipOn ease", data: { toggle: "tooltip", :placement => "top" }, title: t("votes.tooltip.like") unless current_user.voted_on?(post) %>
+                      <% else %>
+                          <%= link_to "#{icon('heart')} #{post.vote_count}".html_safe, "#", class: "like preventLink tooltipOn ease", data: { :toggle => "modal", :"toggle-tooltip" => "tooltip", :placement => "top", :target => "#loginModal_container" }, title: t("unauthorized.tooltip") %>
+                      <% end %>
+                    </li>
+                  </nav>
+                  <div class="tag_container">
+                    <ul>
+                      <li><%= link_to t("page.blog.action.show.tag_icon_html"), "#", class: "tag_icon" %></li>
+                      <% post.tags.each do |item| %>
+                          <li><%= link_to "#{item.name}".html_safe, "#", class: "tag_item" %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <div class="attachment_container">
+                  </div>
+                </div>
+              </li>
+          <% end %>
+        </ul>
+    <% end %>
+    <div class="pagination_container">
+      <%= will_paginate @posts, renderer: BootstrapPagination::Rails, previous_label: "<", next_label: ">" %>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,0 @@
-<% content_for :title, t("page.home.browser_title") %>
-
-<% if signed_in? %>
-  <%= render "layouts/dashboard" %>
-<% else %>
-  <%= render "layouts/reading" %>
-<% end %>

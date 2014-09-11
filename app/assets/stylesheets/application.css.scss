@@ -12,15 +12,22 @@
  *************************************************************************************************
  * Library
  *************************************************************************************************
- *= require font-awesome
  *= require lib/bootstrap
- * require lib/icheck_skins/flat/green
- *= require lib/icheck_skins/polaris/polaris
+ *= require font-awesome
+ *= require lib/pace/themes/pace-theme-flash
+ *= require lib/jquery.shiftenter
+// *= require lib/icheck_skins/flat/green
+// *= require lib/icheck_skins/polaris/polaris
  *************************************************************************************************
- *= require style
+ *= require wingstar
  *= require responsive
- *= require posts
+ *= require post
  *= require home
+ *= require blog
+ *= require profile
+ *= require settings
+ *= require redactor-rails
+ *= require comments
  *= require_self
  */
 

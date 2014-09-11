@@ -1,0 +1,26 @@
+ko:
+  simple_form:
+    "yes": '예'
+    "no": '아니오'
+    required:
+      text: '필수'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      html: ''
+    error_notification:
+      default_message: "다음에 문제가 있군요, 검토해주세요:"
+    # Labels and hints examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+

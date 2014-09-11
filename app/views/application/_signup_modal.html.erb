@@ -20,6 +20,11 @@
             <%= f.input :last_name, placeholder: t("placeholder.signup.last_name"), required: true, label: false, wrapper: false, input_html: { class: "last_name" }, "aria-required" => true, error: false %>
           </div>
 
+          <div class="username_container">
+            <i class="fa fa-user username"></i>
+            <%= f.input :username, placeholder: t("placeholder.signup.username"), required: true, label: false, wrapper: false, input_html: { class: "username" }, "aria-required" => true, error: false %>
+          </div>
+
           <div class="email_container">
             <i class="fa fa-envelope-o fa-fw email"></i>
             <%= f.input :email, placeholder: t("placeholder.signup.email"), required: true, label: false, wrapper: false, input_html: { class: "email" }, "aria-required" => true, error: false  %>

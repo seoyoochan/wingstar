@@ -1,7 +1,75 @@
 ko:
+  comment:
+    comment_control:
+      edit: • 편집
+      reply: • 답글
+      like: • 좋아요
+      unlike: • 좋아요 취소
+    placeholder:
+      line_break: "Shift+Enter: 행바꿈 / Enter: 전송"
+  flash:
+    comment:
+      success_update: 댓글이 편집되었습니다.
+      success_destroy: 댓글이 삭제되었습니다.
+    cover:
+      empty_attachment: 사진을 첨부해주세요.
+      success_upload: 커버 사진이 업로드 되었습니다.
+      success_destroy: 커버 사진이 삭제 되었습니다.
+      error_destroy: 커버 사진이 없습니다.
+  votes:
+    tooltip:
+      like: 좋아요!
+      unlike: 음..별로 마음에 안들어요
+    warning:
+      like: 이미 좋아합니다.
+      unlike: 이미 마음에 들지 않습니다.
+  system:
+    text:
+      back: 뒤로
+      cancel: 취소
+      submit: 등록
+      list: 목록
+      save: 저장
+      edit: 편집
+      open_map: 지도 보기
+      select_all: 모두 선택
+      cancel_select_all: 선택 취소
+    alert:
+      delete_confirmation: 정말 삭제하시겠습니까?
+  default_state:
+    job: "직업 추가"
+    description: "자기소개 추가"
+    birthday_html: <i class="icon-heart-2"></i><span class="text">생일 추가</span>
+    phone: "휴대폰 번호 추가"
+    website: "웹사이트 추가"
+    location_html: <i class='icon-map-marker-1'></i><span class='text'>위치 추가</span>
   page:
-    home:
-      browser_title: 윙스타
+    profile:
+      page_title: "%{user} 프로필"
+    settings:
+      avatar:
+        title: 프로필 사진
+        submit: 사진 업로드
+      page_title: 계정 설정
+      submit: 변경 내용 저장
+      cancel_button: 회원 탈퇴하기
+      tab_name:
+        general: 일반
+        notifications: 알림
+        security: 보안
+        cancel: 탈퇴
+        sns_connect: SNS 연결
+      sns_connect:
+        connected: 이미 연결되었습니다
+        title_html: <i class="fa fa-sun-o"></i>SNS 연동하기
+        twitter_html: <i class="fa fa-twitter"></i>Twitter
+        facebook_html: <i class="fa fa-facebook"></i>Facebook
+        google_html: <i class="fa fa-google-plus"></i>Google
+        linkedin_html: <i class="fa fa-linkedin-square"></i>LinkedIn
+        github_html: <i class="fa fa-github-square"></i>Github
+    intro:
+      page_title: 홈
+      browser_title: Wingstar
       login: 로그인
       signup: 회원가입
       top_nav:
@@ -11,12 +79,107 @@ ko:
         privacy: 개인정보
         cookies: 쿠키사용
         help: 도움말
+    post:
+      action:
+        show:
+          postNum: "%{number}번째 글"
+          comments: 댓글
+          views: 명이 읽음
+        new:
+          form:
+            title:
+              placeholder: 제목
+            content:
+              placeholder: 새로운 아이디어가 떠올랐나요?
+            tags:
+              placeholder: "태그를 입력하실 수 있습니다. (예: 윙스타,블로그)"
+    blog:
+      post_size: "총 %{post_size}개의 글"
+      widget:
+        title:
+          tag_cloud_html: <i class="fa fa-tags"></i><span class="text">태그 클라우드</span>
+      page_title: "%{blog_title} 블로그"
+      tooltip:
+        share: 공유하기!
+      action:
+        new:
+          placeholder: 사용할 블로그명을 입력해주세요.
+        show:
+          delete_selected: 선택한 글 삭제
+          tag_icon_html: <i class='fa fa-tag'></i>
+          blog_empty: 찾으시는 블로그가 없거나 해당 사용자는 블로그를 이용중이 아닙니다.
+          more_html: 더보기 <span><i class="fa fa-angle-right"></i></span>
+          write_html: <i class='fa fa-pencil'></i><span class='text'>글쓰기</span>
+          post_control:
+            popover:
+              edit: 편집
+              delete: 삭제
+        create:
+          success: "%{user}님의 블로그가 생성되었습니다!"
+          error: "%{user}님은 이미 블로그를 생성했습니다."
+    dashboard:
+      page_title: 대쉬보드
+      logo_text: WINGSTAR
+      userControlPanel:
+        notice_html: <i class="fa fa-bullhorn ease"></i><span>윙스타팀은 뭘하고 있을까요?</span>
+        read_blog: 훔쳐보기!
+        logout_html: <i class="icon-log-out-1 ease"></i><span>Logout</span>
+      full_profile:
+        cover:
+          photo_update: 커버 사진 바꾸기
+          photo_upload: 사진 업로드
+          remove_photo_html: <i class="fa fa-times"></i><span class="text">사진 삭제</span>
+          connect:
+            follow: 팔로우
+            following: 팔로잉
+            add_friend: 친구신청
+            frieind_request_sent: 친구신청중
+            cancel_request_request: 친구신청취소
+            friended: 친구
+          bottom_nav:
+            left:
+              followers_html: <h5 class="title">팔로워</h5><span class="content">%{content}</span></a>
+              following_html: <h5 class="title">팔로잉</h5><span class="content">%{content}</span></a>
+              friends_html: <h5 class="title">친구들</h5><span class="content">%{content}</span></a>
+            right:
+              ask_html: <i class="icon-bubble-ask-2"></i><h5 class="title">질문하기</h5>
+              resume_html: <i class="icon-document-1"></i><h5 class="title">이력서</h5>
+              message_html: <i class="icon-bubble-chat-2"></i><h5 class="title">메세지</h5>
+        contents_right_column:
+          title:
+            about_html: <i class="icon-profile-3"></i><span class="text">정보</span>
+            education_html: <i class="icon-academic-cap"></i><span class="text">학력</span>
+            work_html: <i class="icon-suitcase-1"></i><span class="text">경력</span>
+          about:
+            contents:
+              location_html: <i class='icon-map-marker-1'></i><span class='text'>%{address}</span>
+              birthday_html: <i class="icon-heart-2"></i><span class="text">%{date_of_birth} (%{age}세)</span>
+      sidebar:
+        profile_html: <picture class="rounded-full profile_image ease"></picture><span>%{username}</span>
+        profile_text: 프로필
+        portfolio_html: <i class="icon-photos-2 ease"></i><span>포트폴리오</span>
+        portfolio_text: 포트폴리오
+        talentShow_html: <i class="icon-diamond ease"></i><span>탤런트쇼</span></a>
+        talentShow_text: 탤런트쇼
+        blog_html: <i class="icon-newspaper-1 ease"></i><span>블로그</span></a>
+        blog_text: 블로그
+        scrap_html: <i class="icon-document-box-3 ease"></i><span>스크랩</span></a>
+        scrap_text: 스크랩
+        connections_html: <i class="icon-connection-3 ease"></i><span>관계도</span>
+        connections_text: 관계도
+        report_html: <i class="icon-file-graph-2 ease"></i><span>리포트</span>
+        report_text: 리포트
+        logout_html: <i class="icon-log-out-1 ease"></i><span>로그아웃</span>
+        logout_text: 로그아웃
+        login_html: <i class="icon-user-2 ease"></i><span>로그인</span>
+        login_text: 로그인
   performed:
     posts:
       destroy: 포스트가 삭제되었습니다.
       update: 포스트가 수정되었습니다.
       create: 포스트가 작성되었습니다.
   unauthorized:
+    tooltip: 로그인을 해주세요.
     posts:
       index: 전체 포스트 페이지에 접근할 권한이 없습니다.
       new: 포스트를 작성할 권한이 없습니다.
@@ -65,9 +228,11 @@ ko:
     signup:
       first_name: "이름"
       last_name: "성"
+      username: "아이디"
       email: "이메일"
       password: "비밀번호"
     settings:
+      username: "아이디"
       first_name: "이름"
       last_name: "성"
       email: "이메일"
@@ -80,7 +245,10 @@ ko:
     ko: "한국어"
   activerecord:
     attributes:
+      location:
+        address: 주소
       user:
+        username: "아이디"
         first_name: "이름"
         last_name: "성"
         email: "이메일주소"

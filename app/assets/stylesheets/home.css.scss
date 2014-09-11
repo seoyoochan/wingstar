@@ -1,15 +1,3 @@
-
-/* Scroll Effects */
-.hidden{
-  opacity: 0;
-}
-
-.visible{
-  opacity: 1;
-}
-
-.icon-bar { background: #fff; width: 30px !important; height: 4px !important; }
-
 #main {
   text-align: center;
   height: 100%;
@@ -21,8 +9,6 @@
     top: 0;
     left: 0;
   }
-
-
 
   .logo {
     position: relative;
@@ -61,7 +47,7 @@
       margin: 0;
       padding: 0;
       display: block;
-      color: #aaa;
+      color: rgba(255,255,255,0.5);
       font-size: 25px;
       font-style: italic;
       font-family: "Noto Serif", sans-serif;
@@ -97,13 +83,13 @@
 
       .login {
         margin: 40px 0 15px 0;
-        background: rgba(21,29,32, 1.0);
+        background: rgba(21,29,32,1);
         border: 3px solid #007194;
         a { color: #fff; }
       }
 
       .login:hover {
-        background: rgba(66,180,214,0.2);
+        background: #007194;
       }
 
       .signup {
@@ -113,34 +99,50 @@
       }
 
       .signup:hover {
-        background: rgba(255,255,255,0.2);
+
+        background: rgba(255,255,255,1);
+        a { color: rgba(21,29,32, 1.0); }
       }
     }
   }
 
-  nav {
-    font-size: 14px;
-    left:50%;
-    bottom: 0;
-    position:relative;
+  .footer {
+    position: relative;
+    margin: 0;
+    padding: 0px 0 50px 0;
 
-    ul {
-      width:500px;
-      margin-left:-250px;
-      height:100%;
-      text-align:center;
-      max-width:500px;
-      max-height:500px;
+    nav {
+      font-size: 14px;
+      display: table;
+      margin: 0 auto 15px auto;
+      position: relative;
+
+      ul {
+        text-align: center;
+        display: block;
+
+        li {
+          display: inline-block;
+          margin: 0;
+          padding: 0 6px 0 0;
+          text-transform: capitalize;
+          a { color: #fff; }
+          a:hover{ background: none; color: #999; }
+        }
+
+        li:last-child {
+          padding: 0;
+        }
+      }
     }
 
-    ul li {
-      display: inline;
-      text-align: inherit;
-      margin: 0 6px 0 0;
-      padding: 0;
-      text-transform: capitalize;
-      a { color: #fff; }
-      a:hover{ background: none; color: #999; }
+    .copyright {
+      font-size: 12px;
+      position: relative;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #fff;
     }
   }
 
@@ -158,9 +160,8 @@
 * Tablet
 ******************************************************************************/
 @media (max-width: 768px) {
- nav {
 
- }
+
 }
 
 
@@ -168,7 +169,21 @@
 * Usual Mobile
 ******************************************************************************/
 @media (max-width: 480px) {
+  #main {
+    .footer {
 
+      nav {
+        font-size: 12px;
+      }
+      nav ul li {
+        margin: 0;
+        padding: 0;
+      }
+      .copyright {
+        font-size: 11px !important;
+      }
+    }
+  }
 }
 
 /******************************************************************************

@@ -1,0 +1,411 @@
+/*****************************************************************************
+* Blog Layout
+*****************************************************************************/
+#blog-show {
+
+  .contents_container {
+
+    .contents_left_column {
+      width: 85% !important;
+      padding: 0px 0 60px 0 !important;
+      margin: 0 0 0 0 !important;
+      border-top: 0 !important;
+      .contents {
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 100%;
+        min-height: 800px;
+
+      }
+
+      .post_form {
+        margin: 0;
+        padding: 0;
+      }
+
+    }
+
+    .contents_right_column {
+      width: 15% !important;
+
+      .contents {
+
+      }
+
+
+    }
+  }
+}
+
+#blog-new {
+  .contents_container {
+    .contents_full_column {
+      height: 100vh;
+      .contents {
+        margin: 0 auto;
+        padding: 20px 20px 60px 20px;
+        .blog_address {
+          margin-bottom: 10px;
+        }
+        .blog_title {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+.popover {
+
+  h3.title {
+    font-weight: normal;
+  }
+
+  h3.edit {
+    margin-bottom: 10px;
+  }
+
+
+  h3.edit a, h3.delete a { color: #777; }
+}
+
+
+/*****************************************************************************
+* Blog Show Styles
+*****************************************************************************/
+#borderlessStyle {
+
+  .posts {
+
+    li:hover {
+      background-color: #fafafa;
+      .post_control {
+        display: block !important;
+      }
+    }
+
+    li {
+      padding: 20px 0;
+      margin: 0;
+      border-bottom: 1px solid #ddd;
+
+      .general_info {
+        clear: both;
+        float: left;
+        width: 21%;
+        padding: 0;
+        margin: 0;
+        display: block;
+
+        ul {
+          li {
+            clear: both;
+            display: block;
+            float: right;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+          }
+          li.user {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+
+            .profile_image {
+              width: 60px;
+              height: 60px;
+            }
+          }
+          li.date, li.time, li.comments, li.likes {
+            margin-bottom: 5px;
+            font-size: 11px;
+            letter-spacing: -0.5px;
+          }
+        }
+
+      }
+
+      .post_info {
+        width: 79%;
+        float: left;
+        display: block;
+        margin: 0;
+        padding: 0 20px 0 20px;
+
+        .title {
+          margin-bottom: 10px;
+        }
+
+        .title a {
+          font-size: 25px;
+          font-weight: 900;
+        }
+        .content {
+          font-size: 14px;
+          color: #777;
+          margin-bottom: 10px;
+        }
+        .post_control {
+          display: none;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 120px;
+          font-size: 18px;
+          float: right;
+          text-align: right;
+          padding: 0;
+          margin: 10px 0 0 0;
+
+          li {
+            display: inline !important;
+            margin: 0 10px 0 0 !important;
+            padding: 0 !important;
+            border: 0 !important;
+            a {
+              color: #a7a7a7;
+            }
+
+            a.edit_delete:hover {
+              color: rgba(0,0,0,.6);
+            }
+
+            a.share:hover {
+              color: rgba(0,191,255,.8);
+            }
+
+            a.like:hover {
+              color: rgba(255,0,0,.6);
+            }
+
+            a.unlike:hover {
+              color: rgba(0,0,0,.6);
+            }
+          }
+          li:last-child {
+            margin-right: 0;
+          }
+        }
+        .tag_container {
+          width: 85% !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          border: 0 !important;
+          ul {
+
+            li {
+              clear: both !important;
+              display: inline !important;
+              padding: 0 !important;
+              margin: 0 !important;
+              border: 0 !important;
+              float: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+#borderStyle {
+  .blog_title {
+    color: #333;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .btn_write {
+    display: none;
+  }
+
+  .write {
+    float: right;
+    margin: 0 0 20px 0;
+    padding: 5px 5px 7px 5px;
+    width: 80px;
+    background-color: rgba(0,180,218,.7);
+    text-align: center;
+
+    a {
+      color: rgba(255,255,255,1);
+      i {
+        position: relative;
+        top: 3px;
+        margin-right: 7px;
+        font-size: 18px;
+      }
+      .text { font-size: 14px; font-weight: bold; }
+    }
+  }
+
+  .write:hover {
+    background-color: rgba(0,180,218,1);
+  }
+
+  .owner_mode {
+    font-size: 12px;
+    float: left;
+  }
+
+  .posts {
+    margin-top: 50px;
+    padding: 0;
+    clear: both;
+
+    .post {
+      clear: both;
+      margin-top: 15px;
+      padding: 20px;
+      border: 1px solid gainsboro;
+      background-color: #fff;
+      background-clip: padding-box;
+      word-wrap: break-word;
+
+      .title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .content, .content p {
+        font-size: 14px;
+        line-height: 1.5em;
+      }
+
+      .readMore {
+        position: relative;
+        float: right;
+        height: 35px;
+        padding: 0 14px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-size: 12px;
+        color: rgba(0,0,0,0.44);
+        background-color: rgba(0,0,0,0);
+        border: 1px solid #ddd;
+        text-align: center;
+        line-height: 32px;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+        cursor: pointer;
+        text-rendering: optimizeLegibility;
+        border-radius: 30px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+
+        span {
+          margin-left: 5px;
+        }
+      }
+
+      .readMore:hover {
+        color: rgba(0,180,218,1);
+        border-color: rgba(0,180,218,1);
+      }
+
+      .bottom {
+
+        clear: both;
+
+        .post_control {
+          font-size: 18px;
+          text-align: right;
+
+          li {
+            display: inline;
+            margin-right: 10px;
+            a {
+              color: #a7a7a7;
+            }
+
+            a.edit_delete:hover {
+              color: rgba(0,0,0,.6);
+            }
+
+            a.share:hover {
+              color: rgba(0,191,255,.8);
+            }
+
+            a.like:hover {
+              color: rgba(255,0,0,.6);
+            }
+
+            a.unlike:hover {
+              color: rgba(0,0,0,.6);
+            }
+          }
+          li:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    .post:hover {
+      border: 1px solid rgba(0,180,218,1);
+    }
+  }
+}
+
+/******************************************************************************
+* Tablet
+******************************************************************************/
+@media (max-width: 768px) {
+ #blog-show {
+   .contents {
+
+     #borderStyle {
+       .write {
+         width: 70px !important;
+         a > i { top: 2px !important; font-size: 16px !important; }
+         .text { font-size: 12px !important; }
+       }
+
+       .post {
+         .title {
+           font-size: 22px !important;
+         }
+       }
+     }
+
+   }
+ }
+
+}
+
+@media (max-width: 600px) {
+
+}
+
+
+/******************************************************************************
+* Usual Mobile
+******************************************************************************/
+@media (max-width: 480px) {
+  #blog-show {
+    .contents {
+
+      width: 100% !important;
+
+      #borderStyle {
+        .post {
+          .title {
+          }
+
+        }
+      }
+
+    }
+  }
+
+  #blog-new {
+    .contents {
+
+      form {
+        input { font-size: 14px !important; }
+      }
+    }
+  }
+}

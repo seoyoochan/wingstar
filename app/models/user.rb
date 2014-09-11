@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
   include ApplicationHelper
+  include UsersHelper
+  acts_as_tagger
+  acts_as_ordered_taggable
+  acts_as_ordered_taggable_on :skills, :interests
+  acts_as_voter
 
   rolify
   after_create :set_default_roles, if: Proc.new { User.count > 0 }
@@ -10,7 +15,22 @@ class User < ActiveRecord::Base
 
   has_many :posts, dependent: :destroy
   has_many :authorizations, dependent: :destroy
+  has_many :blogs, dependent:  :destroy
+  has_one :profile, dependent:  :destroy
+  has_one :location, dependent: :destroy
+  has_many :highschools, dependent: :destroy
+  has_many :colleges, dependent: :destroy
+  has_many :views, as: :viewable
 
+  # User.latest.male.username
+  scope :id, -> { select("id") }
+  scope :username, -> { select("username") }
+  scope :male, -> { where(:gender => "male") }
+  scope :female, -> { where(:gender => "female") }
+  scope :latest, -> { order("last_sign_in_at desc") }
+  # scope :by_id, ->(id) {where (:id => id)} # put some params into a named scope
+
+  mount_uploader :avatar, AvatarUploader
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -22,6 +42,9 @@ class User < ActiveRecord::Base
   validates :locale, presence: true
   validates :gender, presence: true
   validates :agreement, presence: true
+  validates :username, presence: true
+  validates :username, uniqueness: { :case_sensitive => false, :allow_blank => false }
+
 
   # Skip 'current password' requirement
   def update_with_password(params={})
@@ -103,18 +126,18 @@ class User < ActiveRecord::Base
   def self.signup_by_facebook(auth, identity)
     logger.debug " * signup_by_facebook 시작 "
     user = User.new
-    user.password = Devise.friendly_token[0,20]
-    user.email = auth.info.email
-    user.agreement = 1
-    user.confirmed_at = Time.now
-    user.name = auth.info.name
-    user.username = auth.info.name
-    user.first_name = auth.info.first_name
-    user.last_name = auth.info.last_name
-    user.locale = fb_locales_available(auth.extra.raw_info.locale)
-    user.gender = auth.extra.raw_info.gender
+    # user.password = Devise.friendly_token[0,20]
+    # user.email = auth.info.email
+    # user.agreement = 1
+    # user.confirmed_at = Time.now
+    user.name = auth.info.name if auth.info.name
+    # user.username = auth.info.name if auth.info.name
+    user.first_name = auth.info.first_name if auth.info.first_name
+    user.last_name = auth.info.last_name if auth.info.last_name
+    user.locale = fb_locales_available(auth.extra.raw_info.locale) if auth.extra.raw_info.locale
+    user.gender = auth.extra.raw_info.gender if auth.extra.raw_info.gender
     user.facebook_account_url = auth.info.urls.Facebook
-    user.profile_image = auth.info.image
+    user.profile_image = auth.info.image if auth.info.image
     user.skip_confirmation_notification!
     user.save(validate: false)
     identity.username = user.name
@@ -126,18 +149,18 @@ class User < ActiveRecord::Base
   def self.signup_by_google_oauth2(auth, identity)
     logger.debug " * signup_by_google_oauth2 시작 "
     user = User.new
-    user.password = Devise.friendly_token[0,20]
-    user.agreement = 1
-    user.confirmed_at = Time.now
-    user.name = auth.info.name
-    user.email = auth.info.email
-    user.first_name = auth.info.first_name
-    user.last_name = auth.info.last_name
-    user.profile_image = auth.info.image
+    # user.password = Devise.friendly_token[0,20]
+    # user.agreement = 1
+    # user.confirmed_at = Time.now
+    user.name = auth.info.name if auth.info.name
+    # user.email = auth.info.email if auth.info.email
+    user.first_name = auth.info.first_name if auth.info.first_name
+    user.last_name = auth.info.last_name if auth.info.last_name
+    user.profile_image = auth.info.image if auth.info.image
     user.googleplus_account_url = auth.extra.raw_info.profile
-    user.gender = auth.extra.raw_info.gender
-    user.date_of_birth = auth.extra.raw_info.birthday
-    user.locale = auth.extra.raw_info.locale
+    user.gender = auth.extra.raw_info.gender if auth.extra.raw_info.gender
+    user.date_of_birth = auth.extra.raw_info.birthday if auth.extra.raw_info.birthday
+    user.locale = auth.extra.raw_info.locale if auth.extra.raw_info.locale
     user.skip_confirmation_notification!
     user.save(validate: false)
     identity.username = auth.info.name
@@ -152,21 +175,21 @@ class User < ActiveRecord::Base
 
   def self.signup_by_linkedin(auth, identity)
     user = User.new
-    user.password = Devise.friendly_token[0,20]
-    user.agreement = 1
-    user.confirmed_at = Time.now
-    user.email = auth.info.email
-    user.name = auth.info.name
-    user.first_name = auth.info.first_name
-    user.last_name = auth.info.last_name
-    user.username = auth.info.nickname
-    user.location = auth.info.location
-    user.profile_image = auth.info.image
-    user.about = auth.info.description
-    user.industry = auth.info.industry
-    user.phone = auth.info.phone
+    # user.password = Devise.friendly_token[0,20]
+    # user.agreement = 1
+    # user.confirmed_at = Time.now
+    # user.email = auth.info.email if auth.info.email
+    user.name = auth.info.name if auth.info.name
+    user.first_name = auth.info.first_name if auth.info.first_name
+    user.last_name = auth.info.last_name if auth.info.last_name
+    # user.username = auth.info.nickname if auth.info.nickname
+    user.address = auth.info.location if auth.info.location
+    user.profile_image = auth.info.image if auth.info.image
+    user.description = auth.info.description if auth.info.description
+    user.job = auth.info.industry if auth.info.industry
+    user.phone = auth.info.phone if auth.info.phone
     user.linkedin_account_url = auth.info.urls.public_profile
-    user.locale = linkedin_locales_available(auth.extra.raw_info.location.country.code)
+    user.locale = linkedin_locales_available(auth.extra.raw_info.location.country.code) if auth.extra.raw_info.location.country.code
     user.skip_confirmation_notification!
     user.save(validate: false)
     identity.username = auth.info.name
@@ -179,15 +202,15 @@ class User < ActiveRecord::Base
     user = User.new
     user.password = Devise.friendly_token[0,20]
     user.agreement = 1
-    user.name = auth.info.name
-    user.username = auth.info.nickname
-    user.location = auth.info.location
-    user.profile_image = auth.info.image
-    user.about = auth.info.description
-    user.website = auth.info.urls.Website
+    user.name = auth.info.name if auth.info.name
+    # user.username = auth.info.nickname if auth.info.nickname
+    user.address = auth.info.location if auth.info.location
+    user.profile_image = auth.info.image if auth.info.image
+    user.description = auth.info.description if auth.info.description
+    user.website = auth.info.urls.Website if auth.info.urls.Website
     user.twitter_account_url = auth.info.urls.Twitter
-    user.locale = tw_locales_available(auth.extra.lang)
-    user.email = "#{auth.uid}@#{auth.provider}.com" if user.email.blank?
+    user.locale = tw_locales_available(auth.extra.lang) if auth.extra.lang
+    # user.email = "#{auth.uid}@#{auth.provider}.com" if user.email.blank?
     user.skip_confirmation!
     user.save(validate: false)
     identity.username = auth.info.nickname
@@ -200,13 +223,13 @@ class User < ActiveRecord::Base
   def self.sns_crawling(user, auth, identity)
     if auth.provider == "facebook"
       user.name = auth.info.name if auth.info.name
-      user.email = auth.info.email if auth.info.email
+      # user.email = auth.info.email if auth.info.email
       user.username = auth.info.nickname if auth.info.nickname
       user.first_name = auth.info.first_name if auth.info.first_name
       user.last_name = auth.info.last_name if auth.info.last_name
       user.locale = fb_locales_available(auth.extra.raw_info.locale) if auth.extra.raw_info.locale
       user.gender = auth.extra.raw_info.gender if auth.extra.raw_info.gender
-      user.location = auth.info.location if auth.info.location
+      user.address = auth.info.location if auth.info.location
       user.facebook_account_url = auth.info.urls.Facebook if auth.info.urls.Facebook
       user.profile_image = auth.info.image if auth.info.image
       identity.username = user.username
@@ -218,10 +241,10 @@ class User < ActiveRecord::Base
 
     if auth.provider == "twitter"
       user.name = auth.info.name if auth.info.name
-      user.username = auth.info.nickname if auth.info.nickname
-      user.location = auth.info.location if auth.info.location
+      # user.username = auth.info.nickname if auth.info.nickname
+      user.address = auth.info.location if auth.info.location
       user.profile_image = auth.info.image if auth.info.image
-      user.about = auth.info.description if auth.info.description
+      user.description = auth.info.description if auth.info.description
       user.website = auth.info.urls.Website if auth.info.urls.Website
       user.twitter_account_url = auth.info.urls.Twitter if auth.info.urls.Twitter
       user.locale = tw_locales_available(auth.extra.lang) if auth.extra.lang
@@ -234,7 +257,7 @@ class User < ActiveRecord::Base
 
     if auth.provider == "google_oauth2"
       user.name = auth.info.name if auth.info.name
-      user.email = auth.info.email if auth.info.email
+      # user.email = auth.info.email if auth.info.email
       user.first_name = auth.info.first_name if auth.info.first_name
       user.last_name = auth.info.last_name if auth.info.last_name
       user.profile_image = auth.info.image if auth.info.image
@@ -254,14 +277,14 @@ class User < ActiveRecord::Base
     end
 
     if auth.provider == "linkedin"
-      user.email = auth.info.email if auth.info.email
+      # user.email = auth.info.email if auth.info.email
       user.name = auth.info.name if auth.info.name
       user.first_name = auth.info.first_name if auth.info.first_name
       user.last_name = auth.info.last_name if auth.info.last_name
-      user.username = auth.info.nickname if auth.info.nickname
-      user.location = auth.info.location if auth.info.location
+      # user.username = auth.info.nickname if auth.info.nickname
+      user.address = auth.info.location if auth.info.location
       user.profile_image = auth.info.image if auth.info.image
-      user.about = auth.info.description if auth.info.description
+      user.description = auth.info.description if auth.info.description
       user.linkedin_account_url = auth.info.urls.public_profile if auth.info.urls.public_profile
       user.locale = linkedin_locales_available(auth.extra.raw_info.location.country.code) if auth.extra.raw_info.location.country.code
       identity.username = user.username
@@ -278,8 +301,6 @@ class User < ActiveRecord::Base
     identity.user.save(validate: false)
     identity.user
   end
-
-
 
   private
   def set_default_roles

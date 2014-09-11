@@ -1,21 +1,34 @@
 class PostsController < ApplicationController
 
-  before_action :set_post, only: [:read, :edit, :update, :destroy]
+  before_action :set_post, except: [:index, :new, :create, :destroy_multiple, :post_modal_form]
   before_filter :authenticate_user!, except: [:index, :read]
   load_and_authorize_resource
 
   def index
-    @posts = Post.paginate(:page => params[:page], :per_page => 100).order('created_at desc')
+    @posts = Post.paginate(:page => params[:page], :per_page => 10).order('created_at DESC')
   end
 
   def read
-    @posts = Post.paginate(:page => params[:page], :per_page => 10).order('created_at desc')
     @post = Post.find(params[:id])
+    @obj = @post
+    @comment = Comment.build_from(@obj, current_user.id, "")
+    @all_comments = @obj.comment_threads
+
+    # Count Views
+    if signed_in?
+      @post.views.create(user_id: current_user.id, created_at: Time.now, updated_at: Time.now, ip: current_user.current_sign_in_ip) if (@post.views.where(user_id: current_user.id).blank?) && (@post.views.where(ip: current_user.current_sign_in_ip).blank?)
+    else
+      @post.views.create(user_id: @cached_guest_user.id, created_at: Time.now, updated_at: Time.now, ip: guest_user.current_sign_in_ip) if (@post.views.where(user_id: @cached_guest_user.id).blank?) && (@post.views.where(ip: @cached_guest_user.current_sign_in_ip).blank?)
+    end
+
+    if request.path != post_path(@post)
+      redirect_to @post, status: :moved_permanently
+    end
   end
 
-
-  def newS
+  def new
     @post = Post.new
+    @post.attachments.build
   end
 
 
@@ -23,15 +36,16 @@ class PostsController < ApplicationController
 
   end
 
-
   def create
     @post = Post.new(post_params)
+    @post.blog_id = current_user.blogs.first.id if current_user.blogs.any?
     @post.user = current_user
 
     respond_to do |format|
       if @post.save
         flash[:success] = t("performed.posts.create")
-        format.html { redirect_to posts_url }
+
+        format.html { redirect_to blog_show_path(current_user.username) }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { render action: 'new' }
@@ -56,9 +70,43 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
+
     respond_to do |format|
       flash[:alert] = t("performed.posts.destroy")
-      format.html { redirect_to posts_url }
+      format.html { redirect_to blog_show_path(current_user.username) }
+      format.json { head :no_content }
+    end
+  end
+
+  def like
+    if current_user.voted_on?(@post)
+      flash[:warning] = "이미 좋아합니다."
+      # redirect_to "/blog/#{current_user.username}"
+    else
+      current_user.vote_for(@post)
+      # redirect_to "/blog/#{current_user.username}"
+      redirect_to :back
+    end
+  end
+
+  def unlike
+    if current_user.voted_on?(@post)
+      current_user.unvote_for(@post)
+      # redirect_to "/blog/#{current_user.username}"
+      redirect_to :back
+    else
+      flash[:warning] = "이미 좋아하지 않습니다."
+      # redirect_to "/blog/#{current_user.username}"
+    end
+  end
+
+  def destroy_multiple
+
+    Post.where(id: params[:post_ids]).delete_all
+
+    respond_to do |format|
+      flash[:alert] = t("performed.posts.destroy")
+      format.html { redirect_to blog_show_path(current_user.username) }
       format.json { head :no_content }
     end
   end
@@ -69,13 +117,13 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :slug, :tag_list, :attachments_attributes => [:attachable_id, :attachable_type, :_destroy, :file_name, :id])
   end
 
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = I18n.t("unauthorized.#{controller_name}.#{exception.action}")
-    redirect_to ""
+    flash[:error] = t("unauthorized.#{controller_name}.#{exception.action}")
+    redirect_to :back
   end
 
 end

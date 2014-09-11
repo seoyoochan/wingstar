@@ -1,3 +1,4 @@
+<% content_for :content do %>
 <table class="table">
   <!--<thead>-->
   <!--<tr>-->
@@ -25,3 +26,4 @@
 <br>
 
 <%= link_to 'New Post', new_post_path, class: "btn btn-default" if signed_in? %>
+<% end %>

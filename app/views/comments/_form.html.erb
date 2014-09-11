@@ -1,0 +1,12 @@
+<div id="comment_form_container" class="clearFix">
+    <div class="profile_image_container">
+      <%= link_to "<picture class='rounded-5 profile_image ease'></picture>".html_safe, "/profile/#{@obj.user.username}", class: "default-avatar tooltipOn", data: { :toggle => "tooltip", :placement => "bottom" }, title: "#{name_mapper(@obj.user)}" %>
+    </div>
+    <%= simple_form_for(@comment, url: comments_create_post_path(@obj.id), method: :post) do |f| %>
+      <%= f.hidden_field :parent_id %>
+      <%= f.input :commentable_id, :as => :hidden, :value => @comment.commentable_id %>
+      <%= f.input :commentable_type, :as => :hidden, :value => @comment.commentable_type %>
+      <%= f.input :body, placeholder: t("comment.placeholder.line_break"), required: true, label: false, wrapper: false, input_html: { class: "content rounded-5" } %>
+      <%= f.button :submit, class: "submit WS_submit" %>
+    <% end %>
+</div>

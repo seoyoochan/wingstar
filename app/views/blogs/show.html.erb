@@ -1,0 +1,18 @@
+<% content_for :content do %>
+<% content_for :title do t("page.blog.page_title", :blog_title => "#{@blog.title}") end %>
+<style type="text/css">
+  <% if @parsed_user.avatar.url.present? %>
+  .general_info .user .profile_image { background-image: url(<%= @parsed_user.avatar.url %>); }
+  <% end %>
+</style>
+<div id="blog-show">
+    <div class="contents_container">
+      <aside class="contents_left_column">
+        <div class="contents">
+           <%= render "borderless" %>
+        </div>
+      </aside>
+    </div>
+</div>
+<% end %>
+

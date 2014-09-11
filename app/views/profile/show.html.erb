@@ -1,0 +1,137 @@
+<% content_for :content do %>
+    <% content_for :title do t("page.profile.page_title", :user => "#{name_mapper(@parsed_user)}") end %>
+    <div class="contents_container">
+      <section class="contents_center_column">
+        <div class="cover">
+          <% if current_user == @parsed_user %>
+          <div class="cover_photo_container">
+            <a class="popWindow_cover effect" data-container="body" data-placement="bottom" data-toggle="popover" href="#" title=""><i class="fa fa-camera"></i><span class="text"><%= t("page.dashboard.full_profile.cover.photo_update") %></span></a>
+            <div id="cover_photo_menu_container">
+            <ul id="cover_photo_menu">
+              <li>
+                <div class="upload_photo"><i class="fa fa-plus"></i><span class="text"><%= t("page.dashboard.full_profile.cover.photo_upload") %></span></div>
+                <div class="submit_photo"><i class="fa fa-upload"></i><span class="text"><%= t("system.text.save") %></span></div>
+                <%= nested_form_for(@profile, url: profile_cover_path(@profile), method: :post) do |f| %>
+                    <%= f.fields_for :attachments do |attachment| %>
+                        <%= attachment.file_field :file_name, :accept => "image/png,image/gif,image/jpeg", class: "photo_uploader" %>
+                    <% end %>
+                    <%= f.submit "upload", class: "submit" %>
+                <% end %>
+              </li>
+              <li><%= link_to t("page.dashboard.full_profile.cover.remove_photo_html"), profile_cover_destroy_path, class: "remove_photo", data: { confirm: t("system.alert.delete_confirmation"), method: "delete" } %></li>
+            </ul>
+            </div>
+          </div>
+          <% end %>
+          <div class="info">
+            <div class="about">
+              <picture data-toggle="tooltip" data-placement="top" class="profile_image profile_image_80 rounded-full tooltipOn ease <% if @parsed_user.online? %>online<% else %>offline<% end %>" title="<% if @parsed_user.online? %>online<% else %>offline<% end %>"><%= link_to "", profile_show_path(@parsed_user.username), class: "rounded-full" %></picture>
+              <h3 class="name WS_text_brave"><%= name_mapper(@parsed_user) %></h3>
+              <span class="job WS_text_brave"><%= @parsed_user.job? ? @parsed_user.job : t("default_state.job") %></span>
+              <p class="description WS_text_brave">"<%= @parsed_user.description? ? @parsed_user.description : t("default_state.description") %>"</p>
+              <% if (@parsed_user.authorizations.any?) || (signed_in? && (@parsed_user != current_user)) %>
+              <div class="connect">
+                <% if @parsed_user.authorizations.any? %>
+                    <nav class="sns">
+                      <ul>
+                        <% if @parsed_user.facebook_account_url.present? %><li class="facebook"><%= link_to "<i class=\"fa fa-facebook\"></i>".html_safe, @parsed_user.facebook_account_url, target: "_blank", class: "rounded-full ease" %><% end %></li>
+                        <% if @parsed_user.twitter_account_url.present? %><li class="twitter"><%= link_to "<i class=\"fa fa-twitter\"></i>".html_safe, @parsed_user.twitter_account_url, target: "_blank", class: "rounded-full ease" %><% end %></li>
+                        <% if @parsed_user.googleplus_account_url.present? %><li class="google"><%= link_to "<i class=\"fa fa-google-plus\"></i>".html_safe, @parsed_user.googleplus_account_url, target: "_blank", class: "rounded-full ease" %><% end %></li>
+                      </ul>
+                    </nav>
+                <% end %>
+
+                <% if signed_in? && (@parsed_user != current_user) %>
+                <div class="relationship">
+                  <%= link_to t("page.dashboard.full_profile.cover.connect.follow"), "#follow", class: "follow rounded-10 ease" %>
+                  <%= link_to t("page.dashboard.full_profile.cover.connect.add_friend"), "#", class: "add_friend rounded-10 ease" %>
+                  <% # link_to t("page.dashboard.cover.connect.following"), "#", class: "following rounded-10 ease" %>
+                  <% # link_to t("page.dashboard.cover.connect.frieind_request_sent"), "#", class: "frieind_request_sent rounded-10 ease" %>
+                </div>
+                <% end %>
+              </div>
+              <% end %>
+              <div class="bottom_nav">
+                <nav class="left">
+                  <ul>
+                    <li><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.left.followers_html", :content => "51"), "#"  %></li>
+                    <li><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.left.following_html", :content => "179"), "#" %></li>
+                    <li><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.left.friends_html", :content => "270"), "#" %></li>
+                  </ul>
+                </nav>
+                <nav class="right">
+                  <ul>
+                    <li class="ask"><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.right.ask_html"), "#" %></li>
+                    <li class="resume"><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.right.resume_html"), "#" %></li>
+                    <li class="message"><%= link_to t("page.dashboard.full_profile.cover.bottom_nav.right.message_html"), "#" %></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <aside class="contents_left_column">
+        <div class="contents">
+          프로필 페이지
+        </div>
+      </aside>
+      <aside class="contents_right_column">
+        <div class="contents">
+          <section class="widget about">
+            <h3 class="title"><%= link_to t("page.dashboard.full_profile.contents_right_column.title.about_html"), "#" %></h3>
+            <div class="content">
+                <ul>
+                  <li class="location">
+                    <% if current_user == @parsed_user %>
+                        <% if @parsed_address.present? %>
+                        <%= link_to t("page.dashboard.full_profile.contents_right_column.about.contents.location_html", address: "#{@parsed_address}"), "#", data: {toggle: "modal", target: "#locationForm_container"} %>
+                        <% else %>
+                        <%= link_to t("default_state.location_html"), "#", data: {toggle: "modal", target: "#locationForm_container"} %>
+                        <% end %>
+                    <% else %>
+                        <% if @parsed_address.present? %>
+                        <%= link_to t("page.dashboard.full_profile.contents_right_column.about.contents.location_html", address: "#{@parsed_address}"), "https://www.google.co.kr/maps/place/#{@parsed_address}", target: "_blank"  %>
+                        <% else %>
+                        <%= t("default_state.location_html") %>
+                        <% end %>
+                    <% end %>
+                  </li>
+                  <li class="birthday">
+                    <% if current_user == @parsed_user %>
+                        <% if @parsed_user.date_of_birth.present? %>
+                            <%= link_to t("page.dashboard.full_profile.contents_right_column.about.contents.birthday_html", date_of_birth: "#{@parsed_user.date_of_birth}", age: "#{age(@parsed_user)}"), "#", data: {toggle: "modal", target: "#birthdayForm_container"} %>
+                        <% else %>
+                            <%= link_to t("default_state.birthday_html"), "#", data: {toggle: "modal", target: "#birthdayForm_container"} %>
+                        <% end %>
+                    <% else %>
+                        <% if @parsed_user.date_of_birth.present? %>
+                            <%= t("page.dashboard.full_profile.contents_right_column.about.contents.birthday_html", date_of_birth: "#{@parsed_user.date_of_birth}", age: "#{age(@parsed_user)}") %>
+                        <% else %>
+                            <%= t("default_state.birthday_html") %>
+                        <% end %>
+                    <% end %>
+                  </li>
+                  <li class="profile_url"><i class="icon-profile-1"></i><span class="text"><%= @parsed_user.profile.url %></span></li>
+                  <li class="phone"><i class="icon-mobile-phone-1"></i><span class="text"><%= @parsed_user.phone? ? @parsed_user.phone : t("default_state.phone") %></span></li>
+                  <li class="email"><i class="icon-mail-1"></i><span class="text"><%= @parsed_user.email %></span></li>
+                  <li class="website"><i class="icon-link-2"></i><span class="text"><%= @parsed_user.website? ? @parsed_user.website : t("default_state.website") %></span></li>
+                </ul>
+            </div>
+          </section>
+          <section class="widget education">
+            <h3 class="title"><%= link_to t("page.dashboard.full_profile.contents_right_column.title.education_html"), "#" %></h3>
+            <div class="content">
+
+            </div>
+          </section>
+          <section class="widget work">
+            <h3 class="title"><%= link_to t("page.dashboard.full_profile.contents_right_column.title.work_html"), "#" %></h3>
+            <div class="content">
+
+            </div>
+          </section>
+        </div>
+      </aside>
+    </div>
+<% end %>

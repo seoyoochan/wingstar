@@ -1,0 +1,31 @@
+<div class="sns_connector">
+  <ul>
+    <div class="wrapper">
+      <% if parsed_user.authorizations.find_by_provider("twitter").present? %>
+          <li class="twitter"><%= link_to t("page.settings.sns_connect.twitter_html"), "#", class: "rounded-3 tooltipOn ease", data: { :"toggle-tooltip" => "tooltip", :placement => "top" }, title: t("page.settings.sns_connect.connected") %></li>
+      <% else %>
+          <li class="twitter"><%= link_to t("page.settings.sns_connect.twitter_html"), user_omniauth_authorize_path(:twitter), class: "rounded-3" %></li>
+      <% end%>
+      <% if parsed_user.authorizations.find_by_provider("facebook").present? %>
+          <li class="facebook"><%= link_to t("page.settings.sns_connect.facebook_html"), "#", class: "rounded-3 tooltipOn ease", data: { :"toggle-tooltip" => "tooltip", :placement => "top" }, title: t("page.settings.sns_connect.connected") %></li>
+      <% else %>
+          <li class="facebook"><%= link_to t("page.settings.sns_connect.facebook_html"), user_omniauth_authorize_path(:facebook), class: "rounded-3" %></li>
+      <% end%>
+
+    </div>
+    <div class="wrapper">
+      <% if parsed_user.authorizations.find_by_provider("linkedin").present? %>
+          <li class="linkedin"><%= link_to t("page.settings.sns_connect.linkedin_html"), "#", class: "rounded-3 tooltipOn ease", data: { :"toggle-tooltip" => "tooltip", :placement => "top" }, title: t("page.settings.sns_connect.connected") %></li>
+      <% else %>
+          <li class="linkedin"><%= link_to t("page.settings.sns_connect.linkedin_html"), user_omniauth_authorize_path(:linkedin), class: "rounded-3" %></li>
+      <% end%>
+
+      <% if parsed_user.authorizations.find_by_provider("google_oauth2").present? %>
+          <li class="google"><%= link_to t("page.settings.sns_connect.google_html"), "#", class: "rounded-3 tooltipOn ease", data: { :"toggle-tooltip" => "tooltip", :placement => "top" }, title: t("page.settings.sns_connect.connected") %></li>
+      <% else %>
+          <li class="google"><%= link_to t("page.settings.sns_connect.google_html"), user_omniauth_authorize_path(:google_oauth2), class: "rounded-3" %></li>
+      <% end%>
+    </div>
+  </ul>
+</div>
+</div>

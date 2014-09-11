@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: MyString
+  start: 2014-08-30
+  end: 2014-08-30
+  graduated: false
+  description: MyText
+
+two:
+  school: MyString
+  start: 2014-08-30
+  end: 2014-08-30
+  graduated: false
+  description: MyText

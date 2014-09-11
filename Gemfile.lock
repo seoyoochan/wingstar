@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/bouchard/thumbs_up.git
+  revision: f499a7c803c0a9fdcefe4275f2f0a10ca7964508
+  specs:
+    thumbs_up (0.6.7)
+      activerecord
+      statistics2
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -29,6 +37,12 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (3.3.0)
+      activerecord (>= 3, < 5)
+    acts_as_commentable_with_threading (1.2.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      awesome_nested_set (>= 2.0)
     addressable (2.3.6)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
@@ -40,6 +54,8 @@ GEM
       treetop
     autoprefixer-rails (2.1.1.20140710)
       execjs
+    awesome_nested_set (3.0.1)
+      activerecord (>= 4.0.0, < 5)
     bcrypt (3.1.7)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
@@ -52,6 +68,9 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    closure_tree (5.0.0)
+      activerecord (>= 3.2.0)
+      with_advisory_lock (>= 3.0.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -64,6 +83,7 @@ GEM
       currencies (~> 0.4.2)
     country_select (1.3.1)
       countries (= 0.9.3)
+    crass (0.2.1)
     currencies (0.4.2)
     daemons (1.1.9)
     devise (3.2.4)
@@ -83,17 +103,29 @@ GEM
     equalizer (0.0.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    excon (0.6.6)
     execjs (2.2.1)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    fog (0.9.0)
+      builder
+      excon (~> 0.6.1)
+      formatador (>= 0.1.3)
+      json
+      mime-types
+      net-scp (>= 1.0.4)
+      net-ssh (>= 2.1.4)
+      nokogiri (>= 1.4.4)
+      ruby-hmac
     font-awesome-sass (4.1.0)
       sass (~> 3.2)
-    friendly_id (5.0.4)
-      activerecord (>= 4.0.0)
+    foreigner (1.6.1)
+      activerecord (>= 3.0.0)
+    formatador (0.2.5)
+    geocoder (1.2.3)
     haml (4.0.5)
       tilt
     hashie (3.2.0)
-    high_voltage (2.2.0)
     hike (1.2.3)
     http (0.6.1)
       http_parser.rb (~> 0.6.0)
@@ -133,13 +165,21 @@ GEM
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     mime-types (1.25.1)
+    mini_magick (3.8.0)
+      subexec (~> 0.2.1)
     minitest (5.4.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mysql2 (0.3.16)
     naught (1.0.0)
+    nested_form (0.3.2)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.1)
     nokogiri (1.4.7)
+    nokogumbo (1.1.12)
+      nokogiri
     oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
@@ -210,9 +250,18 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
+    redactor-rails (0.4.5)
+      devise
+      mime-types
+      orm_adapter
     request_store (1.0.7)
     rmagick (2.13.2)
     rolify (3.4.0)
+    ruby-hmac (0.4.0)
+    sanitize (3.0.2)
+      crass (~> 0.2.0)
+      nokogiri (>= 1.4.4)
+      nokogumbo (= 1.1.12)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -245,6 +294,9 @@ GEM
     sqlite3 (1.3.9)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
+    statistics2 (0.54)
+    stringex (2.5.2)
+    subexec (0.2.3)
     table_print (1.5.2)
     thin (1.5.1)
       daemons (>= 1.0.9)
@@ -276,12 +328,19 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.7)
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
+    with_advisory_lock (3.0.0)
+      activerecord (>= 3.2)
+      thread_safe
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   active_model_serializers
+  acts-as-taggable-on
+  acts_as_commentable_with_threading
   ancestry
   annotate (>= 2.6.0)
   attr_searchable
@@ -289,15 +348,17 @@ DEPENDENCIES
   better_errors
   cancancan (~> 1.9)
   carrierwave
+  closure_tree
   coffee-rails (~> 4.0.0)
   country_select
   devise
   draper (~> 1.3)
   dynamic_form
   enumerize
+  fog
   font-awesome-sass
-  friendly_id (~> 5.0.0)
-  high_voltage
+  foreigner
+  geocoder
   http_accept_language
   jbuilder (~> 2.0)
   jquery-rails
@@ -306,7 +367,9 @@ DEPENDENCIES
   koala
   linkedin
   mailcatcher
+  mini_magick
   mysql2
+  nested_form
   omniauth
   omniauth-facebook
   omniauth-github
@@ -318,13 +381,18 @@ DEPENDENCIES
   public_activity
   quiet_assets
   rails (= 4.1.1)
+  redactor-rails
   rmagick
   rolify
+  sanitize
   sass-rails (~> 4.0.3)
   sdoc
   simple_form
   sqlite3
+  stringex
   table_print
+  thumbs_up!
   twitter
   uglifier (>= 1.3.0)
   will_paginate (~> 3.0)
+  will_paginate-bootstrap

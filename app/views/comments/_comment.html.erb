@@ -1,0 +1,33 @@
+<% if @obj.user.avatar.url.present? %>
+<style type="text/css">
+  .root_comment .profile_image, .nested_comment .profile_image, #comment_form_container .profile_image { background-image: url(<%= @obj.user.avatar.url %>); }
+</style>
+<% end %>
+<li class="root_comment clearFix">
+    <div class="profile_image_container">
+      <%= link_to "<picture class='rounded-5 profile_image ease'></picture>".html_safe, "/profile/#{@obj.user.username}", class: "default-avatar tooltipOn", data: { :toggle => "tooltip", :placement => "bottom" }, title: "#{name_mapper(@obj.user)}" %>
+    </div>
+    <div class="comment_contents_container">
+      <div class="root_comment_wrapper">
+      <h4 class="author"><%= name_mapper(comment.user) %><% if comment.vote_count > 0 %><strong class="vote_count">+<%= comment.vote_count %></strong><% end %></h4>
+      <span class="time tooltipOn" data-toggle="tooltip" data-placement="right" title="<%= comment.created_at.strftime("%Y.%m.%d at %I:%M%P") %>"><%= time_ago_in_words(comment.created_at) %></span>
+      <p class="comment_content"><%= comment.body %></p>
+      <ul class="comment_control clearFix">
+        <% if signed_in? %>
+          <% if (can? :edit, comment)%><li class="edit"><%= link_to t("comment.comment_control.edit"), comment_edit_post_path(comment) %></li><% end %>
+          <li class="reply"><%= link_to t("comment.comment_control.reply"), new_comment_path(comment) %></li>
+          <li class="vote"><%= link_to t("comment.comment_control.unlike"), comment_unlike_post_path(comment), method: :post if current_user.voted_on?(comment) %></li>
+          <li class="vote"><%= link_to t("comment.comment_control.like"), comment_like_post_path(comment), method: :post unless current_user.voted_on?(comment) %></li>
+        <% else %>
+          <li class="reply"><%= link_to t("comment.comment_control.reply"), "#", class: "like preventLink tooltipOn ease", data: { :toggle => "modal", :"toggle-tooltip" => "tooltip", :placement => "top", :target => "#loginModal_container" }, title: t("unauthorized.tooltip") %></li>
+          <li class="vote"><%= link_to t("comment.comment_control.like"), "#", class: "like preventLink tooltipOn ease", data: { :toggle => "modal", :"toggle-tooltip" => "tooltip", :placement => "top", :target => "#loginModal_container" }, title: t("unauthorized.tooltip") %></li>
+        <% end %>
+      </ul>
+      </div>
+      <% if comment.has_children? %>
+          <ul class="nested_comments_container">
+            <%= render partial: "comments/nested_comment", collection: comment.children.order("created_at DESC"), as: :nested_comment %>
+          </ul>
+      <% end %>
+    </div>
+</li>

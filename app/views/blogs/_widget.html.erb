@@ -1,0 +1,16 @@
+<aside class="contents_right_column widget_column">
+  <div class="contents">
+    <section class="widget tag_cloud">
+      <h2 class="title"><%= link_to t("page.blog.widget.title.tag_cloud_html") %></h2>
+      <div class="content">
+        <% if @post.tag_counts_on(:tags).present? %>
+            <ul class="tag_list">
+              <% @post.tag_counts_on(:tags).each do |item| %>
+                  <li><%= link_to "#{item.name}".html_safe, "#", class: "tag_item" %></li>
+              <% end %>
+            </ul>
+        <% end %>
+      </div>
+    </section>
+  </div>
+</aside>
