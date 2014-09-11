@@ -235,6 +235,7 @@
     <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.3.9, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sqlite3-ruby (v1.3.3, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="statistics2 (v0.54, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="stringex (v2.5.2, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="subexec (v0.2.3, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thin (v1.5.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.19.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />

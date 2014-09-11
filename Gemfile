@@ -3,12 +3,12 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.1'
 ruby '2.1.2'
 gem 'sass-rails', '~> 4.0.3'
-# gem 'http_accept_language'
+gem 'http_accept_language'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
 
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -38,7 +38,7 @@ gem 'closure_tree'
 gem 'font-awesome-sass'
 gem 'devise'
 # gem 'autoprefixer-rails'
-# gem 'stringex'
+gem 'stringex'
 gem 'sanitize'
 gem 'cancancan', '~> 1.9'
 gem 'rolify'
