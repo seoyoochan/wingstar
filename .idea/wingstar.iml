@@ -136,11 +136,8 @@
     <orderEntry type="library" scope="PROVIDED" name="acts-as-taggable-on (v3.3.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="acts_as_commentable_with_threading (v1.2.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="addressable (v2.3.6, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="ancestry (v2.1.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="annotate (v2.6.5, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v5.0.1.20140414130214, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="attr_searchable (v0.0.5, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="autoprefixer-rails (v2.1.1.20140710, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="awesome_nested_set (v3.0.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.7, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="better_errors (v1.1.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
@@ -151,18 +148,9 @@
     <orderEntry type="library" scope="PROVIDED" name="carrierwave (v0.10.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="closure_tree (v5.0.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coderay (v1.1.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="coffee-rails (v4.0.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="coffee-script (v2.3.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="coffee-script-source (v1.7.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="countries (v0.9.3, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="country_select (v1.3.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v0.2.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="currencies (v0.4.2, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="daemons (v1.1.9, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise (v3.2.4, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="draper (v1.3.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="dynamic_form (v1.1.4, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="enumerize (v0.8.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="equalizer (v0.0.9, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="eventmachine (v1.0.3, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
@@ -215,9 +203,7 @@
     <orderEntry type="library" scope="PROVIDED" name="omniauth-oauth2 (v1.2.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="omniauth-twitter (v1.0.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="orm_adapter (v0.5.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="pdf-core (v0.2.5, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="polyglot (v0.3.5, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="prawn (v1.1.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_activity (v1.4.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="quiet_assets (v1.0.3, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v1.5.2, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
@@ -230,7 +216,6 @@
     <orderEntry type="library" scope="PROVIDED" name="rake (v10.3.2, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rdoc (v4.1.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redactor-rails (v0.4.5, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="request_store (v1.0.7, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rmagick (v2.13.2, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rolify (v3.4.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-hmac (v0.4.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
@@ -247,16 +232,13 @@
     <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.3.9, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sqlite3-ruby (v1.3.3, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="statistics2 (v0.54, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="stringex (v2.5.2, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="subexec (v0.2.3, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="table_print (v1.5.2, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thin (v1.5.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.19.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thread_safe (v0.3.4, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thumbs_up (v0.6.7@f499a7, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v1.4.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.15, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="ttfunk (v1.2.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="twitter (v5.11.0, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v1.2.1, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="uglifier (v2.5.3, RVM: ruby-2.1.2 [rails4.1]) [gem]" level="application" />
