@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.1'
-gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.3'
 gem 'http_accept_language'
 
@@ -15,7 +14,6 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
-gem 'mysql2'
 gem 'simple_form'
 gem 'attr_searchable'
 gem 'jquery-ui-rails'
@@ -64,9 +62,12 @@ gem 'thumbs_up', git: 'https://github.com/bouchard/thumbs_up.git'
 
 group :production do
   gem 'rails_12factor'
+  gem 'pg'
 end
 
 group :development, :test do
+  gem 'sqlite3'
+  gem 'mysql2'
   # gem 'byebug'
   gem 'better_errors'
   gem 'quiet_assets'
