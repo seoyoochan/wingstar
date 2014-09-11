@@ -21,10 +21,5 @@ module Wingstar
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # prevents the Rails environment to be loaded when the assets:precompile task is executed.
-    # Because Heroku precompile assets before setting the database configuration,
-    # you need to set this configuration to false or you Rails application will try to
-    # connect to an unexisting database.
-    config.assets.initialize_on_precompile = false
   end
 end
