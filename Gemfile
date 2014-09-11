@@ -62,6 +62,10 @@ gem 'rmagick'
 gem 'acts-as-taggable-on'
 gem 'thumbs_up', git: 'https://github.com/bouchard/thumbs_up.git'
 
+group :production do
+  gem 'rails_12factor'
+end
+
 group :development, :test do
   # gem 'byebug'
   gem 'better_errors'
