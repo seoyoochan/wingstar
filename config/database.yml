@@ -48,7 +48,9 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: wingstar_production
-  username: root
-  password: 123
+  #  <<: *default
+  #  database: wingstar_production
+  #  password: 123
+  adapter: postgresql
+  encoding: unicode
+  pool: 5

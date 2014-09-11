@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.1'
+ruby '2.1.2'
 gem 'sass-rails', '~> 4.0.3'
 gem 'http_accept_language'
 
