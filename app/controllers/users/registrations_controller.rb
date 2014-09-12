@@ -24,7 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         Profile.create(url: "http://wingstar.net/profile/#{resource.username}", user_id: "#{resource.id}")
         Blog.create(
             title: "#{name_mapper(resource)}",
-            url: "http://wingstar.net/blog/#{resource.username}",
+            url: "http://www.wingstar.net/blog/#{resource.username}",
             user_id: "#{resource.id}",
             created_at: Time.now,
             updated_at: Time.now
@@ -129,7 +129,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # context = router_name ? send(router_name) : self
     # context.respond_to?(:root_path) ? context.root_path : "/"
 
-    redirect_to root_path
+    # redirect_to root_path
+
+    after_sign_in_path_for(resource)
   end
 
   # The default url to be used after updating a resource. You need to overwrite

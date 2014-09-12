@@ -85,10 +85,9 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
       :address   => "smtp.mandrillapp.com",
       :port      => 587,
-      :user_name => "app29469421@heroku.com",
-      :password  => "UQBcbtr_5JJpcxeKFtvVMA",
-      :domain => "wingstar.herokuapp.com",
-      authentication: "plain"
+      :user_name => "master@bitsnut.com",
+      :password  => "VN2STvKg5ElocVbGb87uNA",
+      :domain => "wingstar.herokuapp.com"
   }
 
   config.action_mailer.default_url_options = { :host => 'wingstar.herokuapp.com' }
