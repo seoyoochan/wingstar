@@ -87,7 +87,8 @@ Rails.application.configure do
       :port      => 587,
       :user_name => "app29469421@heroku.com",
       :password  => "UQBcbtr_5JJpcxeKFtvVMA",
-      :domain => "wingstar.herokuapp.com"
+      :domain => "wingstar.herokuapp.com",
+      authentication: "plain"
   }
 
   config.action_mailer.default_url_options = { :host => 'wingstar.herokuapp.com' }
