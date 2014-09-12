@@ -86,8 +86,17 @@ Rails.application.configure do
       :address   => "smtp.mandrillapp.com",
       :port      => 587,
       :user_name => "app29469421@heroku.com",
-      :password  => "UQBcbtr_5JJpcxeKFtvVMA"
+      :password  => "UQBcbtr_5JJpcxeKFtvVMA",
+      :domain => "wingstar.herokuapp.com"
   }
+
+  config.action_mailer.default_url_options = { :host => 'wingstar.herokuapp.com' }
+  # ActionMailer Config
+  # Setup for production - deliveries, no errors raised
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
 
 
 end
