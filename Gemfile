@@ -63,6 +63,7 @@ gem 'thumbs_up', git: 'https://github.com/bouchard/thumbs_up.git'
 group :production do
   gem 'rails_12factor'
   gem 'pg'
+  gem 'mandrill_mailer'
 end
 
 group :development, :test do
