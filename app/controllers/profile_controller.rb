@@ -13,7 +13,7 @@ class ProfileController < ApplicationController
     respond_to do |format|
       if @profile.update(safe_params)
         flash[:success] = t("flash.cover.success_upload")
-        format.html { redirect_to :back }
+        format.html { redirect_to root_path }
         format.json { head :no_content }
       end
     end
