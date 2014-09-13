@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.blog_id = current_user.blogs.first.id if current_user.blogs.any?
+    @post.blog_id = current_user.blog.id if current_user.blog.present?
     @post.user = current_user
 
     respond_to do |format|
@@ -80,7 +80,7 @@ class PostsController < ApplicationController
 
   def like
     if current_user.voted_on?(@post)
-      flash[:warning] = "이미 좋아합니다."
+      flash[:warning] = t("votes.warning.like")
       # redirect_to "/blog/#{current_user.username}"
     else
       current_user.vote_for(@post)
@@ -95,7 +95,7 @@ class PostsController < ApplicationController
       # redirect_to "/blog/#{current_user.username}"
       redirect_to :back
     else
-      flash[:warning] = "이미 좋아하지 않습니다."
+      flash[:warning] = t("votes.warning.unlike")
       # redirect_to "/blog/#{current_user.username}"
     end
   end

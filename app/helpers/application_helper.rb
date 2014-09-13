@@ -75,7 +75,7 @@ module ApplicationHelper
     if current_user.nil?
       return nil
     end
-    eastern_format = "#{current_user.last_name} #{current_user.first_name}"
+    eastern_format = "#{current_user.last_name}#{current_user.first_name}"
     western_format = "#{current_user.first_name} #{current_user.last_name}"
 
     # 1. user's name exists?
@@ -112,13 +112,13 @@ module ApplicationHelper
 
   def blog_link_provider(user)
     if user == current_user
-      if current_user.blogs.present?
+      if current_user.blog.present?
         "/blog/#{current_user.username}"
       else
         new_blog_path
       end
     else
-      if user.blogs.present?
+      if user.blog.present?
         "/blog/#{user.username}"
       else
         :back

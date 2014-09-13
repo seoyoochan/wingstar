@@ -21,14 +21,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if resource_saved
       if resource.active_for_authentication?
-        Profile.create(url: "/profile/#{resource.username}", user_id: "#{resource.id}")
-        Blog.create(
-            title: "#{name_mapper(resource)}",
-            url: "/blog/#{resource.username}",
-            user_id: "#{resource.id}",
-            created_at: Time.now,
-            updated_at: Time.now
-        )
         set_flash_message(:success, :signed_up, :name => name_mapper(resource) ) if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)

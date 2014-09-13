@@ -20,7 +20,7 @@ class BlogsController < ApplicationController
 
   def create
     @blog = Blog.new(blog_params)
-    @blog.url = "http://wingstar.net/blog/#{current_user.username}"
+    @blog.url = "http://www.wingstar.net/blog/#{current_user.username}"
     @blog.user = current_user
 
     respond_to do |format|
@@ -36,9 +36,9 @@ class BlogsController < ApplicationController
   end
 
   def show
-    if parsed_user.blogs.present?
-    @blog = Blog.find_by_url("http://wingstar.net/blog/#{params['username']}")
-    @posts = Post.where("blog_id=?", "#{parsed_user.blogs.first.id}").paginate(:page => params[:page], :per_page => 10).order('created_at desc')
+    if parsed_user.blog.present?
+    @blog = Blog.find_by_url("http://www.wingstar.net/blog/#{params['username']}")
+    @posts = Post.where("blog_id=?", "#{parsed_user.blog.id}").paginate(:page => params[:page], :per_page => 10).order('created_at desc')
     else
       flash["error"] = t("page.blog.action.show.blog_empty")
       redirect_to root_path

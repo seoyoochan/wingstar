@@ -8,7 +8,7 @@
                   <li class="user"><%= link_to "<picture class='rounded-full profile_image ease'></picture>".html_safe, "/profile/#{post.user.username}", class: "default-avatar tooltipOn", data: { :toggle => "tooltip", :placement => "bottom" }, title: "#{name_mapper(post.user)}" %></li>
                   <li class="date"><i class="fa fa-calendar-o"></i><%= post.created_at.strftime("%Y.%m.%d") %></li>
                   <li class="time"><i class="fa fa-clock-o"></i><%= post.created_at.strftime("%I:%M%P") %></li>
-                  <li class="comments"><i class="fa fa-comment"></i>0</li>
+                  <li class="comments"><i class="fa fa-comment"></i><%= post.comments.size %></li>
                   <li class="likes"><i class="fa fa-heart"></i><%= post.vote_count %></li>
                   <li class="views"><i class="fa fa-eye"></i><%= post.views.count %></li>
                 </ul>

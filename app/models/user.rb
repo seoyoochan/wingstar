@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :posts, dependent: :destroy
   has_many :authorizations, dependent: :destroy
-  has_many :blogs, dependent:  :destroy
+  has_one :blog, dependent:  :destroy
   has_one :profile, dependent:  :destroy
   has_one :location, dependent: :destroy
   has_many :highschools, dependent: :destroy

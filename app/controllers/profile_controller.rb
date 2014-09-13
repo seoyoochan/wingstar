@@ -8,7 +8,9 @@ class ProfileController < ApplicationController
       return redirect_to :back
     end
 
-    @profile = Profile.where(user_id: params[:username]).first
+    @profile = current_user.profile
+
+    logger.debug "프로필 : #{@profile.inspect}"
 
     respond_to do |format|
       if @profile.update(safe_params)

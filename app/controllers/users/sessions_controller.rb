@@ -2,6 +2,19 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     self.resource = warden.authenticate!(auth_options)
+
+    Profile.create(url: "http://www.wingstar.net/profile/#{resource.username}", user_id: "#{resource.id}") if resource.profile.blank?
+
+    if resource.blog.blank?
+      Blog.create(
+          title: "#{name_mapper(resource)}",
+          url: "http://www.wingstar.net/blog/#{resource.username}",
+          user_id: "#{resource.id}",
+          created_at: Time.now,
+          updated_at: Time.now
+      )
+    end
+
     set_flash_message(:success, :signed_in, :name => resource.first_name ) if is_flashing_format?
     sign_in(resource_name, resource)
     yield resource if block_given?
@@ -25,4 +38,5 @@ class Users::SessionsController < Devise::SessionsController
       format.any(*navigational_formats) { redirect_to after_sign_out_path_for(resource_name) }
     end
   end
+
 end

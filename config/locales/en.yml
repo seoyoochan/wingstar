@@ -129,7 +129,7 @@ en:
       full_profile:
         cover:
           photo_update: Change Cover
-          photo_upload: Photo Upload
+          photo_upload: Upload
           remove_photo_html: <i class="fa fa-times"></i><span class="text">Remove Photo</span>
           connect:
             follow: Follow
