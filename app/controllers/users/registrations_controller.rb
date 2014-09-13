@@ -18,17 +18,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     resource_saved = resource.save
     yield resource if block_given?
+
     if resource_saved
       if resource.active_for_authentication?
-        set_flash_message(:success, :signed_up, :name => name_mapper(resource) ) if is_flashing_format?
-        Profile.create(url: "http://wingstar.net/profile/#{resource.username}", user_id: "#{resource.id}")
+        Profile.create(url: "/profile/#{resource.username}", user_id: "#{resource.id}")
         Blog.create(
             title: "#{name_mapper(resource)}",
-            url: "http://www.wingstar.net/blog/#{resource.username}",
+            url: "/blog/#{resource.username}",
             user_id: "#{resource.id}",
             created_at: Time.now,
             updated_at: Time.now
         )
+        set_flash_message(:success, :signed_up, :name => name_mapper(resource) ) if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
       else
@@ -124,14 +125,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts. You need to overwrite
   # this method in your own RegistrationsController.
   def after_inactive_sign_up_path_for(resource=nil)
-    # scope = Devise::Mapping.find_scope!(resource)
-    # router_name = Devise.mappings[scope].router_name
-    # context = router_name ? send(router_name) : self
-    # context.respond_to?(:root_path) ? context.root_path : "/"
-
-    # redirect_to root_path
-
-    after_sign_in_path_for(resource)
+    after_sign_in_path_for(resource) unless resource.nil?
+    redirect_to :back if resource.nil?
   end
 
   # The default url to be used after updating a resource. You need to overwrite

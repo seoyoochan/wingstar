@@ -137,7 +137,6 @@ $(document).ready(function(){
     var timeZone = jstz.determine();
     document.cookie = 'jstz_time_zone='+timeZone.name()+';';
 
-
     /*********************************************************************
     * 01. UX Approach to Sidebar
     * It shows the sidebar when the width of screen is greater than or equal to 768.

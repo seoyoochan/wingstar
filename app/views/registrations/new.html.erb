@@ -1,0 +1,82 @@
+<% content_for :content do %>
+    <style type="text/css">
+        .contents { background: url('<%= asset_url("bg/light/Polygon_v2/01.jpg") %>') repeat left top !important; }
+    </style>
+
+    <div id="signup_container">
+      <div class="contents_container">
+        <section class="contents_full_column">
+          <div class="contents">
+            <div class="container rounded-10">
+              <div class="header">
+                <div class="title">
+                  <h2 class="logo ease"></h2><span class="text"><%= t("title.signup") %></span>
+                </div>
+              </div>
+              <div class="body">
+
+                <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+
+                    <div class="fisrt_name_container">
+                      <i class="fa fa-child fa-fw first_name"></i>
+                      <%= f.input :first_name, placeholder: t("placeholder.signup.first_name"),required: true, autofocus: true, label: false, wrapper: false, input_html: { class: "first_name rounded-3-top-left rounded-3-top-right" }, "aria-required" => true, error: false %>
+                    </div>
+
+                    <div class="last_name_container">
+                      <i class="fa fa-child fa-fw last_name"></i>
+                      <%= f.input :last_name, placeholder: t("placeholder.signup.last_name"), required: true, label: false, wrapper: false, input_html: { class: "last_name" }, "aria-required" => true, error: false %>
+                    </div>
+
+                    <div class="username_container">
+                      <i class="fa fa-user username"></i>
+                      <%= f.input :username, placeholder: t("placeholder.signup.username"), required: true, label: false, wrapper: false, input_html: { class: "username" }, "aria-required" => true, error: false %>
+                    </div>
+
+                    <div class="email_container">
+                      <i class="fa fa-envelope-o fa-fw email"></i>
+                      <%= f.input :email, placeholder: t("placeholder.signup.email"), required: true, label: false, wrapper: false, input_html: { class: "email" }, "aria-required" => true, error: false  %>
+                    </div>
+
+                    <div class="password_container">
+                      <i class="fa fa-lock fa-fw password"></i>
+                      <%= f.input :password, placeholder: t("placeholder.signup.password"), required: true, autocomplete: false, label: false, wrapper: false, input_html: { class: "password rounded-3-bottom-left rounded-3-bottom-right" }, "aria-required" => true, error: false %>
+                    </div>
+
+                    <div class="divider rounded-3"></div>
+
+                    <div class="locale_container">
+                      <h5 class="title"><%= t("signup_page.label.language_html") %></h5>
+                      <%= f.input :locale, collection: @locales.map { |k,v| [v,k] }, selected: I18n.locale, wrapper: false, input_html: { class: "locale" }, label: false, error: false  %>
+                    </div>
+
+                    <div class="date_of_birth_container">
+                      <h5 class="title"><%= t("signup_page.label.dob_html") %></h5>
+                      <%= f.input :date_of_birth, as: :date, wrapper: false, order: [:year, :month, :day], prompt: {year: t('date.year'), month: t('date.month'), day: t('date.day')},
+                                  start_year: Date.current.year, end_year: 1920, use_month_names: t(:month_names, scope: :date),
+                                  required: false, label: false, input_html: { class: "date_of_birth" }, error: false  %>
+                    </div>
+
+                    <div class="gender_container">
+                      <h5 class="title"><%= t("signup_page.label.gender_html") %></h5>
+
+                      <%= f.collection_radio_buttons :gender, [["female", t("signup_page.collection.gender.female_html") ], ["male", t("signup_page.collection.gender.male_html")]], :first, :last, wrapper: false %>
+
+                    </div>
+
+                    <div class="agreement_container rounded-3">
+                      <p class="notice"><%= t("instruction.signup_notice_html") %></a></p>
+                    </div>
+
+                    </div>
+
+                    <div class="footer rounded-3">
+                      <%= f.button :submit, t("button_link.signup"), class: "btn submit rounded-3", wrapper: false %>
+                    </div>
+                <% end %>
+                </div>
+          </div>
+        </section>
+      </div>
+    </div>
+<% end %>
