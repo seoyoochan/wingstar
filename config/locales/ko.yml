@@ -1,4 +1,9 @@
 ko:
+  instructions:
+    confirmation:
+      title: 이메일 인증을 마치면 드디어 윙스타 멤버가 됩니다!
+      welcome_html: "<p>안녕하세요. 윙스타입니다.</p><p>윙스타에서 요청하신 <strong style='color:00B4DA;'>%{email}</strong> 이메일 주소 확인을 위한 인증 링크입니다.</p><p>아래를 클릭하시면 해당 이메일 주소를 윙스타 계정의 아이디로 사용하실 수 있습니다.</p>"
+      confirm_link: 제 이메일 주소가 맞음을 확인합니다.
   comment:
     comment_control:
       edit: • 편집

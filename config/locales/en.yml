@@ -1,4 +1,9 @@
 en:
+  instructions:
+      confirmation:
+        title: You are just about to be our member!
+        welcome_html: "<p>Hello. This is Wingstar.</p><p>Please verify your <strong style='color:00B4DA;'>%{email}</strong> email address through the link below.</p><p>Your account id will be your email address.</p>"
+        confirm_link: I confirm that this is my email address.
   comment:
     comment_control:
       edit: • Edit
