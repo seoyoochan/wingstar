@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def read
     @post = Post.find(params[:id])
     @obj = @post
-    @comment = Comment.build_from(@obj, current_user.id, "")
+    @comment = Comment.build_from(@obj, current_user.id, "") if signed_in?
     @all_comments = @obj.comment_threads
 
     # Count Views
