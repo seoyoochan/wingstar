@@ -36,21 +36,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_comment.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_comment.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/comments/_comment.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17045455" vertical-offset="0" max-vertical-offset="616">
+            <state vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="585">
               <caret line="7" column="121" selection-start-line="7" selection-start-column="121" selection-end-line="7" selection-end-column="121" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_nested_comment.html.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="_nested_comment.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/comments/_nested_comment.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="390">
-              <caret line="2" column="98" selection-start-line="2" selection-start-column="98" selection-end-line="2" selection-end-column="119" />
+            <state vertical-scroll-proportion="0.048701297" vertical-offset="0" max-vertical-offset="616">
+              <caret line="2" column="112" selection-start-line="2" selection-start-column="112" selection-end-line="2" selection-end-column="112" />
               <folding />
             </state>
           </provider>
@@ -115,8 +115,8 @@
         <option value="$PROJECT_DIR$/app/controllers/posts_controller.rb" />
         <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
         <option value="$PROJECT_DIR$/app/helpers/comments_helper.rb" />
-        <option value="$PROJECT_DIR$/app/views/comments/_nested_comment.html.erb" />
         <option value="$PROJECT_DIR$/app/views/comments/_comment.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/comments/_nested_comment.html.erb" />
       </list>
     </option>
   </component>
@@ -1274,18 +1274,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/comments/_nested_comment.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/comments/_comment.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="390">
-          <caret line="2" column="98" selection-start-line="2" selection-start-column="98" selection-end-line="2" selection-end-column="119" />
+        <state vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="585">
+          <caret line="7" column="121" selection-start-line="7" selection-start-column="121" selection-end-line="7" selection-end-column="121" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/comments/_comment.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/comments/_nested_comment.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17045455" vertical-offset="0" max-vertical-offset="616">
-          <caret line="7" column="121" selection-start-line="7" selection-start-column="121" selection-end-line="7" selection-end-column="121" />
+        <state vertical-scroll-proportion="0.048701297" vertical-offset="0" max-vertical-offset="616">
+          <caret line="2" column="112" selection-start-line="2" selection-start-column="112" selection-end-line="2" selection-end-column="112" />
           <folding />
         </state>
       </provider>
