@@ -1,6 +1,6 @@
 <li class="nested_comment comment_depth-1">
   <div class="profile_image_container">
-    <%= link_to "<picture class='rounded-5 profile_image ease'></picture>".html_safe, "/profile/#{@obj.user.username}", class: "default-avatar tooltipOn", data: { :toggle => "tooltip", :placement => "bottom" }, title: "#{name_mapper(@obj.user)}" %>
+    <%= link_to "<picture class='rounded-5 profile_image ease'></picture>".html_safe, "/profile/#{comment.user.username}", class: "default-avatar tooltipOn", data: { :toggle => "tooltip", :placement => "bottom" }, title: "#{name_mapper(@obj.user)}" %>
   </div>
   <div class="nested_comment_wrapper">
     <h4 class="author"><%= name_mapper(nested_comment.user) %><% if nested_comment.vote_count > 0 %><strong class="vote_count">+<%= nested_comment.vote_count %></strong><% end %></h4>

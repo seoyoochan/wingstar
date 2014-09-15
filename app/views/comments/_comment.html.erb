@@ -5,7 +5,7 @@
 <% end %>
 <li class="root_comment clearFix">
     <div class="profile_image_container">
-      <%= link_to "<picture class='rounded-5 profile_image ease'></picture>".html_safe, "/profile/#{@obj.user.username}", class: "default-avatar tooltipOn", data: { :toggle => "tooltip", :placement => "bottom" }, title: "#{name_mapper(@obj.user)}" %>
+      <%= link_to "<picture class='rounded-5 profile_image ease'></picture>".html_safe, "/profile/#{comment.user.username}", class: "default-avatar tooltipOn", data: { :toggle => "tooltip", :placement => "bottom" }, title: "#{name_mapper(@obj.user)}" %>
     </div>
     <div class="comment_contents_container">
       <div class="root_comment_wrapper">

@@ -75,8 +75,8 @@ module ApplicationHelper
     if current_user.nil?
       return nil
     end
-    eastern_format = "#{current_user.last_name}#{current_user.first_name}"
-    western_format = "#{current_user.first_name} #{current_user.last_name}"
+    eastern_format = "#{current_user.last_name}#{current_user.first_name}" if current_user.locale == "ko"
+    western_format = "#{current_user.first_name} #{current_user.last_name}" if current_user.locale == "en"
 
     # 1. user's name exists?
     if current_user.name
@@ -112,8 +112,8 @@ module ApplicationHelper
 
   def blog_link_provider(user)
     if user == current_user
-      if current_user.blog.present?
-        "/blog/#{current_user.username}"
+      if user.blog.present?
+        "/blog/#{user.username}"
       else
         new_blog_path
       end
@@ -129,7 +129,7 @@ module ApplicationHelper
   def parsed_user
     @parsed_user =
     if request.params[:username].present?
-      parsed_user = User.find_by_username("#{params[:username]}")
+      parsed_user = User.find_by(username: "#{params[:username]}")
     else
       current_user
     end
