@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
   end
 
   def profile_cover_build
-    current_user.profile.attachments.build if (params["controller"] == "application") && (params["action"] == "index") && signed_in?
+    acurrent_user.profile.attachments.build if (params["controller"] == "application") && (params["action"] == "index") && signed_in?
   end
 
   # called (once) when the user logs in, insert any code your application needs

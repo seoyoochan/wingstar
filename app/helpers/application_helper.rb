@@ -10,7 +10,6 @@ module ApplicationHelper
 
   def default_locale
     if signed_in?
-      logger.debug "* User Preference Language: #{current_user.locale}."
       I18n.locale = current_user.locale.to_sym # User locale is the highest priority
     else
       # Set locale by browser language
@@ -27,13 +26,9 @@ module ApplicationHelper
   def available_locale(source)
     ws_locales
     if @locales.include?(source.to_s)
-      logger.debug "* Language: '#{source}' was set."
       I18n.locale = source
     else
-      logger.debug "* Language: '#{source}' isn't supported, then set English as default."
       I18n.locale = :en
-      flash[:error] = "#{source.to_s} " + t("unfound_locale")
-      redirect_to root_path
     end
   end
 
